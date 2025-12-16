@@ -1,0 +1,383 @@
+\documentclass[12pt,nohyper,nobib,xcolor=dvipsnames,svgnames,x11names]{tufte-book}
+
+\title{CPE 487/587: Deep Learning for Computer Engineers}
+\date{Spring 2026}
+\author[Rahul Bhadani]{Rahul Bhadani}
+\publisher{Department of Electrical \& Computer Engineering, The University of Alabama in Huntsville}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=SeaGreen,
+    urlcolor=SeaGreen,
+    citecolor=SeaGreen,
+    filecolor=SeaGreen
+}
+
+\usepackage{mycolors}
+
+\definecolor{darkrose}{HTML}{9F3450}
+\definecolor{forestgreen}{HTML}{35a17f}
+
+\usepackage{fourier}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand{\maketitlepage}{%
+\begingroup%
+\setlength{\parindent}{0pt}
+
+{\fontsize{22}{20}\selectfont\textit{\@author}\par}
+
+\vspace{1.5in}{\fontsize{22}{20}\selectfont\@title\par}
+
+\vspace{0.5in}{\fontsize{28}{14}\selectfont\textsf{\smallcaps{Syllabus}}\par}
+
+\vspace{0.5in}{\fontsize{20}{14}\selectfont\textsf{\smallcaps{\@date}}\par}
+\vspace{0.25in}{\fontsize{20}{14}\selectfont\textsf{\smallcaps{Tue/Thur 04:20 PM 05:40 PM}}\par}
+
+\vspace{0.25in}{\fontsize{20}{14}\selectfont\textsf{\smallcaps{Location: ENG 240}}\par}
+
+\vspace{0.25in}{\fontsize{15}{14}\selectfont\url{https://uah.instructure.com/courses/86391}\par}
+
+
+\vfill{\fontsize{14}{14}\selectfont\textit{\@publisher}\par}
+
+\thispagestyle{empty}
+\endgroup
+}
+\makeatother
+
+
+
+\titlecontents{part}%
+    [0pt]% distance from left margin
+    {\addvspace{0.25\baselineskip}}% above (global formatting of entry)
+    {\allcaps{Part~\thecontentslabel}\allcaps}% before w/ label (label = ``Part I'')
+    {\allcaps{Part~\thecontentslabel}\allcaps}% before w/o label
+    {}% filler and page (leaders and page num)
+    [\vspace*{0.5\baselineskip}]% after
+
+\titlecontents{chapter}%
+    [4em]% distance from left margin
+    {}% above (global formatting of entry)
+    {\contentslabel{2em}\textit}% before w/ label (label = ``Chapter 1'')
+    {\hspace{0em}\textit}% before w/o label
+    {\qquad\thecontentspage}% filler and page (leaders and page num)
+    [\vspace*{0.5\baselineskip}]% after
+%%%% End additional code by Kevin Godby
+
+\makeatletter
+% Redefine chapter to prevent empty pages
+\renewcommand{\chapter}{%
+    \clearpage% Use clearpage instead of cleardoublepage
+    \thispagestyle{plain}%
+    \global\@topnum\z@
+    \@afterindentfalse
+    \secdef\@chapter\@schapter
+}
+
+% Alternative approach - modify the openright behavior
+\@openrightfalse
+
+% Or if the above doesn't work, try this more direct approach:
+\let\cleardoublepage\clearpage
+\makeatother
+
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\section*{Subject to Change}
+Every effort is made to follow the guidelines in the syllabus; however, if needed, the syllabus will be amended. You will be notified if changes are made.
+
+\section*{Technology Statement}
+This course will use UAH’s learning management system, Canvas, as well as other technology tools. Students will be expected to have access to a computer with internet capabilities in order to fully participate in this course. 
+
+
+
+\section{Copyright Rahul Bhadani, 2026}
+
+I reserve all federal and state copyrights in my lectures and course materials. You are authorized to take notes in class for your personal use and no other purpose. You are not authorized to record my lectures to make any commercial use of them or to provide them to anyone else other than students currently enrolled in this course, without my prior written permission. In addition to legal sanctions for violations of copyright law, students found in violation of these prohibitions may be subject to University disciplinary action under the Code of Student Conduct.
+
+\section*{Important Dates}
+\href{https://www.uah.edu/registrar/calendars}{Review the semester dates and deadlines and the academic calendar}: \url{https://www.uah.edu/registrar/calendars}.
+
+\vspace{15pt}
+
+\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Exam Dates}} \\ \hline
+\textbf{Exam} & \textbf{Date} & \textbf{Time} \\ \hline
+Mid-Term 1 & Tuesday, March 03, 2026 & 4:20 PM to 5:40 PM\\  \hline
+Final Exam & Thursday, April 30, 2026 & 3:00 PM to 5:30 PM\\ \hline
+\end{tabular}
+
+\chapter{Textbook}
+
+\begin{tabular}{p{0.20\textwidth}p{0.70\textwidth}}
+
+\textbf{Reference(s)} 
+        & 
+        
+		\emph{\color{DarkGreen}The Matrix Calculus You Need For Deep Learning. Terence Parr, Jeremy Howard}. \par{\color{DarkRed}\url{https://arxiv.org/abs/1802.01528}}. \par\vspace{5pt}
+		
+		\emph{\color{DarkGreen}Mathematical theory of deep learning
+. Philipp Petersen, Jakob Zech}. \par{\color{DarkRed}\url{https://arxiv.org/abs/2407.18384}}. \par\vspace{5pt}
+
+        
+        \emph{\color{DarkGreen}Learning Deep Learning. Magnus Ekman}. \par{\color{DarkRed}Addison-Wesley Professional}. \par ISBN-10: 0-13-747035-5, ISBN-13: 978-0-13-747035-8\par\vspace{5pt}
+
+		\emph{\color{DarkGreen}Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow}. Aurelien Géron. \par{\color{DarkRed}O’Reilly Media, 2nd Edition, 2019}. \par ISBN-10: 3031046471, ISBN-13: 978-3031046476\par\vspace{5pt}
+
+
+        \emph{\color{DarkGreen}Neural Networks Theory}.  Alexander I. Galushkin . \par{\color{DarkRed} Springer, 2007}. \par ISBN-10: 9783540481249, ISBN-13: 978-3540481249\par\vspace{5pt}
+        
+         \emph{\color{DarkGreen}Optimal Transport: A Comprehensive Introduction to Modeling, Analysis, Simulation, Applications}.  Gero Friesecke . \par{\color{DarkRed} SIAM Publication, 2024}. \par ISBN:978-1-61197-808-7\par\vspace{5pt}
+        
+        
+        
+
+\end{tabular}
+
+
+
+\chapter{Course Description}
+Machine learning deals with the automated classification, identification, and/or characterization of an unknown system and its parameters. There are an overwhelming number of application-driven fields that can benefit from machine learning techniques. This course will introduce you to advanced concepts of machine learning -- deep learning based on neural networks and its variants to accomplish data-driven predictive analysis, machine generation, and automation. We will also look at mathematical rigor and connections with other engineering concepts discussed in elsewhere courses. We will focus on engineering applications in autonomous systems, robotics, communication engineering, and industrial applications. 
+
+
+\subsection*{Course Learning Outcome}
+
+\textbf{For CPE 487 students}
+
+\begin{itemize}
+
+    \item Utilize machine learning libraries, such as Scikit-Learn and PyTorch, to build machine learning models and evaluate their effectiveness using metrics of interest (e.g., accuracy, F1-score, mean-squared error).
+    \item Implement and analyze deep learning algorithms for classification, supervised learning, predictions, image recognition, sequence modeling and forecasting, generative modeling, and related topics.
+    \item Use deep learning techniques on real-world datasets, providing clear interpretation and visualization of results (e.g., using boxplots, histograms, probability distributions, etc.).
+    \item Be able to demonstrate the key concepts of deep learning with mathematics (e.g. backpropagation, gradient descent, matrix operations for neural networks).
+    % \item Understand the explainability, interpretability, privacy preservation, and guardrails in machine learning.
+\end{itemize}
+
+
+\textbf{For CPE 587 students}
+
+\begin{itemize}
+
+   \item Utilize machine learning libraries, such as Scikit-Learn and PyTorch, to build machine learning models and evaluate their effectiveness using metrics of interest (e.g., accuracy, F1-score, mean-squared error).
+    \item Implement and analyze deep learning algorithms for classification, supervised learning, predictions, image recognition, sequence modeling and forecasting, generative modeling, and related topics.
+    \item Use deep learning techniques on real-world datasets, providing clear interpretation and visualization of results (e.g., using boxplots, histograms, probability distributions, etc.).
+    \item Be able to demonstrate the key concepts of deep learning with mathematics (e.g. backpropagation, gradient descent, matrix operations for neural networks).
+    % \item Understand the explainability, interpretability, privacy preservation, and guardrails in machine learning.
+    \item Apply and adapt existing deep learning methods to solve complex engineering problems, with a measurable performance improvement (e.g. $10\%$ increase in accuracy or F1-score).
+\end{itemize}
+
+
+
+\section*{Academic Topics} % (fold)
+\label{sub:academic_topics}
+
+\textbf{\textit{No. of Lectures: 28}}, \textbf{\textit{Tentative absence: 4}}, \textbf{\textit{Mid-term Days: 1}}
+
+\vspace{5 pt}
+
+
+The set of topics and areas covered by this course, and upon which you may be tested, includes:
+
+{
+\begin{itemize}	\item \color{OrchardRed}  \underline{Crash Course on Machine Learning:} Numpy, Pandas, Scikit-learn, PyTorch, Regression, Logistics Regression, Dimensionality Reduction, Support Vector Machine, Clustering, Setting Up Development Environment \quad \textbf{(1 Lecture)}
+
+	\item \color{OrchardRed}  \underline{Introducing Deep Learning -- Neural Networks:} Perceptron, Multi-layer Perceptron, Nonlinear Activation Functions, Backpropagation Algorithms, Vectorization and Batch Techniques, Neural Network Layers, Training Neural Networks, Learning Rates and Optimization Techniques in Neural Network, Implementation using PyTorch, Neural Network Systems \quad \textbf{(3 Lectures)}
+	
+   \item \color{OrchardRed} \underline{Deep Learning for Sequence Data:} Convolution, Pooling, Convolutional Neural Network (CNN), CNN architectures, Recurrent Neural Network (RNN), Long Short-term Memory (LSTM), Gated recurrent unit (GRU), xLSTM, Transformers, Implementation using PyTorch \quad \textbf{(3 Lectures)}
+   
+   \item \color{OrchardRed} \underline{Generative Adversarial Network (GAN):} Adversarial Learning, Generator and Discriminator, Minimax Loss, Wasserstein Loss, GAN Training, Image and Video Synthesis using GAN, Deep Convolution GAN, Cycle GAN, Wasserstein GAN, StackGAN, StyleGAN, Issues in GAN: Model Collapse and Training Instability, Interpretability, Data Privacy and Security, GAN for Voice and Music, Implementation using PyTorch, Applications of GAN in industrial setttings \quad \textbf{(1 Lecture)}
+	   
+	   \item \color{OrchardRed} \underline{Generative Deep Learning:} Variational Autoencoder, Diffusion Model, UNet, Normalizing Flow Models, Energy-Based Models, Multimodal Models \quad \textbf{(2 Lectures)}
+	   
+	   \item \color{OrchardRed} \underline{Graph Neural Network (GNN) and Geometric Learning:} Representation Learning with Graphs, Message Passing Techniques in Graph Neural Network, Graph Convolutional Network, Graph Representation Learning, GNN for Node Classification, Graph Classification, Link Prediction, Application of GNN, Implementation in PyTorch, Geometric Learning and Topological Deep Learning \quad \textbf{(2 Lectures)}
+	   
+	   \item \color{OrchardRed} \underline{Deep Reinforcement Learning (DRL):} Sequential Decision Problems, Markov Decision Process, SARSA, Q-Learning, Policy-based RL, Value-based RL, Actor-Critic Models, Gym Environment, Simulation Environment for RL Training \quad \textbf{(2 Lectures)}
+	   
+	   \item \color{OrchardRed} \underline{Physics-Informed Machine Learning, Neural ODE/PDE, Operator Learning:} Physics-Informed Neural Networks , Loss Function Design, Weak and Variational Formulations, Operator Learning, Training Challenges \& Optimization, Discretization-Informed Architectures, Neural Controlled Differential Equations, Hamiltonian \& Lagrangian Neural Networks, Dynamical Systems Identification, Observability and Controllability \quad \textbf{(3 Lectures)}
+
+
+	   \item \color{OrchardRed} \underline{Bayesian Deep Learning and Uncertainty Quantification:} Bayesian Statistics, Bayesian Deep Neural Network, Markov Chain Monte Carlo , Evidential Deep Learning,  Gaussian Processes (GPs) \& Neural Kernels, Types of Uncertainty,  Conformal Prediction,  Conformal Correlation, Optimal Transport \quad \textbf{(2 Lectures)}
+
+
+  \item \color{OrchardRed} \underline{Kolmogorov-Arnold Network:} Kolmogorov-Arnold Representation Theorem, Network Architecture, Topoogy, B-splines \quad \textbf{(1 Lecture)}
+  
+        \item \color{OrchardRed} \underline{Federated Learning:} Distributed Learning,  Privacy-Preserving Techniques and Differential Privacy, Algorithm in Federated Learning, Federated Neural Architecture Search,  \quad \textbf{(1 Lecture)}
+        
+         \item \color{OrchardRed} \underline{Adversarial Training, Non-stationarity and Concept Drift:} Adversarial Attacks, Adversarial Defenses, Adversarial Distributional Shift, Non-Stationary Environments, Concept Shift, Full Distribution Shift, Statistical Change Detection, Data Distribution Monitoring, Active Learning, IID Assumption Violation, Drift Characterization, Incremental Learners \quad \textbf{(1 Lecture)}
+         
+         \item \color{OrchardRed} \underline{NeuroSymbolic AI:} Neural Symbolic Integration, Symbolic Neural Networks, Logical Neural Networks , Differentiable Theorem Provers,  Neurosymbolic Architectures \& Systems, Symbolic Reasoning, Neural-Guided Symbolic Reasoning, Knowledge Graph Embeddings, Neural Network Verification within Symbolic Frameworks \quad \textbf{(2 Lectures)}
+         
+          \item \color{OrchardRed} \underline{Quantum Machine Learning Quantum Deep Neural Network:} Qubits \& Quantum States, Quantum Gates \& Circuits, Noisy Intermediate-Scale Quantum (NISQ) Era, Quantum Approximate Optimization Algorithm, Quantum Annealing, Quantum Kernel Methods, Parameterized Quantum Circuits, Ansatz Design, Quantum Neuron Models, Quantum Deep Learning Architectures \quad \textbf{(2 Lectures)}
+
+	   
+\end{itemize}
+}
+
+
+
+
+
+\section*{Summary of your responsibilities as an active participant in this course}
+
+Commit to taking part in every single class meeting. Commit to being engaged by switching off your mobile devices. Commit to learning the material in advance by performing the reading assignments without distraction. Commit to starting your homework and quizzes early by reading the homework descriptions before you start working on the code. Commit to helping everyone in the class by actively engaging in all the in-class exercises ----- even if you don't understand the topic, and even if you understand the topic better than everyone (including the instructors). 
+
+Commit to being an engaged member of this class, and your reward will be a deeper understanding of your own abilities and a deeper appreciation of how you can succeed in your career through committing to doing better.
+
+\chapter{Submission and Grading Policy}
+
+\section*{Grading}
+
+As your instructor, I do not \textit{give} grades: I assign the grade that you earn, based on your individual performance. You will not be competing with other students for your grade for all assignments in this course: your grade is solely based on the points you earn, in the below-weighted
+categories:
+
+\begin{center}
+
+\textbf{CPE 487}
+
+\begin{tabular}{lp{1in} l l l}
+\textbf{Homework:} & 30\% \\
+ \textbf{Quizzes:} &  5\%\\
+\textbf{Attendance/In-Class Participation:} & 5\%\\
+\textbf{Mid-term Exam:} & 15\%  \\
+\textbf{Scribe:} & 10\%  \\
+\textbf{Three-page Paper Commentary:} & 5\%  \\
+\textbf{Final Exam:} & 30\%  \\
+\end{tabular}
+
+\textbf{CPE 587}
+
+\begin{tabular}{lp{1in} l l l}
+\textbf{Homework:} & 25\% \\
+ \textbf{Quizzes:} &  5\%\\
+\textbf{Attendance/In-Class Participation:} & 5\%\\
+\textbf{Mid-term Exam:} & 15\%  \\
+\textbf{Scribe:} & 10\%  \\
+\textbf{Three-page Paper Commentary:} & 5\%  \\
+\textbf{Final Exam:} & 30\%  \\
+\textbf{Project Report:} & 5\%  \\
+
+\end{tabular}
+
+\end{center}
+
+
+\begin{tabular}{|p{3cm}|p{3cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Grading Scale}} \\ \hline
+\textbf{Percentage} & \textbf{Grade} \\ \hline
+90\% - 100\% & A \\ \hline
+75\% - 89\% & B \\ \hline
+60\% - 74\% & C \\ \hline
+45\% - 59\% & D \\ \hline
+0\% - 44\% & F \\ \hline
+\end{tabular}
+
+The percent score will be rounded to the nearest integer before assigning the final grade.
+
+
+
+\section*{Homework Submission Policy}
+You must submit all of the code, data, and PDF files in a zip folder (i.e., not rar, 7z, etc) on Canvas. If the submission requires only a single file, it doesn't need to be zipped. Assignments must be submitted as a zip file with code and a PDF document with your solutions!  You must include a single PDF file (not doc, docx, or multiple JPEG figures of the pages from your homework) with the solutions. Failure to follow any/all of these policies leaves the instructor the option not to grade the homework based on a failure to follow the homework submission policy. Your zip and pdf should be named as follows \texttt{CPE487587-LastFirst-HW-XX.zip} and \texttt{CPE487587-LastFirst-HW-X.pdf}, where Last is your last name as it appears on Canvas, First is your first name as it appears on Canvas, and X is the homework number. Example: \texttt{CPE487587-TaylorSam-HW-01.zip}
+
+\section{Missed Assignments/Make-Ups/Extra Credit}
+
+Homework assignments that will be submitted after the due date will receive a penalty of 10\% for each day, for a maximum of 5 days, after which no submission will be entertained. Solution to homework will be posted 5 days after the due date.  Students are expected to start working on their assignments as soon as it is posted. Homework solutions will be posted within one week of their due date. There will not be extra credit assignments; however, individual homework may have bonus questions constituting not more than 10\% of the individual assignment.
+
+
+
+\chapter{Attendance Policy}
+All students are expected to arrive on time and attend lectures. If there are extenuating circumstances, please email the instructor. If you are absent, you are responsible for learning the material covered in class. If you are absent when an assignment is due, you must have submitted the assignment before the due date to receive credit. Please contact your instructor if you have specific questions or concerns. 
+
+\section*{Attendance, Participation, and Quizzes:}
+Attendance is mandatory. You are permitted a maximum of \textbf{two unexcused absences}. A daily roll will be taken.  Pop quizzes or class handouts may be distributed without notice; these \emph{cannot} be made up.  All in-class exercises serve as objective measures of participation and attendance; these activities \emph{cannot} be made up.  Anticipated absences for valid reasons (e.g., conference travel) \emph{must be cleared in advance} to avoid a participation penalty.
+
+\chapter{Academic Integrity} 
+Students are expected to do all work by themselves, except when specified by the instructor in writing. All exceptions will be plainly marked in the requirements for that exercise or project. Any violations of this policy will be dealt with to the full extent permitted by the University of Alabama in Huntsville, and \emph{may result in suspension or expulsion from the university, in addition to a failing grade}. Please familiarize yourself with the Code of Academic Integrity if you have any questions.
+
+\section*{Class Disruptions:}
+Please silence your cell phone, and do not use it during the class. The use of a phone in class will adversely affect your attendance grade\footnote{Uh, um, unless you are programming it as part of an in-class exercise. But please, no talking or texting. Unless, uh, that is part of the class exercise too.}.
+
+
+\chapter{Communication \& Instructional Continuity}
+In this class, the official mode of communication is through email or Canvas. During the week, students can expect a response from the instructor within a 24-48 hour timeframe. Messages sent during the weekend may not be answered until the following week. On occasion, response times may vary due to domestic and international travel for conferences or meetings.
+
+In the event a regularly scheduled course is unexpectedly interrupted, course requirements, due dates, and grading policy are subject to change when necessitated by revised course delivery, semester calendar, or other instances. Information about changes in this course can be obtained from the Canvas course webpage or by contacting me. If, under these circumstances, I do not respond within 72 hours, please contact my department at \href{mailto:ece@uah.edu}{ece@uah.edu}.
+
+If our regular scheduled class meeting is interrupted or the campus should unexpectedly close, students should immediately log onto Canvas and read any course announcements. Students are encouraged to continue the readings and other assignments as outlined on the course syllabus until otherwise advised. Any student who does not study could fall behind in the course.
+
+
+\chapter{Course Conduct}
+
+All students must treat others with civility and respect and conduct themselves in a way that does not unreasonably interfere with the opportunity of other students to learn. All communication between student/instructor and between student/student should be respectful and professional. 
+
+
+\chapter{Academic Honesty}
+Your written assignments and examinations must be your own work. Academic misconduct will not be tolerated. Examples of unacceptable behavior include plagiarism/use of prior work/use of Chegg and other online problem-solving sites/etc. To ensure that you are aware of what academic misconduct is considered, you should carefully review the definitions and examples provided in \href{https://www.uah.edu/dos/office-of-student-ethics-education/handbook}{Student Handbook}. If you have questions in this regard, please contact me without delay.
+
+
+\chapter{Course Artificial Intelligence (AI) Policy}
+
+You are allowed to use a generative model-based AI tool for your assignment. However, you must submit an accompanying reflection report on how you used the AI tool, what the query was for the tool, and how it improved your understanding of the subject. You must also add your thoughts on how you would tackle the assignment if there were no such tool available. Failure to provide a reflection report for every single assignment where an  AI tool was used may result in a penalty, and subsequent actions will be taken in line with the plagiarism policy.
+
+\chapter{Safety Instructions} 
+The frequent operation of a computer, such as will be required in this course, may have long-term disabling effects if you do not appropriately consider your ergonomic interaction with the computer, desk, chair, and light sources. Poorly designed workstations/practices can lead to musculoskeletal disorders and may result in chronic pain, inability to sleep, or expensive surgery decades from today. The habits you form in your university years may well impact your future performance, and it is highly recommended that you consult with the office of risk management and compliance \href{https://www.uah.edu/rmi}{https://www.uah.edu/rmi}.
+
+\chapter{Disability Statement}
+The University of Alabama in Huntsville will make reasonable accommodations for students with documented disabilities. If you need support or assistance due to a disability, you may be eligible for academic accommodations. \href{https://kea.accessiblelearning.com/s-UAH/ApplicationStudent.aspx}{Apply here} (\url{https://kea.accessiblelearning.com/s-UAH/ApplicationStudent.aspx}) or contact \href{https://www.uah.edu/dss}{Disability Support Services}(\url{https://www.uah.edu/dss}) (256.824.1997 or Wilson Hall 128) as soon as possible to coordinate accommodations.
+
+\chapter{Mental Health Statement}
+As a student, you may experience a range of issues that can cause barriers to learning, such as strained relationships, increased anxiety, alcohol/drug problems, feeling down, difficulty concentrating, and/or lack of motivation. These mental health concerns or stressful events may lead to diminished academic performance or reduce a student’s ability to participate in daily activities.
+
+The University of Alabama in Huntsville offers services to assist you with addressing these and other concerns you may be experiencing. If you or someone you know are suffering from any of the aforementioned conditions, you can learn more about the broad range of confidential mental health services available on campus via the \href{https://www.uah.edu/dos}{Department of Student Affairs} located under the Health and Wellness or the \href{https://www.uah.edu/counseling-center}{UAH Counseling Center} by calling 256.824.6203.
+
+24-hour emergency help is also available through the 24/7 National Suicide Prevention Hotline at 1.800.273.TALK or at \href{https://suicidepreventionlifeline.org/}{suicidepreventionlifeline.org} or a student who lives on-campus can reach out to the UAH PD dispatch to contact an on-call counselor by calling 256.824.6596. If you find yourself in a mental health emergency, call 6911 on campus or 911 off-campus.
+
+\chapter{Pertinent UAH Policies \& Guidelines}
+\begin{itemize}
+    \item  UAH Student Handbook: \url{https://www.uah.edu/dos/office-of-student-ethics-education/handbook}
+    
+\item  Academic Misconduct Policy: \url{https://www.uah.edu/policies/02-01-67-academic-misconduct-policy}
+
+\item Complete listing of UAH Policies and Procedures: \url{https://www.uah.edu/policies}
+
+\item AI and the Classroom: \url{https://www.uah.edu/etl/training-resources/faculty-and-staff?view=article&id=17868:ai-and-the-classroom&catid=919:enhanced-teaching-and-learning}
+
+\end{itemize}
+
+
+\chapter{Campus Resources}
+\label{ch:campus Resources}
+
+The University of Alabama in Huntsville offers a range of student services to enhance the experience of students. 
+\begin{itemize}
+ 
+
+\item \href{https://www.uah.edu/ssc}{Academic Support Services} -- ASAP, Student Success Center, Tutoring, PASS, Academic Support Centers by College: \url{https://www.uah.edu/ssc}
+
+
+\item \href{https://www.uah.edu/ualert}{UAlert}—Sign up for UAH’s emergency notification system to receive urgent messages from the university: \url{https://www.uah.edu/ualert}
+
+\item \href{https://www.uah.edu/registrar}{Registrar’s Office} -- Academic Calendars, Course Registration, Student Records, Commencement: \url{https://www.uah.edu/registrar}
+
+\item \href{https://www.uah.edu/library}{M. Louis Salmon Library}  -- Printed and Online Resources, Reference Services, Group Study Rooms, AV Resources, Printing: \url{https://www.uah.edu/library}
+
+\item \href{https://community.canvaslms.com/t5/Student-Guide/How-do-I-get-help-with-Canvas-as-a-student/ta-p/498}{Canvas Support} -- Call 844-219-5802 to report an issue with Canvas: \url{https://community.canvaslms.com/t5/Student-Guide/How-do-I-get-help-with-Canvas-as-a-student/ta-p/498}
+
+\item \href{https://www.uah.edu/oit/contact}{OIT Help Desk} -- For technical support, contact the OIT Help Desk (\href{mailto:helpdesk@uah.edu}{helpdesk@uah.edu}; 256.824.3333): \url{https://www.uah.edu/oit/contact}
+
+\end{itemize}
+
+NOTE: When submitting a support ticket, include your name, your class, the element/assignment being affected, and a detailed description of the issue. Providing a screenshot is often very helpful in diagnosing an issue.
+
+
+\end{document}
