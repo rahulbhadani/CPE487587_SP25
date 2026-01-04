@@ -1,0 +1,661 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[aspectratio=169,xcolor=dvipsnames,svgnames,x11names,fleqn]{beamer}
+% \documentclass[aspectratio=169,xcolor=dvipsnames,fleqn]{beamer}
+
+\usetheme{RedVelvet}
+
+\usefonttheme[onlymath]{serif}
+\newcommand{\showanswers}{yes}
+
+
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{physics}
+% \usepackage{mathbb}
+\usepackage{rahul_math}
+\usepackage{bigints}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{tikz,pgfplots}
+
+\usepackage{subfigure}
+\usetikzlibrary{arrows}
+\usepackage{minted}
+\definecolor{LightGray}{gray}{0.9}
+\definecolor{cream}{rgb}{0.92, 0.9, 0.55}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+
+
+\usepackage{xcolor-material}
+\usetikzlibrary{fit}
+\usetikzlibrary{matrix}
+\tikzset{%
+apple/.pic={
+    \fill [MaterialBrown] (-1/8,0)  arc (180:120:1 and 3/2) coordinate [pos=3/5] (@)-- ++(1/6,-1/7)  arc (120:180:5/4 and 3/2) -- cycle;
+    \fill [MaterialLightGreen500] (0,-9/10)  .. controls ++(180:1/8) and ++(  0:1/4) .. (-1/3,  -1) .. controls ++(180:1/3) and ++(270:1/2) .. (  -1,   0) .. controls ++( 90:1/3) and ++(180:1/3) .. (-1/2, 3/4) .. controls ++(  0:1/8) and ++(135:1/8) .. (   0, 4/7)
+    }
+    }
+
+\newcommand{\leftdoublequote}{\textcolor{blue}{\scalebox{3}{``}}}
+
+\newcommand{\rightdoublequote}{\textcolor{blue}{\scalebox{3}{''}}}
+
+
+\usepackage{textcomp}
+\usepackage{fontawesome}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric, positioning}
+\pgfplotsset{compat=1.8} % or newest version
+
+\usetikzlibrary{positioning}
+
+
+\usepackage{bm}
+\usepackage{relsize}
+
+
+
+\tikzset{basic/.style={draw,fill=MediumBlue!20,text width=1em,text badly centered}}
+\tikzset{input/.style={basic,circle}}
+\tikzset{weights/.style={basic,rectangle}}
+\tikzset{functions/.style={basic,circle,fill=MediumBlue!10}}
+
+
+
+\usepackage{listofitems} % for \readlist to create arrays
+\tikzstyle{mynode}=[thick,draw=MediumBlue,fill=MediumBlue!20,circle,minimum size=22]
+
+
+\usepackage{overpic}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\usepackage{tikz-qtree,tikz-qtree-compat}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{calc}
+
+\usetikzlibrary{fit}
+\tikzset{%
+apple/.pic={
+    \fill [MaterialBrown] (-1/8,0)  arc (180:120:1 and 3/2) coordinate [pos=3/5] (@)-- ++(1/6,-1/7)  arc (120:180:5/4 and 3/2) -- cycle;
+    \fill [MaterialLightGreen500] (0,-9/10)  .. controls ++(180:1/8) and ++(  0:1/4) .. (-1/3,  -1) .. controls ++(180:1/3) and ++(270:1/2) .. (  -1,   0) .. controls ++( 90:1/3) and ++(180:1/3) .. (-1/2, 3/4) .. controls ++(  0:1/8) and ++(135:1/8) .. (   0, 4/7)
+}
+}
+\usepackage{tikz-qtree,tikz-qtree-compat}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{calc}
+
+\usetikzlibrary{positioning}
+
+
+\usepackage{bm}
+\usepackage{relsize}
+
+
+
+\tikzset{basic/.style={draw,fill=MediumBlue!20,text width=1em,text badly centered}}
+\tikzset{input/.style={basic,circle}}
+\tikzset{weights/.style={basic,rectangle}}
+\tikzset{functions/.style={basic,circle,fill=MediumBlue!10}}
+
+
+
+\usepackage{listofitems} % for \readlist to create arrays
+\tikzstyle{mynode}=[thick,draw=MediumBlue,fill=MediumBlue!20,circle,minimum size=22]
+
+
+\newmdenv[
+backgroundcolor=androidYellowLight,
+linecolor=androidYellow,
+linewidth=0.5pt,
+roundcorner=10pt,
+skipabove=\baselineskip,
+skipbelow=\baselineskip
+]{MintedFrame}
+
+% Set minted options
+\setminted{
+fontsize=\footnotesize,
+breaklines=true,
+autogobble,
+linenos,
+frame=none
+}
+
+
+\title[CPE 487/587: Deep Learning]{CPE 486/586: Deep Learning for Engineering Applications} % The short title appears at the bottom of every slide, the full title is only on the title page
+\subtitle{01 Introduction to Deep Learning: Paving pathways to AI}
+
+\author[Rahul Bhadani] {{\Large \textbf{Rahul Bhadani}}}
+
+\institute[UAH] % Your institution as it will appear on the bottom of every slide, maybe shorthand to save space
+{
+    Electrical \& Computer Engineering,  The University of Alabama in Huntsville
+}
+\date
+
+% \titlegraphic{
+%    \includegraphics[width=0.4\linewidth]{figures/UAH_primary.png}
+% }
+
+\begin{document}
+
+%-------------------------------------------------
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------------------------------------------------
+%\begin{frame}{Outline}
+%    \backgroundtableofcontents
+%\end{frame}
+
+
+
+%-----------------------------------------.-------
+\begin{frame}{About Me}
+    \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+        \column{.60\textwidth} % Left column and width
+        \textbf{Rahul Bhadani} \\
+        Assistant Professor \\
+        Electrical and Computer Engineering \\
+        The University of Alabama in Huntsville \\
+        Office: 217-H \\
+        Email: {\color{MediumRed}{rahul.bhadani@uah.edu}} \\
+        Web: {\color{MediumRed}\url{https://rahulbhadani.github.io/}}
+
+        \column{.30\textwidth} % Right column and width
+        \includegraphics[width=.89\textwidth]{figures/intro_rkb.jpg}
+    \end{columns}
+    
+    \begin{block}{Research Interests}
+    Cyber-physical Systems,
+    Intelligent Transportation, 
+    Connected-and-Autonomous Driving, 
+    Applied machine learning,
+    Quantum Information Science
+    \end{block}
+\end{frame}
+
+
+%-------------------------------------------------
+
+\begin{frame}{Course Meeting and Office Hours}
+  \begin{columns}[T] % align columns at the top
+    \begin{column}{0.5\textwidth}
+      \textbf{Lecture:} \\
+      Tue/Thur 4:20 PM - 5:40 PM \\
+      \vspace{0.3cm}
+      \textbf{Location:} \\
+      ENG 240 \\
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Office Hours:}
+      \begin{itemize}
+        \item Mon-Thur 2:00 PM - 3:30 PM
+      \end{itemize}
+      \textbf{Instructor Email:} rahul.bhadani@uah.edu
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%-----------------------------------------
+\begin{frame}{Textbooks}
+
+{\tiny
+\begin{tabular}{p{0.20\textwidth}p{0.80\textwidth}}
+
+\textbf{Reference(s)} 
+        & 
+        
+		\emph{\color{DarkGreen}The Matrix Calculus You Need For Deep Learning. Terence Parr, Jeremy Howard}. \par{\color{DarkRed}\url{https://arxiv.org/abs/1802.01528}}. \par\vspace{5pt}
+		
+		\emph{\color{DarkGreen}Mathematical theory of deep learning
+. Philipp Petersen, Jakob Zech}. \par{\color{DarkRed}\url{https://arxiv.org/abs/2407.18384}}. \par\vspace{5pt}
+
+        
+        \emph{\color{DarkGreen}Learning Deep Learning. Magnus Ekman}. \par{\color{DarkRed}Addison-Wesley Professional}. \par ISBN-10: 0-13-747035-5, ISBN-13: 978-0-13-747035-8\par\vspace{5pt}
+
+		\emph{\color{DarkGreen}Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow}. Aurelien Géron. \par{\color{DarkRed}O’Reilly Media, 2nd Edition, 2019}. \par ISBN-10: 3031046471, ISBN-13: 978-3031046476\par\vspace{5pt}
+
+
+        \emph{\color{DarkGreen}Neural Networks Theory}.  Alexander I. Galushkin . \par{\color{DarkRed} Springer, 2007}. \par ISBN-10: 9783540481249, ISBN-13: 978-3540481249\par\vspace{5pt}
+        
+         \emph{\color{DarkGreen}Optimal Transport: A Comprehensive Introduction to Modeling, Analysis, Simulation, Applications}.  Gero Friesecke . \par{\color{DarkRed} SIAM Publication, 2024}. \par ISBN:978-1-61197-808-7\par\vspace{5pt}
+\end{tabular}
+}
+
+Additional textbook references will be provided as we proceed.
+
+\end{frame}
+
+
+\begin{frame}{Grading}
+
+\begin{tabular}{|p{3cm}|p{3cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Grading Scale}} \\ \hline
+\textbf{Percentage} & \textbf{Grade} \\ \hline
+90\% - 100\% & A \\ \hline
+75\% - 89\% & B \\ \hline
+60\% - 74\% & C \\ \hline
+45\% - 59\% & D \\ \hline
+0\% - 44\% & F \\ \hline
+\end{tabular}
+
+The percent score will be rounded to the nearest integer before assigning the final grade.
+
+\end{frame}
+\begin{frame}{Score Breakdown}
+
+\footnotesize
+
+\begin{columns}
+
+\column{0.5\linewidth}
+
+\textbf{CPE 487}
+
+\vspace{10pt}
+
+\begin{tabular}{lp{1in} l l l}
+\textbf{Homework:} & 30\% \\
+ \textbf{Quizzes:} &  5\%\\
+\textbf{Attendance/In-Class Participation:} & 5\%\\
+\textbf{Mid-term Exam:} & 15\%  \\
+\textbf{Scribe:} & 10\%  \\
+\textbf{Three-page Paper Commentary:} & 5\%  \\
+\textbf{Final Exam:} & 30\%  \\
+\end{tabular}
+
+\column{0.5\linewidth}
+
+
+\textbf{CPE 587}
+
+\vspace{10pt}
+
+
+\begin{tabular}{lp{1in} l l l}
+\textbf{Homework:} & 25\% \\
+ \textbf{Quizzes:} &  5\%\\
+\textbf{Attendance/In-Class Participation:} & 5\%\\
+\textbf{Mid-term Exam:} & 15\%  \\
+\textbf{Scribe:} & 10\%  \\
+\textbf{Three-page Paper Commentary:} & 5\%  \\
+\textbf{Final Exam:} & 30\%  \\
+\textbf{Project Report:} & 5\%  \\
+
+\end{tabular}
+
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Homework Policy}
+\begin{itemize}
+\item Each late submission will be penalized by 10\% per day for up to 5 days maximum, thereafter, if later, one will receive 0 credit. 
+\item Solution to homework will be posted 10 days after the due date.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Classwork}
+
+\begin{itemize}
+\item Each lecture may be followed by in-class problem-solving that students will turn in the next lecture day. If you miss the lecture day (either the day it is handed to you, or the day you need to turn in), you will not receive any credit.
+
+\item There will be intermediate small tests to assess your skills based on lectures and the classwork. This portion will count towards your classwork credits.
+\end{itemize}
+
+
+
+\end{frame}
+
+\begin{frame}{Scribe}
+
+Scribe will include one student preparing a chapter-style lecture notes in Latex on specific topic(s) that is a part of the syllabus and submit to the Canvas by the second last week of the semester.
+
+\vspace{10pt}
+
+The instructor will provide a Latex template using which you will be writing the chapter. It should include appropriate references to any textbook or paper referred. Please refrain from using AI-generated texts for writing your scribe.
+
+\end{frame}
+
+\begin{frame}{Three-page Paper Commentary}
+
+You will be assigned research papers to read frequently throughout the semester. You are required to submit a three-page commentary on the paper in IEEE conference format (template will be provided). The commentary should entirely be your own and not an AI-summary as the purpose is to broaden your own understanding and not an AI's understanding. Commentary is supposed to include mathematical formulation, model structure, and other scientific notation. Your commentary can be supplemented with python scripts, jupyter notebook, additional running examples and dataset for an extra credit of 5\%.
+
+\end{frame}
+
+\begin{frame}{Project Report}
+
+You will choose a deep learning method of your choice to solve an engineering problem in your domain with in-depth analysis and scientifically conclusive results supported by code, and plots and submit a report in 6-10 pages in NeurIPS format along with codebase and dataset used.
+
+\end{frame}
+
+\begin{frame}{Attendance Policy}
+
+\begin{itemize}
+\item Must attend all lectures.
+\item Two unexcused absences permitted.
+\item No option to make up for classwork.
+\end{itemize}
+
+\end{frame}
+
+
+%-----------------------------------------
+\begin{frame}{Exam Schedule}
+\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Exam Dates}} \\ \hline
+\textbf{Exam} & \textbf{Date} & \textbf{Time} \\ \hline
+Mid-Term 1 & Tuesday, March 03, 2026 & 4:20 PM to 5:40 PM\\ \hline
+Final Exam & Thursday, April 30, 2026 & 3:00 PM to 5:30 PM\\ \hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Tentative Absence}
+
+\begin{enumerate}
+
+\item Jan 13, Jan 15
+
+\item April 14 (likely may not happen, I will update on that)
+
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{Tentative Topics}
+
+\tiny
+
+{
+\begin{itemize}	\item \color{darkForest}  \underline{Crash Course on Machine Learning:} Numpy, Pandas, Scikit-learn, PyTorch, Regression, Logistics Regression, Dimensionality Reduction, Support Vector Machine, Clustering, Setting Up Development Environment \quad \textbf{(1 Lecture)}
+
+	\item \color{darkForest}  \underline{Introducing Deep Learning -- Neural Networks:} Perceptron, Multi-layer Perceptron, Nonlinear Activation Functions, Backpropagation Algorithms, Vectorization and Batch Techniques, Neural Network Layers, Training Neural Networks, Learning Rates and Optimization Techniques in Neural Network, Implementation using PyTorch, Neural Network Systems \quad \textbf{(3 Lectures)}
+	
+   \item \color{darkForest} \underline{Deep Learning for Sequence Data:} Convolution, Pooling, Convolutional Neural Network (CNN), CNN architectures, Recurrent Neural Network (RNN), Long Short-term Memory (LSTM), Gated recurrent unit (GRU), xLSTM, Transformers, Implementation using PyTorch \quad \textbf{(3 Lectures)}
+   
+   \item \color{darkForest} \underline{Generative Adversarial Network (GAN):} Adversarial Learning, Generator and Discriminator, Minimax Loss, Wasserstein Loss, GAN Training, Image and Video Synthesis using GAN, Deep Convolution GAN, Cycle GAN, Wasserstein GAN, StackGAN, StyleGAN, Issues in GAN: Model Collapse and Training Instability, Interpretability, Data Privacy and Security, GAN for Voice and Music, Implementation using PyTorch, Applications of GAN in industrial setttings \quad \textbf{(1 Lecture)}
+	   
+	   \item \color{darkForest} \underline{Generative Deep Learning:} Variational Autoencoder, Diffusion Model, UNet, Normalizing Flow Models, Energy-Based Models, Multimodal Models \quad \textbf{(2 Lectures)}
+	   
+	   \item \color{darkForest} \underline{Graph Neural Network (GNN) and Geometric Learning:} Representation Learning with Graphs, Message Passing Techniques in Graph Neural Network, Graph Convolutional Network, Graph Representation Learning, GNN for Node Classification, Graph Classification, Link Prediction, Application of GNN, Implementation in PyTorch, Geometric Learning and Topological Deep Learning \quad \textbf{(2 Lectures)}
+	   
+	   \item \color{darkForest} \underline{Deep Reinforcement Learning (DRL):} Sequential Decision Problems, Markov Decision Process, SARSA, Q-Learning, Policy-based RL, Value-based RL, Actor-Critic Models, Gym Environment, Simulation Environment for RL Training \quad \textbf{(2 Lectures)}
+	   
+	   \item \color{darkForest} \underline{Physics-Informed Machine Learning, Neural ODE/PDE, Operator Learning:} Physics-Informed Neural Networks , Loss Function Design, Weak and Variational Formulations, Operator Learning, Training Challenges \& Optimization, Discretization-Informed Architectures, Neural Controlled Differential Equations, Hamiltonian \& Lagrangian Neural Networks, Dynamical Systems Identification, Observability and Controllability \quad \textbf{(3 Lectures)}
+
+\end{itemize}
+}
+
+\end{frame}
+
+\begin{frame}{Tentative Topics}
+
+\tiny
+
+{
+\begin{itemize}
+
+	   \item \color{darkForest} \underline{Bayesian Deep Learning and Uncertainty Quantification:} Bayesian Statistics, Bayesian Deep Neural Network, Markov Chain Monte Carlo , Evidential Deep Learning,  Gaussian Processes (GPs) \& Neural Kernels, Types of Uncertainty,  Conformal Prediction,  Conformal Correlation, Optimal Transport \quad \textbf{(2 Lectures)}
+
+
+  \item \color{darkForest} \underline{Kolmogorov-Arnold Network:} Kolmogorov-Arnold Representation Theorem, Network Architecture and Topology, B-splines \quad \textbf{(1 Lecture)}
+  
+        \item \color{darkForest} \underline{Federated Learning:} Distributed Learning,  Privacy-Preserving Techniques and Differential Privacy, Algorithm in Federated Learning, Federated Neural Architecture Search,  \quad \textbf{(1 Lecture)}
+        
+         \item \color{darkForest} \underline{Adversarial Training, Non-stationarity and Concept Drift:} Adversarial Attacks, Adversarial Defenses, Adversarial Distributional Shift, Non-Stationary Environments, Concept Shift, Full Distribution Shift, Statistical Change Detection, Data Distribution Monitoring, Active Learning, IID Assumption Violation, Drift Characterization, Incremental Learners \quad \textbf{(1 Lecture)}
+         
+         \item \color{darkForest} \underline{NeuroSymbolic AI:} Neural Symbolic Integration, Symbolic Neural Networks, Logical Neural Networks , Differentiable Theorem Provers,  Neurosymbolic Architectures \& Systems, Symbolic Reasoning, Neural-Guided Symbolic Reasoning, Knowledge Graph Embeddings, Neural Network Verification within Symbolic Frameworks \quad \textbf{(2 Lectures)}
+         
+          \item \color{darkForest} \underline{Quantum Machine Learning Quantum Deep Neural Network:} Qubits \& Quantum States, Quantum Gates \& Circuits, Noisy Intermediate-Scale Quantum (NISQ) Era, Quantum Approximate Optimization Algorithm, Quantum Annealing, Quantum Kernel Methods, Parameterized Quantum Circuits, Ansatz Design, Quantum Neuron Models, Quantum Deep Learning Architectures \quad \textbf{(2 Lectures)}
+
+	   
+\end{itemize}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Getting ML Specific Help with Python}
+Where can I get resources to help with Python programming?
+\begin{itemize}
+%    \item Many of the figures that appear in the slides were written with Python ({\color{MediumRed}\url{https://github.com/gditzler/ML-Lecture-Figures}})
+    \item Python for Everybody by Dr. Charles Severance ({\color{MediumRed}\url{https://www.youtube.com/watch?v=PKrC027wIUU&list=PLAtoCfxWRIErTozMKGdHmUieMuQDGEoEJ}}) is a great place to refresh your Python
+    \item Sklearn has some extremely helpful documentation pages ({\color{MediumRed}\url{https://scikit-learn.org/stable/index.html}})
+    \item Matplotlib: the most used visualization tool in Python: ({\color{MediumRed}\url{https://matplotlib.org/stable/tutorials/index.html}})
+
+	\item Polars for Data Analysis: {\color{MediumRed}\url{https://docs.pola.rs/user-guide/getting-started/}}
+
+    \item Learning PyTorch with Examples: 
+    ({\color{MediumRed}\url{https://pytorch.org/tutorials/beginner/pytorch_with_examples.html}})
+\end{itemize} 
+
+
+\end{frame}
+
+
+\begin{frame}{How to get help for this course?}
+\begin{itemize}
+    \item Ask questions in the class without hesitation. No question is silly.
+    \item Utilize office hours to the maximum extent.
+    \item Start your homework as soon as it is posted. The more you delay, the chance of your success will diminish.
+    \item Do additional self-reading related to topics covered in the class.
+\end{itemize}
+
+\begin{texample}
+Remember, you are here to learn the material in this course, and not just pass it.
+\end{texample}
+\end{frame}
+
+%-----------------------------------------
+\begin{frame}{In-Class Activity}
+  \centering
+  \textbf{Introduce Yourself} \\[1em]
+  
+  \begin{block}{}
+    \begin{itemize}
+      \item Why do you want to take this course?
+      \item What are your research intersts? How are you planning to utilize Deep Learning in your research/career?
+      \item Pick a domain of your interest where you will apply deep learning algorithms. Personalized homework problems will be assigned based on your domain. You may take a week to decide, if not today.
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\section{Introduction to the Course}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+\begin{frame}{What is Deep Learning?}
+\footnotesize
+
+\begin{tblock}{}
+Learning algorithms that rely on neural network architectures with several layers and are primarily based on gradient descent optimization.
+\end{tblock}
+
+\begin{columns}[c] % [c] ensures vertical alignment between columns
+
+    \column{0.5\linewidth}
+    \centering % Centers content within the column
+    \begin{tikzpicture}[
+        % Use 'scale' and 'transform shape' for proper bounding box scaling
+        scale=0.6, transform shape, 
+        input neuron/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=1.2cm},
+        hidden1 neuron/.style={circle, draw=blue!60, fill=blue!5, very thick, minimum size=1.2cm},
+        hidden2 neuron/.style={circle, draw=orange!60, fill=orange!5, very thick, minimum size=1.2cm},
+        output neuron/.style={circle, draw=red!60, fill=red!5, very thick, minimum size=1.2cm},
+        arrow/.style={-{Latex[length=3mm]}, thick},
+    ]
+
+    \def\layersep{2.5cm}
+    \def\nodeinlayersep{1.2cm}
+
+    \node[input neuron] (I1) at (0,0) {};
+    \node[input neuron, below=\nodeinlayersep of I1] (I2) {};
+
+    \node[hidden1 neuron, right=\layersep of I1, yshift=1.2cm] (H11) {};
+    \node[hidden1 neuron, below=\nodeinlayersep of H11] (H12) {};
+    \node[hidden1 neuron, below=\nodeinlayersep of H12] (H13) {};
+    \node[hidden1 neuron, below=\nodeinlayersep of H13] (H14) {};
+
+    \node[hidden2 neuron, right=\layersep of H12] (H21) {};
+    \node[hidden2 neuron, below=\nodeinlayersep of H21] (H22) {};
+
+    \node[output neuron, right=\layersep of H21, yshift=-0.6cm] (O1) {};
+
+    % Drawing connections
+    \foreach \i in {1,2}
+        \foreach \j in {1,2,3,4}
+            \draw[arrow] (I\i) -- (H1\j);
+
+    \foreach \i in {1,2,3,4}
+        \foreach \j in {1,2}
+            \draw[arrow] (H1\i) -- (H2\j);
+
+    \foreach \i in {1,2}
+        \draw[arrow] (H2\i) -- (O1);
+
+    \end{tikzpicture}
+
+    \column{0.5\linewidth}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1.0\linewidth, trim={0cm 12cm 0 0},clip]{figures/gradient_descent.pdf}
+    \end{figure}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{History of Neural Network}
+
+\begin{center}
+{
+\huge
+\textbf{1943}
+\vspace{10pt}
+}
+
+Warren McCulloch,  Walter Pitts: How neurons work. 
+
+\textit{McCulloch, Warren S., and Walter Pitts. "A logical calculus of the ideas immanent in nervous activity." The bulletin of mathematical biophysics 5, no. 4 (1943): 115-133.}
+
+{{\tiny \url{https://jontalle.web.engr.illinois.edu/uploads/410-NS.F22/McCulloch-Pitts-1943-neural-networks-ocr.pdf}}}
+
+\vspace{10pt}
+
+\includegraphics[scale=0.15]{figures/Screen_Shot_2020-09-09_at_6.46.46_AM_big.png}
+
+{{\tiny McCulloch (right) and Pitts (left) in 1949 \\ \url{https://www.historyofinformation.com/detail.php?entryid=782}}}
+
+\end{center}
+
+
+\end{frame}
+
+
+\begin{frame}{History of Neural Network}
+
+\begin{center}
+{
+\huge
+\textbf{1959/1962}
+\vspace{10pt}
+}
+
+Bernard Widrow and Marcian Hoff: ADALINE, and MADALINE: (Multiple) Adaptive Linear Elements
+
+\textit{"Associative storage and retrieval of digital information in networks of adaptive neurons" In Biological Prototypes and Synthetic Systems: Volume 1 Proceedings of the Second Annual Bionics Symposium, Springer US, 1962.}
+
+
+\vspace{10pt}
+
+
+
+\includegraphics[width=0.25\linewidth]{figures/marcian_widrow.png}
+
+
+{{\tiny Bernard Widrow (Left) and Marcian Hoff (Right)}}
+
+\end{center}
+
+
+\end{frame}
+
+
+\begin{frame}{History of Neural Network}
+
+\begin{center}
+{
+\huge
+\textbf{1969: Beginning of the first AI Winter}
+\vspace{10pt}
+}
+
+ Marvin Minsky and Seymour Papert suggested problem could not be solved using a single-layer perceptron if classes were not linearly separable. They suggested there could not be an extension from the single layered neural network to a multiple layered neural network.
+ 
+\textit{Minsky, Marvin, and Seymour Papert. "An introduction to computational geometry." Cambridge tiass., HIT 479, no. 480 (1969): 104.}
+
+
+\vspace{10pt}
+
+
+
+\includegraphics[width=0.12\linewidth]{figures/Perceptrons_book.jpg}
+
+\end{center}
+
+
+\end{frame}
+
+\begin{frame}{History of Neural Network}
+
+\footnotesize
+
+\begin{enumerate}
+
+
+\item \textbf{1982:} John Hopfield's approach was to create more useful machines by using bidirectional lines. Previously, the connections between neurons was only one way. \textit{Hopfield, John J. "Neural networks and physical systems with emergent collective computational abilities." Proceedings of the national academy of sciences 79, no. 8 (1982): 2554-2558.}
+
+\item \textbf{1982:} Reilly and Cooper used a "Hybrid network" with multiple layers, each layer using a different problem-solving strategy. \textit{Reilly, Douglas L., Leon N. Cooper, and Charles Elbaum. "A neural model for category learning." Biological cybernetics 45, no. 1 (1982): 35-41.}
+
+\item \textbf{1982:} Japan announced fifth-gen effort on AI, US got FOMO and increased funding that renewed interest in AI.
+
+\item \textbf{1986:} Backpropagation by David E. Rumelhart, Geoffrey E. Hinton \& Ronald J. Williams. \textit{Rumelhart, David E., Geoffrey E. Hinton, and Ronald J. Williams. "Learning representations by back-propagating errors." nature 323, no. 6088 (1986): 533-536.}
+
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+	\Huge{\centerline{\color{MediumBlue}\textbf{The End}}}
+\end{frame}
+
+\end{document}
