@@ -1,0 +1,575 @@
+\documentclass[12pt, xcolor=dvipsnames,svgnames,x11names]{article}
+
+\input{common}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+
+% Redefine \maketitle to include tcolorbox
+\makeatletter
+\renewcommand{\maketitle}{%
+      \begin{center}
+         \begin{tcolorbox}[
+               enhanced,
+               colback=white,
+               colframe=goldenrod,
+               boxrule=1pt,
+               arc=3pt,
+               left=0pt,
+               right=0pt,
+               top=0pt,
+               bottom=0pt,
+               drop shadow={goldenrod!25!white},
+         ]
+               % Header section
+               \begin{tcolorbox}[
+                  enhanced,
+                  colback=stormblue!85!white,
+                  colframe=stormblue!25!white,
+                  boxrule=0pt,
+                  arc=3pt,
+                  sharp corners=south,
+                  left=2em,
+                  right=2em,
+                  top=1em,
+                  bottom=1em
+               ]
+                  \centering
+                  {\LARGE\bfseries\textcolor{white}{\@title}}
+               \end{tcolorbox}
+               
+               % Content section
+               \vspace{1em}
+               \centering
+               {\large\textcolor{darkgray}{\@author}} \\[0.8em]
+               {\normalsize\textcolor{darkgray}{\@date}}
+               \vspace{1em}
+         \end{tcolorbox}
+      \end{center}
+      \vspace{2em}
+}
+\makeatother
+
+
+
+\newcommand{\hw}{Homework 0: Machine Learning Tools}
+\newcommand{\duedate}{Jan 09, 2025, 11:59 PM}
+\newcommand{\hwturnin}{hw00}
+
+\newenvironment{multiequation}[1][]{%
+\begin{equation}%
+   \begin{aligned}%
+   \ifx#1\@empty\else\label{#1}\fi%
+}{%
+   \end{aligned}%
+\end{equation}%
+}
+\pagestyle{fancy}
+
+\lhead{\footnotesize{\coursenumber, \courseterm}, \footnotesize{The University of Alabama in Huntsville}}
+\chead{}
+\rhead{\footnotesize{\emph{\hw}}}
+\lfoot{\footnotesize{\instructorname}}
+\cfoot{\footnotesize{\thepage}}
+\rfoot{\footnotesize{\textit{Last Revised:~\today}}}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\newcommand{\minipagewidth}{0.8\columnwidth}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+\begin{document}
+
+
+\title{\textsc{\hw\\
+\coursenumber}}
+\author{Instructor: \instructorname}
+\date{Due: \duedate\\ Ungraded}
+
+\maketitle
+
+\setlength{\unitlength}{1in}
+You are allowed to use a generative model-based AI tool for your assignment. However, you must submit an accompanying reflection report detailing how you used the AI tool, the specific query you made, and how it improved your understanding of the subject. You are also required to submit screenshots of your conversation with any large language model (LLM) or equivalent conversational AI, clearly showing the prompts and your login avatar. Some conversational AIs provide a way to share a conversation link, and such a link is desirable for authenticity. Failure to do so may result in actions taken in compliance with the plagiarism policy.
+
+Additionally, you must include your thoughts on how you would approach the assignment if such a tool were not available. Failure to provide a reflection report for every assignment where an AI tool is used may result in a penalty, and subsequent actions will be taken in line with the plagiarism policy.
+
+\subsection*{Submission instruction:}
+Upload a .pdf on Canvas with the format  \texttt{CPE487587-LastFirst-HW-XX}. For example, if your name is Sam Wells, your file name should be \texttt{CPE487587-LastFirst-HW-XX.pdf}.  If there is a programming assignment, then you should include your source code along with your PDF files in a zip file \texttt{CPE487587-LastFirst-HW-XX.zip}. 
+Your submission must contain your name and UAH Charger ID or your UAH email address.  Please number your pages as well.
+
+All CPE 587 students are required to submit their response in a Latex-generated PDF.
+\vskip 1em
+\hrule
+\vskip 1em
+
+
+\section{Working with GitHub}
+
+Perform the following tasks:
+
+
+\begin{enumerate}
+\item Create a new GitHub account with a random ID name using English keywords, e.g \textbf{orangeunicorn} followed by gh. For example, if your keyword is \textbf{orangeunicorn}, then your Github ID should \textbf{orangeunicorngh}. Make sure that \textbf{no} offensive or NSFW keywords should be used. You should report your unique keyword in the submitted PDF. \underline{Do not} share this unique keyword with your classmates. \hfill \textbf{(2 Points)}
+
+\item Install Git on your computer if it's not already installed.
+
+\item Configure Git with your name and email. You do not need to use your UAH email for this purpose. I recommend creating a new Gmail account with the same username \textbf{orangeunicorn@gmail.com}. You will use this unique keyword for the entirety of the course. Replace \textbf{orangeunicorn} with your unique keyword.  \hfill \textbf{(4 Points)}
+
+
+
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git config --global user.name "orangeunicorn"
+git config --global user.email "orangeunicorn@gmail.com"
+\end{minted}
+
+Replace the values as per your preference.
+
+\item Create a new repository on GitHub named \textbf{hw00orangeunicorn}. Make sure that the repository you have created is public. \hfill \textbf{(2 Points)}
+
+\item Clone it locally to your computer: \hfill \textbf{(2 Points)} 
+
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git clone https://github.com/orangeunicorngh/hw00orangeunicorn
+
+\end{minted}
+
+Place a  \texttt{hello.py} file  in \texttt{hw00orangeunicorn} folder with a text \texttt{print("Hello!)"}.
+
+You should replace the repo URL accordingly. Change your current working directory to \texttt{hw00orangeunicorn} folder using the command line. \hfill \textbf{(2 Points)}
+
+\item Create a new branch named "hw00": \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git checkout -b hw00
+
+\end{minted}
+
+
+\item Add your \texttt{hello.py} file to this branch. \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git add hello.py
+git commit -m "Add hw 00 hello.py"
+\end{minted}
+
+
+\item Create a file \texttt{.gitignore}. What purpose does \texttt{.gitignore} serve?  \hfill \textbf{(4 Points)}
+
+
+Add following content to the  \texttt{.gitignore} file:
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{text}
+
+# ----------------------------
+# PYTHON
+#------------------------------
+.ipynb_checkpoints/
+dist/
+*.egg-info/
+## ------------------------------
+# Visual Studio Code
+#--------------------------------
+.vscode/
+\end{minted}
+
+Explain what would adding the above content to the \texttt{.gitignore} file do?
+
+Next, add \texttt{.gitignore} file to git and commit it:
+
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git add .gitignore
+git commit -m "Added gitignore file"
+\end{minted}
+
+
+
+\item Push your branch to GitHub: \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git push origin hw00
+\end{minted}
+
+or you might need to do
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+git push -set-upstream origin hw00
+\end{minted}
+
+
+
+\end{enumerate}
+
+Report your GitHub username. \hfill \textbf{(3 Points)}
+
+
+
+
+\section{Working with UV (45 points)}
+A part of this assignment asks you to install \textbf{UV} and create a Python package. It is recommended that you read the documentation at \url{https://docs.astral.sh/uv/}. Provide screenshots of your installation.
+
+
+Install UV in your machine (or alternatively, you can install it in your Blackhawk server account).
+\begin{enumerate}
+   \item Linux/Mac/WSL on Windows: \hfill \textbf{(2 Points)}
+   \begin{minted}[bgcolor=powderGreen,frame=lines,
+framesep=1mm,
+baselinestretch=1.2]{bash}
+ curl -LsSf https://astral.sh/uv/install.sh | sh
+   \end{minted}
+
+   \item Create a package (replace \textbf{orangeunicorn} with your unique keyword.) \hfill \textbf{(2 Points)}
+   \begin{minted}[bgcolor=powderGreen,fontsize=\footnotesize,frame=lines,
+framesep=1mm,
+baselinestretch=1.2]{bash}
+# Create a uv project
+uv init --lib --package orangeunicorn --build-backend maturin --author-from git
+cd orangeunicorn
+# install python
+uv python install 3.12
+# create a virtual environment
+uv venv --python 3.12
+# activate virtual environment
+source .venv/bin/activate
+\end{minted}
+
+\item Let's look at the structure of the package: \hfill \textbf{(5 Points)}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\textbar{}-- Cargo.toml
+\textbar{}-- pyproject.toml
+\textbar{}-- README.md
+\textbackslash{}\textbar{}-- src
+ \textbar{}-- lib.rs
+ \textbackslash{}\textbar{}-- myawesomepackage
+ \textbar{}-- \_core.pyi
+ \textbar{}-- \_\_init\_\_.py
+ \textbar{}-- py.typed
+\end{Verbatim}
+
+Explain what each of those file mean and what their purpose is.
+
+\item Create a subpackage called \textbf{differential}. \hfill \textbf{(2 Points)}
+\item In subpackage, create a module named \texttt{discrete.py} and implement a function \texttt{diff} in Python for computing a discrete derivative of a timeseries data as follows. Consider a timeseries $x(t)$. The discrete derivative $v(t)$ of the timeseries is given by 
+
+$$
+v(t) = \frac{x(t_k) - x(t_{k-1})}{t_k - t_{k-1}}.
+$$
+
+For this purpose, assume that the function \texttt{diff} takes two Python arrays as input (do not use Numpy Array) of equal length: (i) The first array should be the time value $t_k$, $k$ is the index of time; (ii) The second array should be the signal value $x$. The function should be able to check for the equality of lengths. The function should return the computed discrete derivative $v(t)$ as a Python array. Make sure to add an inline comment to the function as shown in the example in the code snippet included in the Lecture slides. \hfill \textbf{(10 Points)}
+
+It is your responsibility to make sure that the function is \textit{importable}. See Lecture Slides 2 of CPE 486/586 for the reference.
+
+\item Build your UV package using \hfill \textbf{(2 Points)}
+
+\begin{minted}[bgcolor=powderGreen, frame=lines,
+framesep=1mm,
+baselinestretch=1.2]{bash}
+uv build
+\end{minted}
+
+\item Commit your UV package to your GitHub account created earlier. You must provide all the necessary commands you executed to commit the package to GitHub. \hfill \textbf{(2 Points)}
+
+\item Add .whl file generated in \texttt{dist} folder as a result of \texttt{uv build} as a release to your GitHub repo. \hfill \textbf{(2 Points)}
+
+\item Create another UV project for testing your package: \hfill \textbf{(2 Points)}
+
+\begin{minted}[bgcolor=powderGreen, frame=lines,
+framesep=1mm,
+baselinestretch=1.2]{bash}
+uv init difftest
+cd difftest
+uv venv --python 3.12
+source .venv/bin/activate
+uv add <enter the URL of your .whl release file>
+\end{minted}
+
+\item Prepare your UV Virtual Environment for Jupyter Notebook. \hfill \textbf{(2 Points)}
+
+\begin{minted}[bgcolor=powderGreen, frame=lines,
+framesep=1mm,
+baselinestretch=1.2]{bash}
+cd difftest
+source .venv/bin/activate
+uv add --dev jupyter
+uv add --dev ipykernel
+# create a kernel for jupyter
+uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv \
+ --name=difftest
+
+# Launch Jupyter Notebook
+jupyter notebook
+\end{minted}
+
+\item Create a new ipynb file with kernel set to \texttt{difftest}. \hfill \textbf{(2 Points)}
+\item Import your UV package \texttt{orangeunicorn} (Change this name to your chosen keyword) and its required module to test \texttt{diff} function. Take the test data as \hfill \textbf{(2 Points)}
+
+
+\begin{minted}[bgcolor=powderGreen, frame=lines,
+framesep=1mm,
+baselinestretch=1.2]{python}
+t = [0, 0.1, 0.3, 0.4, 0.55, 0.67, 0.71]
+x = [23.1, 22.5, 23.5, 21.88, 22.5, 23.5, 24.88]
+\end{minted}
+
+\item Create two line plots with markers : (i) $x$ vs $t$, (ii) $v$ vs $t$, where $v$ is the discrete derivative. Save the plot as a PDF and include it in your submission report. \hfill \textbf{(5 Points)}
+
+
+\end{enumerate}
+
+\section{Install Visual Studio Code and Important Extensions (15 Points)}
+
+\textbf{Note:} The following assignment is meant for macOS or Ubuntu Linux. If you have a Windows OS, please use WSL.
+
+Perform the following tasks:
+
+\begin{enumerate}
+
+\item Download and install Visual Studio Code. \hfill \textbf{(2 Points)}
+
+
+\item Go to your test UV environment \texttt{difftest}, activate the virtual environment there, and install the following packages: \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+uv pip install pandas matplotlib torch seaborn scikit-learn pygame
+\end{minted}
+
+
+\item Open Visual Studio Code by typing  \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+code
+\end{minted}
+
+in the command line, 
+
+and click on the Extensions icon in the left sidebar (or press Ctrl+Shift+X).
+
+\item Search for and install the following extensions: \hfill \textbf{(2 Points)}
+
+   \begin{enumerate}
+      \item Jupyter (Microsoft)
+      \item Jupyter Notebook Renderers (Microsoft)
+      \item Python (Microsoft)
+      \item Pylance (Microsoft)
+      \item Python Debugger (Microsoft)
+      \item Python Environments (Microsoft)
+      \item Remote -- SSH (Microsoft)
+      \item Remote -- SSH: Editing Configuration Files (Microsoft)
+      \item Remote Explorer (Microsoft)
+   \end{enumerate}
+   
+
+\item Create a new file and save it as \texttt{vscodehw00.ipynb}. On the top right corner, click \textbf{Select Kernel} and choose the appropriate kernel you created earlier. \hfill \textbf{(2 Points)}
+
+\item Enter the following code into your notebook and execute it
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{python}
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("Hello, Jupyter!")
+\end{minted}
+
+Make sure the notebook is executed successfully. \hfill \textbf{(2 Points)}
+
+\end{enumerate}
+
+
+
+
+
+\section{Working with Google Colab (25 Points)}
+
+Perform the following tasks:
+
+Create a Google Colab notebook on \url{https://colab.research.google.com/}, name it \texttt{hw00.ipynb}.
+
+\begin{enumerate}
+\item Create a markdown cell, and enter your name and email address you created earlier. \hfill \textbf{(2 Points)}
+
+
+\item Install some Python packages as follows by creating a new code cell and executing: 
+
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{bash}
+%reload_ext autoreload
+%autoreload 2
+! pip install pandas matplotlib torch seaborn scikit-learn pygame
+\end{minted}
+
+Please describe, what does  \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=lightapricot,
+fontsize=\normalsize
+]
+{bash}
+%reload_ext autoreload
+%autoreload 2
+\end{minted}
+
+
+
+\item Next, create another new code cell, and execute the following \hfill \textbf{(2 Points)}
+
+   \begin{minted}
+[
+frame=lines,
+framesep=1mm,
+baselinestretch=1.2,
+bgcolor=cpeyellow,
+fontsize=\normalsize
+]
+{python}
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("Hello, World!")
+\end{minted}
+
+
+\item Create an account in \url{https://pypi.org/} with the unique keyword as your username. This will prepare you to upload a Python package to be installed using the \texttt{pip install} command. \hfill \textbf{(2 Points)}
+
+
+\item Go back to your UV Project \texttt{orangeunicorn} (replace the project name with your chosen keyword) and upload the built package to PYPI using \hfill \textbf{(5 Points)}
+
+\begin{minted}[bgcolor=powderGreen,fontsize=\footnotesize]{bash}
+uv publish
+\end{minted}
+
+
+See \url{https://docs.astral.sh/uv/guides/package/#updating-your-version} for details.
+
+You may also need to edit README.md that is auto-generated in the project folder so that it doesn't stay empty. An empty README.md might cause an error while uploading .whl package to \url{https://pypi.org/}.
+
+Here, you may encounter two issues: (i) how to generate a Token as a password, (ii) naming issues with your .whl or .tar.gz file. You must figure out how to solve this as part of your assignment.
+
+\item Go back to the Google Colab notebook.
+
+In one of the cells, enter.
+
+\begin{minted}[bgcolor=powderGreen,fontsize=\footnotesize]{bash}
+!pip install orangeunicorn
+\end{minted}
+
+Restart the notebook Kernel. Test your function \texttt{diff} with the test data provided earlier and create two plots. Provide a publicly accessible URL of your Notebook as a part of your submission. \hfill \textbf{(5 Points)}
+
+\end{enumerate}
+
+Provide a public URL to your Google Colab notebook. \hfill \textbf{(2 Points)}
+
+
+\end{document}
