@@ -1,0 +1,1778 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[aspectratio=169,xcolor=dvipsnames,svgnames,x11names,fleqn]{beamer}
+% \documentclass[aspectratio=169,xcolor=dvipsnames,fleqn]{beamer}
+
+\usetheme{RedVelvet}
+
+\usefonttheme[onlymath]{serif}
+\newcommand{\showanswers}{yes}
+
+
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{physics}
+% \usepackage{mathbb}
+\usepackage{rahul_math}
+\usepackage{bigints}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{tikz,pgfplots}
+
+\usepackage{subfigure}
+\usetikzlibrary{arrows}
+\usepackage{minted}
+\definecolor{LightGray}{gray}{0.9}
+\definecolor{cream}{rgb}{0.92, 0.9, 0.55}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+
+
+\usepackage{xcolor-material}
+\usetikzlibrary{fit}
+\usetikzlibrary{matrix}
+\tikzset{%
+apple/.pic={
+    \fill [MaterialBrown] (-1/8,0)  arc (180:120:1 and 3/2) coordinate [pos=3/5] (@)-- ++(1/6,-1/7)  arc (120:180:5/4 and 3/2) -- cycle;
+    \fill [MaterialLightGreen500] (0,-9/10)  .. controls ++(180:1/8) and ++(  0:1/4) .. (-1/3,  -1) .. controls ++(180:1/3) and ++(270:1/2) .. (  -1,   0) .. controls ++( 90:1/3) and ++(180:1/3) .. (-1/2, 3/4) .. controls ++(  0:1/8) and ++(135:1/8) .. (   0, 4/7)
+    }
+    }
+
+\newcommand{\leftdoublequote}{\textcolor{blue}{\scalebox{3}{``}}}
+
+\newcommand{\rightdoublequote}{\textcolor{blue}{\scalebox{3}{''}}}
+
+
+\usepackage{textcomp}
+\usepackage{fontawesome}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric, positioning}
+\pgfplotsset{compat=1.8} % or newest version
+
+\usetikzlibrary{positioning}
+
+
+\usepackage{bm}
+\usepackage{relsize}
+
+
+
+\tikzset{basic/.style={draw,fill=MediumBlue!20,text width=1em,text badly centered}}
+\tikzset{input/.style={basic,circle}}
+\tikzset{weights/.style={basic,rectangle}}
+\tikzset{functions/.style={basic,circle,fill=MediumBlue!10}}
+
+
+
+\usepackage{listofitems} % for \readlist to create arrays
+\tikzstyle{mynode}=[thick,draw=MediumBlue,fill=MediumBlue!20,circle,minimum size=22]
+
+
+\usepackage{overpic}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\usepackage{tikz-qtree,tikz-qtree-compat}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{calc}
+
+\usetikzlibrary{fit}
+\tikzset{%
+apple/.pic={
+    \fill [MaterialBrown] (-1/8,0)  arc (180:120:1 and 3/2) coordinate [pos=3/5] (@)-- ++(1/6,-1/7)  arc (120:180:5/4 and 3/2) -- cycle;
+    \fill [MaterialLightGreen500] (0,-9/10)  .. controls ++(180:1/8) and ++(  0:1/4) .. (-1/3,  -1) .. controls ++(180:1/3) and ++(270:1/2) .. (  -1,   0) .. controls ++( 90:1/3) and ++(180:1/3) .. (-1/2, 3/4) .. controls ++(  0:1/8) and ++(135:1/8) .. (   0, 4/7)
+}
+}
+\usepackage{tikz-qtree,tikz-qtree-compat}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{calc}
+
+\usetikzlibrary{positioning}
+
+
+\usepackage{bm}
+\usepackage{relsize}
+
+
+
+\tikzset{basic/.style={draw,fill=MediumBlue!20,text width=1em,text badly centered}}
+\tikzset{input/.style={basic,circle}}
+\tikzset{weights/.style={basic,rectangle}}
+\tikzset{functions/.style={basic,circle,fill=MediumBlue!10}}
+
+
+
+\usepackage{listofitems} % for \readlist to create arrays
+\tikzstyle{mynode}=[thick,draw=MediumBlue,fill=MediumBlue!20,circle,minimum size=22]
+
+
+\newmdenv[
+backgroundcolor=androidYellowLight,
+linecolor=androidYellow,
+linewidth=0.5pt,
+roundcorner=10pt,
+skipabove=\baselineskip,
+skipbelow=\baselineskip
+]{MintedFrame}
+
+% Set minted options
+\setminted{
+fontsize=\footnotesize,
+breaklines=true,
+autogobble,
+linenos,
+frame=none
+}
+
+
+\title[CPE 487/587: Deep Learning]{CPE 486/586: Deep Learning for Engineering Applications} % The short title appears at the bottom of every slide, the full title is only on the title page
+\subtitle{02 Crash Course on Machine Learning}
+
+\author[Rahul Bhadani] {{\Large \textbf{Rahul Bhadani}}}
+
+\institute[UAH] % Your institution as it will appear on the bottom of every slide, maybe shorthand to save space
+{
+    Electrical \& Computer Engineering,  The University of Alabama in Huntsville
+}
+\date
+
+% \titlegraphic{
+%    \includegraphics[width=0.4\linewidth]{figures/UAH_primary.png}
+% }
+
+\begin{document}
+
+%-------------------------------------------------
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------------------------------------------------
+\begin{frame}{Outline}
+    \backgroundtableofcontents
+\end{frame}
+
+
+
+
+
+\begin{frame}{PyTorch Basic Operations}
+
+\begin{center}
+
+\url{https://github.com/rahulbhadani/CPE486586_FA25/blob/main/Code/CPE486586_Ch03_Basic_Linear_Algebra_PyTorch.ipynb}
+
+\end{center}
+
+
+
+\end{frame}
+
+
+\section{Supervised Learning: Linear Regression}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+
+\begin{frame}{Supervised Learning from Examples}
+\small
+    \begin{tabular}{p{0.25\textwidth} p{0.05\textwidth} p{0.25\textwidth}p{0.35\textwidth}}
+        \textbf{Input $\xbf$} & &  \textbf{Output $y$} & \textbf{Application}\\
+        \hline \\ 
+        Email & $\to$ & Spam (? (0/1) ) & Spam Filtering\\ \\
+        Audio & $\to$ & Text Transcripts & Speech Recognition\\ \\
+        English & $\to$ & Bengali & Machine Translation\\ \\
+        Ad, User Infor & $\to$ & Clicked (0/1) & Online Advertising \\ \\
+        Image, Radar Info & $\to$ & Position of other Cards & Self-driving Cars \\ \\
+        Image of Phone & $\to$ & Defect (0/1) & Automated Quality Inspection
+        \end{tabular}
+    
+\end{frame}
+
+\begin{frame}{The Supervised Learning Setting}
+
+ \begin{itemize}
+        \item Consider {\bf\color{MediumBlue}Input}: $\Dcal:=\{(\x_i, y_i)\}_{i=1}^n$ where $\xbf_i \in X$ is the feature vector (called \textbf{explanatory/predictor variable}), and $y_i \in Y$ is the known true label (called \textbf{response variable}). 
+        \item Supervised learning algorithms learn from \underline{\textbf{``right answers"}}
+    \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Setting up the Linear Regression Problem}
+    
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{figures/scatterplot_2.png}
+    
+        Can we guess the price of house for a size of 650 sq ft?
+    \end{center}
+    
+ \end{frame}
+ 
+ 
+ %------------------------------------------------
+\begin{frame}{Setting up the Linear Regression Problem}
+    \begin{tblock}{Definition}
+        Linear regression is a kind of supervised machine learning algorithm where a linear discriminant model $g(\xbf)$  (a straight line) is used to fit on the given dataset. 
+    \end{tblock}
+    
+We define a linear model as $g(\x) = \wbf^\T \x + w_0$.
+
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{Data Model and Assumptions for SLR}
+    As input data is $\Dcal:=\{(\x_i, y_i)\}_{i=1}^n$, we imagine that the actual equation that models the physical process may be 
+    \begin{equation}
+        y_i = (w_0 + w_1 x_i) + \epsilon_i
+    \end{equation}
+    which in essence says that $ Y = signal + noise$. $\epsilon_i$ is the random error or noise term.
+
+\begin{gradblock}
+        \textbf{For simplicity, we assume that the noise is zero-mean, constant variance noise.}
+    \begin{itemize}
+        \item $\Ebb[\epsilon_i] = 0 ~\forall~ i$.
+        \item $\sigma^2[\epsilon_i] = \sigma^2$ ( a constant) $\forall~ i$.
+        \item $\sigma[\epsilon_i, \epsilon_j] = 0~\forall~ i\neq j$.
+    \end{itemize}
+\end{gradblock}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Regression and Least Square}
+    \begin{enumerate}
+        \item The problem of regression becomes finding $w_0$ and $w_1$.
+        \item We use \textbf{Least Square} method to estimate $w_0$, and $w_1$. We will denote estimated $\what_0$, and $\what_1$.
+        \item The fitted value would be $\yhat_i = \what_0 + \what_1 x_i$.
+    \begin{facts}{}
+        We want to minimize {\Huge\begin{equation*}
+            Q = \sum(y_i - \yhat_i)^2.
+        \end{equation*}
+        }
+    \end{facts}
+    \item Residuals are $e_i = y_i - \yhat_i$. We want residuals to be as low as possible.
+    \end{enumerate}
+    \end{frame}
+    
+    
+    \begin{frame}{The Least-Square Solution}
+    The solution comes out to be the closed form:
+    
+    
+    \begin{gradblock}{}
+    {
+    \Huge
+    \begin{equation*}
+    \begin{aligned}
+        \what_1 & = \cfrac{\sum_i(x_i - \xbar)(y_i - \ybar)}{\sum_i (x_i - \xbar)^2}\\
+        \what_0 & = \ybar - \what_1 \xbar
+        \end{aligned}
+    \end{equation*}
+    }
+    \end{gradblock}
+    
+    \end{frame}
+    
+    
+       \begin{frame}{Goodness of Fit using Coefficient of Determination $R^2$}
+    Goodness of Fit, i.e. how well this linear regression model fits into the given dataset is given by 
+    \begin{facts}{}
+        {
+        \LARGE
+        \begin{center}
+            \begin{equation*}
+        R^2 = 1-\cfrac{\textrm{SSE}}{\textrm{SSTO}}
+    \end{equation*}
+        \end{center}
+        }
+    \end{facts}
+    
+    where $\textrm{SSTO} = \sum (y_i - \ybar)^2$.
+
+    $R^2$ is the percentage of the total variation of the $y_i$ explained by the regression model.
+
+\end{frame}
+    
+     \begin{frame}{Properties of $R^2$}
+
+
+    \textbf{Some interesting properties of $R^2$:}
+    \begin{enumerate}
+        \item $R^2 = 1$ when every point lies on the regression straight line.
+        \item $R^2 = 0$ when data are cloudy.
+    \end{enumerate}
+    \textbf{Some limitations of $R^2$:}
+    \begin{enumerate}
+        \item $R^2 \to 1$ indicates a strong linear relationship but it might be a poor fit.
+        \item $R^2 \to 0$ indicates a weak linear relationship but it may be a good \textbf{nonlinear fit}.
+    \end{enumerate}
+    
+    \end{frame}
+    
+    %------------------------------------------------
+\begin{frame}{First-order Model with Two Predictor Variables}
+
+
+        \begin{equation}
+            y_i = w_0 + w_1 x_{i1} + w_2 x_{i2} + \epsilon_i
+        \end{equation}
+        In this case, our general assumption model, as seen in the single predictor variable will hold true, such as $\Ebb[y_i] = w_0 + w_1 x_{i1} + w_2 x_{i2} $.
+    
+        \vspace{10pt}
+        In addition, the following value holds, as you see by taking the partial derivatives of the model:
+        \begin{equation}
+            \begin{aligned}
+                 \cfrac{\partial \Ebb[Y]}{\partial X_1}  = w_1 \quad \quad
+                 \cfrac{\partial \Ebb[Y]}{\partial X_2}  = w_2
+            \end{aligned}
+        \end{equation}
+       
+
+    \end{frame}
+    
+    
+%------------------------------------------------
+% Frame 1: Matrix Representation of Components
+%------------------------------------------------
+\begin{frame}[allowframebreaks]{Matrix form of the Linear Regression Model}
+
+    \begin{equation}
+        \ybf_{n\times 1} = \begin{bmatrix}
+            y_1 \\ y_2 \\ \vdots \\  y_n
+        \end{bmatrix}
+    \quad \quad
+          \xbf_{n\times p} = \begin{bmatrix}
+            1 & x_{11} & x_{12} & \cdots & x_{1(p-1)}\\
+            1 & x_{21} & x_{22} & \cdots & x_{2(p-1)}\\
+            \vdots & \vdots & \vdots & \vdots\\
+            1 & x_{n1} & x_{n2} & \cdots & x_{n(p-1)}
+        \end{bmatrix}    
+    \end{equation}
+    
+    \begin{equation}
+        \wbf_{p\times 1} = \begin{bmatrix}
+            w_0 \\ w_1 \\ \vdots \\  w_{p-1}
+        \end{bmatrix}
+    \quad \quad
+        \boldsymbol{\epsilon}_{n\times 1} = \begin{bmatrix}
+             \epsilon_1 \\  \epsilon_2 \\ \vdots \\  \epsilon_n
+        \end{bmatrix}   
+    \end{equation}
+    \end{frame}
+    
+    %------------------------------------------------
+    % Frame 2: Linear Regression Model in Matrix Form
+    %------------------------------------------------
+    \begin{frame}[allowframebreaks]{Linear Regression Model in Matrix Form}
+    \vspace{10pt}
+    In matrix form, we can write it as
+    
+    \begin{facts}{}
+        {\Huge
+    
+        \begin{equation}
+            \ybf_{n\times 1} = \xbf_{n\times p}\wbf_{p\times 1} + \boldsymbol{\epsilon}_{n\times 1}
+        \end{equation}
+        }
+    \end{facts}
+    \end{frame}
+    
+    %------------------------------------------------
+    % Frame 3: Expectation and Variance-Covariance Matrix
+    %------------------------------------------------
+    \begin{frame}[allowframebreaks]{Expectation and Variance-Covariance Matrix}
+    Here, $\Ebb[\boldsymbol{\epsilon}] = 0$, and variance-covariance matrix is
+    \begin{equation}
+        \sigma^2[\boldsymbol{\epsilon}] =  \begin{bmatrix}
+            \sigma^2 & 0 & 0 & \cdots & 0\\
+            0 & \sigma^2 & 0 & \cdots & 0\\
+            \vdots & \vdots & & \vdots \\
+            0 & 0 & \cdots & 0 & \sigma^2
+        \end{bmatrix} = \sigma^2\Ibf
+    \end{equation}
+    
+    In this case, instead of random variable $Y$, and $X$, we have random vector $\Ybf$, and $\Xbf$, and $\Ebb[\Ybf] = \Xbf \wbf $.
+    \end{frame}
+    
+    %------------------------------------------------
+\begin{frame}{Least Square Estimator/Cost Function for MLR}
+    \begin{facts}{Cost Function}
+    {
+    \LARGE
+    \begin{equation}
+    \begin{aligned}
+        J & = \cfrac{1}{2n}\sum_{i=1}^n ( y_i - \sum_{k=0}^{p-1} w_k x_{ik} )^2\\
+        & =  \cfrac{1}{2n}\sum_{i=1}^n ( y_i - \wbf^\top \xbf_i )^2 = \cfrac{1}{2n}(\ybf - \xbf \wbf)^\top(\ybf - \xbf \wbf)
+        \end{aligned}
+    \end{equation}
+    }
+    \end{facts}
+    \end{frame}
+    
+%------------------------------------------------
+% Frame 1: Introducing the Normal Equation
+%------------------------------------------------
+\begin{frame}{Normal Equation for MLR}
+    \begin{facts}{Normal Equation}
+    {
+    \Large
+    \begin{equation}
+       \xbf^\top\xbf \hat{\wbf} = \xbf^\top\ybf
+    \end{equation}
+    How to solve this for $\wbf$?
+    }
+    \end{facts}
+    \end{frame}
+    
+    %------------------------------------------------
+    % Frame 2: Partial Derivative and Solution Derivation
+    %------------------------------------------------
+    \begin{frame}{Deriving the Solution}
+    \begin{facts}{Normal Equation}
+    {
+    \Large
+    \begin{equation}
+        \cfrac{\partial J}{\partial \wbf} = -\cfrac{1}{2n}\xbf^\top(\ybf - \xbf \wbf) = 0 \Rightarrow  -\cfrac{1}{2n}(\xbf^\top\ybf - \xbf^\top\xbf \wbf) = 0
+    \end{equation}
+    }
+    \end{facts}
+    \end{frame}
+    
+    %------------------------------------------------
+    % Frame 3: Final Solution and Inverse Condition
+    %------------------------------------------------
+    \begin{frame}{Final Solution and Inverse Condition}
+    \begin{facts}{Normal Equation}
+    {
+    \Large
+    $$\hat{\wbf} =\tfrac{1}{n}(\xbf^\top\xbf)^{-1}\xbf^\top \ybf $$
+    provided $(\xbf^\top\xbf)^{-1}$ exists. 
+    }
+    \end{facts}
+    What's the condition for an inverse to exist?
+    \end{frame}
+    
+
+
+\section{Supervised Learning: Logistics Regression}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+
+\begin{frame}{Logistics Regression}
+    
+    \begin{center}
+        \Large
+        Logistics Regression is not a \textit{Regression} but a \textbf{classification} method.
+    \end{center}
+    
+      \begin{itemize}
+        \item Linear regression provides us a measure of how close a sample is to the decision boundary from the function $g(\x)$. That is the larger $|g(\x)|$ the farther a sample is from the plane. 
+        \item Unfortunately, this score does not directly correspond to the probability that a sample belongs to a class. 
+        \begin{itemize}
+            \item We could try to think of a heuristic to connect $g(\x)$ to a probability; however, let us try to derive a relationship. 
+            \item We need to revisit Bayes to get the conversation of logistic regression started.
+        \end{itemize}
+        \item Linear regression ended up having a very convenient solution (i.e., it was a convex optimization task) and we want to try to obtain a similar results -- {\em if possible}. 
+    \end{itemize}
+    
+\end{frame}
+
+
+    %------------------------------------------------
+\begin{frame}{A Dataset with Two Classes}
+    \begin{columns}
+        \column{0.5\linewidth}
+        Consider the dataset given in the table:
+    
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{x} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+        \hline
+        \textbf{y} & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\
+        \hline
+        \end{tabular}
+        A scatter plot for this dataset
+        \column{0.5\linewidth}
+
+    
+        \begin{center}
+            \includegraphics[width=1.0\textwidth]{figures/scatterplot_logistics_sample_data.pdf}
+        \end{center}
+    \end{columns}
+\end{frame}
+    
+\begin{frame}{}
+        \begin{center}
+        \Large
+            Clearly, distinguishing red and blue points won't work if we use the Linear Regression method. Also, linear regression predicts a continuous value, hence it won't be able to predict either 0 or 1.
+        \end{center}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Sigmoid Function}
+
+    \begin{columns}
+        \column{0.5\linewidth}
+        By looking at the data, we think we can classify or correctly label the data points if we have a function that is low (0) for some low values of $x$, and high (1) for some values of $x$.
+        One such function is \textbf{Sigmoid Function} or \textbf{Logistics Function} ($g(z)$ in the graph).
+        $$
+        g(z) = \cfrac{1}{1 + e^{-z}}
+        $$
+        \column{0.5\linewidth}
+        \includegraphics[width=0.88\textwidth]{figures/ssigmoid_function.pdf}
+    \end{columns}    
+\end{frame}
+
+\begin{frame}{Sigmoid Function}
+    We see that
+    
+    \begin{multiequation}
+    \lim_{z\to-\infty} g(z) = 0
+    \end{multiequation}
+    
+    and 
+    
+    \begin{multiequation}
+    \lim_{z\to\infty} g(z) = 1
+    \end{multiequation}
+    
+    It means, that for a very high positive value of $x$, the function approaches $1$, and for a very high negative value of $x$, the function approaches $0$.
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Generalized Sigmoid Function}
+    Now, what if we want the slope to change faster or slower? How should we modify the Sigmoid function?
+    
+    \begin{columns}
+    
+        \column{.6\textwidth}
+    
+            \includegraphics[width=0.7\textwidth]{figures/sigmoid_function_varying_slope.pdf}
+        \column{.4\textwidth}
+        
+    $$
+    g(z) = \cfrac{1}{1 + e^{-z\cdot b}}
+    $$
+    \end{columns}
+    
+\end{frame}
+    
+%------------------------------------------------
+\begin{frame}{Defining Sigmoid Function for Logistics Regression}
+
+    In the above example $b_1$, $b_2$ and $\pm a$ are learnable parameters that we are going to learn from data the same way we learned $w_1$ and $w_0$ in the linear regression.
+    Thus, we consider a parameter vector $\boldsymbol{\theta}$ that consists of a vector of parameters to be learned using data $\textbf{x}$ that we can use to write a generalized version of sigmoid that is data-dependent by setting $z = \boldsymbol{\theta}^\top\textbf{x} $
+    
+    $$
+    h_{\boldsymbol{\theta}}(\textbf{x}) = g(\boldsymbol{\theta}^\top\textbf{x} ) = \cfrac{1}{1 + e^{-\boldsymbol{\theta}^\top\textbf{x}}}
+    $$
+    
+    
+\end{frame}
+
+
+
+\begin{frame}{Problem Statement in Logistics Regression}
+    \begin{tblock}{}
+        The overall goal in Logistics Regression becomes finding $P(Y|X)$, i.e, given information about the random variable $X$ that gives the distribution of the predictor variable, find the probability that the random variable $Y$  takes a certain value.
+    \end{tblock}
+\end{frame}
+
+\begin{frame}{Assumptions in Logistics Regresions}
+    
+    \begin{itemize}
+        \item \textbf{Linearity:} The model assumes that the relationship between the natural log of the probabilities (of each outcome and your predictor variable is linear.
+        \item \textbf{No Outliers:} Logistics regression is very sensitive to outliers.
+        \item \textbf{Independence:} Each observation point should be independent of each other.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Logistic Regression}
+
+    \begin{tblock}{}
+    
+    
+    From the earlier formulation, $h_{\boldsymbol{\theta}}$ estimates the probability that the data points belong $Y = 1$, and hence we can write it as
+    
+    \begin{multiequation}
+        P(Y = 1 | X = x) = h_{\boldsymbol{\theta}}(\textbf{x}) 
+    \end{multiequation}
+    
+    \begin{multiequation}
+    P(Y = 0 | X = x) = 1-  h_{\boldsymbol{\theta}}(\textbf{x})
+\end{multiequation}
+    \end{tblock}
+    
+    \end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{Cost Function}
+
+    Just like linear regression, we need a cost function based on which we want to estimate $\boldsymbol{\theta}$.
+    
+    Here, we have two scenarios:
+    
+    \begin{enumerate}
+        \item $y_i = 1$:
+        \begin{itemize}
+            \item if $h_{\boldsymbol{\theta}}(\textbf{x})  \approx 1$, cost $\approx 0$ (no penalty)
+            \item if $h_{\boldsymbol{\theta}}(\textbf{x})  \approx 0$, cost $\approx$ very high
+        \end{itemize}
+    
+        \item $y_i = 0$:
+        \begin{itemize}
+            \item if $h_{\boldsymbol{\theta}}(\textbf{x})  \approx 1$, cost $\approx $ very high
+            \item if $h_{\boldsymbol{\theta}}(\textbf{x})  \approx 0$, cost $\approx 0$ (no penalty)
+        \end{itemize}
+    \end{enumerate}
+    
+    
+    Then as the outcome is 0 or 1, it follows the Bernoulli Distribution.
+    
+    
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Bernoulli Distribution Revisited}
+    \begin{facts}{}
+        The Bernoulli distribution is a special case of the binomial distribution where a single trial is conducted (so $n$ would be $1$ for such a binomial distribution).
+    \end{facts}
+    
+    
+        The formula for pmf associated with a Bernoulli random variable over possible outcomes $x$ is given as follows:
+    
+    \begin{multiequation}
+    f(x; p) =  \begin{cases} p &\quad \textrm{~if~} x= 1 \\ 1- p &\quad \textrm{~if~} x= 0 \end{cases}
+\end{multiequation}
+    We can also express this formula as,
+    
+\begin{multiequation}
+    f(x, p) = p^x(1 - p)^{1 - x},\quad x \in \{0, 1\}
+\end{multiequation}
+    
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Likelihood Function}
+    Hence, probability of assigning a label $y$ based on the data $\mathbf{x}$ is given by
+
+\begin{multiequation}
+P(Y = y| X = \mathbf{x}) =  h_{\boldsymbol{\theta}}(\textbf{x})^y \bigg[ 1 - h_{\boldsymbol{\theta}}(\textbf{x}) \bigg]^{(1-y)}
+\end{multiequation}
+
+Now, we write taking all data into account (all data points are independent):
+
+\begin{multiequation}
+L(\theta) = \Pi_{i=1}^n P(Y = y_i| X = \mathbf{x}_i) = \Pi_{i=1}^n h_{\boldsymbol{\theta}}(\textbf{x}_i)^{y_i} \bigg[ 1 - h_{\boldsymbol{\theta}}(\textbf{x}_i) \bigg]^{(1-y_i)}
+\end{multiequation}
+
+This is called \textbf{likelihood function}.
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{Log-Likelihood Function}
+    Now, take the log of the likelihood function, which is called the log-likelihood function:
+\begin{multiequation}
+    LL(\boldsymbol{\theta}) = \sum_{i=1}^n y_i \log ({ h_{\boldsymbol{\theta}}(\textbf{x}_i) }) + (1-y_i)\log \bigg[ 1 - h_{\boldsymbol{\theta}}(\textbf{x}_i) \bigg]
+\end{multiequation}
+    
+    This is also called \textbf{cross-entropy loss}.
+\end{frame}
+
+\begin{frame}{Optimization Function}
+    In the logistics regression, our goal becomes maximizing the log-likelihood by choosing the appropriate $\boldsymbol{\theta}$.
+    For this, we take the partial derivative of $LL(\theta)$ with respect to  $\boldsymbol{\theta}$.
+    
+
+\end{frame}
+
+
+    
+\begin{frame}{Optimization Function}
+    \begin{multiequation}
+    \cfrac{\partial LL(\boldsymbol{\theta})}{\partial \theta_j} = \sum_{i=1}^n \bigg[ y_i - h_{\boldsymbol{\theta}}(\textbf{x}_i) \bigg]x_{ij}
+    \end{multiequation}
+    
+    The derivation comes from the fact that the logistics function has a special property:
+    
+    \begin{multiequation}
+    \cfrac{\partial g(z) }{\partial z} = g(z)[ 1 - g(z)]
+    \end{multiequation}
+\end{frame}
+    
+
+\begin{frame}{Logistics Regression with SGD}
+
+        Equating $$\cfrac{\partial LL(\boldsymbol{\theta})}{\partial \theta_j}  = 0$$will give optimal $\theta_j^*$. However, the expression doesn't have any closed form, so we resort to using numerical methods for solving the optimization, and hence, in this case, we use \textbf{Gradient Ascent Optimization} which is equivalent to minimizing the negative of the log-likelihood function, for which we can use already discussed \textbf{Gradient Descent Optimization}.
+\end{frame}
+
+\begin{frame}{Updated Rule}
+    $$
+\theta_j \leftarrow \theta_j - \eta \cfrac{\partial LL(\boldsymbol{\theta})}{\partial \theta_j} 
+$$
+
+$$
+\theta_j \leftarrow \theta_j - \eta \sum_{i=1}^n \bigg[ y_i - h_{\boldsymbol{\theta}}(\textbf{x}_i) \bigg]x_{ij}
+$$
+\end{frame}
+
+
+\begin{frame}{Pseudo Code}
+        Logistic regression is quite easy to code up using stochastic gradient descent. You'll need an approach to determine when to stop training.
+       
+
+        \begin{itemize}
+            \item {\bf Input}: $\Dcal := \{(\x_i, y_i)\}_{i=1}^n$, $\eta$, $T$
+            \item {\bf Initialize}: $\boldsymbol{\theta} = 0$ and $\theta_0 = 0$ \hfill {\color{MediumRed} \% or initialize from $\Ncal(0, \sigma)$}
+            \item {\color{MediumBlue}\bf for} $t = 1, \ldots, T$
+            \begin{itemize}
+                \item {\color{MediumBlue}\bf for} $j = 1, \ldots, n$
+                \begin{itemize}
+                    \item $i=\texttt{np.random.randint}(n)$
+                    \item $\boldsymbol{\theta} = \boldsymbol{\theta} + \eta (y_i - g(\x_i))\x_i$
+                    \item $\theta_0 = \theta_0 + \eta (y_i - g(\x_i))$
+                \end{itemize}
+                \item {\color{MediumBlue}\bf if }\texttt{CONVERGED}, STOP
+            \end{itemize}
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Stopping Criteria}
+    \begin{tblock}{}
+        \begin{multiequation}
+        \left\| \boldsymbol{\theta}_{t+1}  - \boldsymbol{\theta}_t \right\|_2^2 \leq \epsilon, \text{ or }
+        \texttt{CrossEntropy}(t) - \texttt{CrossEntropy}(t+1) \leq \epsilon
+        \end{multiequation}
+    \end{tblock}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Logistic Regression Example}
+
+    \begin{center}
+        \includegraphics[width=.6\textwidth]{figures/lm-cross-entropy.pdf} \\
+        {Cross entropy loss on the Iris dataset for two logistic regression models. The {\color{MediumBlue}blue} is trained with a learning rate of $\eta=0.0025$ and the {\color{MediumRed}red} is trained with a learning rate of $\eta=0.001$}
+    \end{center}
+    
+\end{frame}
+    
+%------------------------------------------------
+\begin{frame}{Logistic Regression Example}
+
+    \begin{center}
+        \includegraphics[width=.6\textwidth]{figures/lm-probs.pdf} \\
+        Probabilities, $g(\x)$, on predicted data on a validation set. The Cyan/Yellow probabilities are from the model with $\eta=0.001$ and the Blue/Red probabilities are from the model with $\eta=0.0025$. 
+    \end{center}
+    
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}[containsverbatim]{Logistic Regression (in code)}
+
+    \begin{minted}
+        [
+        framesep=1mm,
+        baselinestretch=1.2,
+        fontsize=\small
+        ]
+        {python}
+    class LR: 
+        def __init__(self, lr=0.0025, epochs=50, split=.1): 
+            self.lr = lr 
+            self.epochs = epochs 
+            self.w = None 
+            self.b = None 
+            self.cross_ent = np.zeros(epochs)
+            self.split = split
+        
+        def score(self, X): 
+            return 1.0/(1 + np.exp(-(np.dot(self.w, X) + self.b)))
+        
+    \end{minted}
+    
+\end{frame}
+    
+%------------------------------------------------
+\begin{frame}[containsverbatim]{Logistic Regression (in code)}
+
+    \begin{minted}
+        [
+        framesep=1mm,
+        baselinestretch=1.2,
+        fontsize=\small
+        ]
+        {python}
+        def crossent(self, X, y): 
+            ce = np.log(self.score(X[y==1])).sum() + \
+                     np.log(1.0 - self.score(X[y==0])).sum()
+            return -ce
+    \end{minted}
+    
+\end{frame}
+    
+    
+    
+    
+    %------------------------------------------------
+    \begin{frame}[containsverbatim]{Logistic Regression (in code)}
+    
+        \begin{minted}
+            [
+            framesep=1mm,
+            baselinestretch=1.2,
+            fontsize=\small
+            ]
+            {python}
+        def fit(self, X, y): 
+            i = np.random.permutation(len(y))
+            X, y = X[i], y[i]
+            self.w, self.b = np.zeros(X.shape[1]), 0
+            M = np.floor((1-self.split)*len(y)).astype(int)
+            Xtr, ytr, Xva, yva = X[:M], y[:M], X[M:], y[M:]        
+            for t in range(self.epochs): 
+                # run stochastic gradient descent
+                for i in np.random.permutation(len(ytr)): 
+                    self.w += self.lr*(ytr[i] - self.score(Xtr[i]))*Xtr[i]
+                    self.b += self.lr*(ytr[i] - self.score(Xtr[i]))
+                self.cross_ent[t] = self.crossent(Xva, yva)
+            \end{minted}
+    
+    \end{frame}
+    
+    
+    %------------------------------------------------
+    \begin{frame}[containsverbatim]{Logistic Regression (in code)}
+    
+        \begin{minted}
+            [
+            framesep=1mm,
+            baselinestretch=1.2,
+            fontsize=\small
+            ]
+            {python}
+        def predict(self, X): 
+            return 1.0*(self.score(X[i]) >= 0.5)
+        
+        def predict_proba(self, X): 
+            return self.score(X[i])
+        
+        def predict_log_proba(self, X): 
+            return np.log(self.predict_proba(X))
+        \end{minted}
+    
+\end{frame}
+    
+    
+    %------------------------------------------------
+\begin{frame}[containsverbatim]{Logistics Regression Using Sklearn}
+    \begin{minted}
+    [
+    framesep=1mm,
+    baselinestretch=1.2,
+    fontsize=\small
+    ]
+    {python}
+    import numpy as np
+    from sklearn.linear_model import LogisticRegression
+    
+    # Create an instance of a Logistic Regression Classifier and fit the data.
+    logreg = LogisticRegression()
+    logreg.fit(x, y.ravel())
+    
+    # Predict
+    y_hat = logreg.predict(x)
+    
+    print("Predictions:", y_hat)
+    \end{minted}
+        
+\end{frame}
+    
+    
+\begin{sectionframe}{\faPencilSquareO}{Logistic Regression Performance Evaluation}
+\end{sectionframe}
+
+\begin{frame}{Accuracy}
+    Accuracy is a metric used to evaluate the performance of classification models. Informally, accuracy is the fraction of predictions our model got right. It measures the ratio of correctly predicted instances (true positives and true negatives) to the total number of instances.
+    
+    $$
+    \text{Accuracy} = \frac{\text{Number of correct predictions}}{\text{Total number of predictions}}
+    $$
+    
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}[containsverbatim]{Confusion Matrix}
+    Confusion Matrix displays how many of the data points were classified correctly and incorrectly.
+    
+    \begin{minted}
+        [
+        framesep=1mm,
+        baselinestretch=1.2,
+        fontsize=\small
+        ]
+        {python}
+from sklearn.metrics import confusion_matrix
+confusion_matrix = confusion_matrix(y, y_hat)
+print(confusion_matrix)
+    \end{minted}
+\end{frame}
+
+
+
+%------------------------------------------------
+%------------------------------------------------
+\begin{frame}{True Positive (tp)}
+    \small
+    \begin{columns}
+        \column{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figures/TP.pdf} % Placeholder image
+        \column{0.5\textwidth}
+        \begin{tblock}{}
+            \textbf{True Positive (tp)}: Arpita has cancer. She takes a medical test for cancer, and the test result is positive. This is a true positive because the test correctly identified that Arpita has cancer.
+        \end{tblock}
+    \end{columns}
+\end{frame}
+    
+    %------------------------------------------------
+\begin{frame}{True Negative (tn)}
+    \small
+    \begin{columns}
+        \column{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figures/TN.pdf} % Placeholder image
+        \column{0.5\textwidth}
+        \begin{tblock}{}
+            \textbf{True Negative (tn)}: Mumtaj does not have cancer. She takes the same medical test, and the test result is negative. This is a true negative because the test correctly identified that Mumtaj does not have cancer.
+        \end{tblock}
+    \end{columns}
+\end{frame}
+    
+    %------------------------------------------------
+\begin{frame}{False Positive (fp)}
+    \small
+    \begin{columns}
+        \column{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figures/FP.pdf} % Placeholder image
+        \column{0.5\textwidth}
+        \begin{tblock}{}
+            \textbf{False Positive (fp)}: Niu does not have cancer. However, when she takes the medical test, the test result is positive. This is a false positive because the test incorrectly identified that Niu has cancer.
+        \end{tblock}
+    \end{columns}
+\end{frame}
+    
+    %------------------------------------------------
+\begin{frame}{False Negative (fn)}
+    \small
+    \begin{columns}
+        \column{0.5\textwidth}
+        \includegraphics[width=\textwidth]{figures/FN.pdf} % Placeholder image
+        \column{0.5\textwidth}
+        \begin{tblock}{}
+            \textbf{False Negative (fn)}: Diana has cancer. However, when she takes the medical test, the test result is negative. This is a false negative because the test incorrectly identified that Diana does not have cancer.
+        \end{tblock}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{}
+    \begin{center}
+        \includegraphics[width=0.65\textwidth]{figures/typeI_typeII.jpeg}
+    \end{center}
+\end{frame}
+    
+\begin{frame}{Precision}
+
+\textbf{Precision} is the ratio
+
+$$
+\textrm{Precision} = \cfrac{tp}{tp + fp}
+$$
+This means the classifier cannot label a sample as positive if it is negative.
+\end{frame}
+
+\begin{frame}{Recall}
+    \textbf{Recall} is
+
+$$
+\textrm{Recall} = \cfrac{tp}{tp + fn}
+$$
+It is the ability of the classifier to find all the positive samples.
+
+\end{frame}
+
+\begin{frame}{F-Score}
+
+
+
+    \textbf{F-score} is the weighted harmonic mean of the precision and recall.
+
+$$
+F_{score} = 2\times \cfrac{Precision \times Recall}{Precision + Recall}
+$$
+    
+\end{frame}
+
+\begin{frame}{Support}
+    \textbf{Support} is the number of occurrences of each class in the test set.
+\end{frame}
+
+\begin{frame}[containsverbatim]{In Sklearn: ...}
+    \begin{minted}
+        [
+        framesep=1mm,
+        baselinestretch=1.2,
+        fontsize=\normalsize
+        ]
+        {python}
+        from sklearn.metrics import classification_report
+        print(classification_report(y, y_hat))
+        \end{minted}
+    
+\end{frame}
+
+\section{Principal Component Analysis}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+\begin{frame}{Why?}
+
+    \Large 
+
+    \begin{itemize}
+        \item Helpful for reducing number of features
+        \item For 2D/3D visualization
+        \item Helpful in unsupervised algorithms
+        \item Data storage cost can be lowered
+    \end{itemize}
+    
+\end{frame}
+
+
+
+\begin{frame}{Intuition Behind PCA}
+    \begin{columns}
+
+    \column{0.6\textwidth}
+    $x_1$: length of the car, $x_4$: height of the car
+
+
+    {\color{lightgray}Class Work}
+        \column{0.4\textwidth}
+  \hfill  \includegraphics[width=0.99\textwidth]{figures/a_car.jpg}
+
+    \end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Problem Setting}
+
+    \Large 
+    \begin{center}
+        We are interested in finding projections $\tilde{\xbf}_n$ of data points $\xbf_n$ that are are similar to the original data points as possible, but which have significant lower intrinsic dimensionality.
+    \end{center}
+    
+    \begin{tblock}{Question}
+        Given a dataset $X = \{ \xbf_1, \cdots \xbf_n\}$, $\xbf_i\in \Rbb^D$, is there a subspace $\Rbb^M$, $M<<D$ in which $X$ approximately lies?
+    \end{tblock}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{sectionframe}{\faPercent}{Mathematics behind PCA}
+\end{sectionframe}
+
+\begin{frame}{Feature Preprocessing}
+   \begin{tblock}{}
+       \begin{itemize}
+            \item Normalize the dataset so that $\mu = 0$, $\sigma = 1$.
+           \begin{multiequation}
+               \boldsymbol{\mu} & = \cfrac{1}{N}\sum_{i = 1}^n \xbf_i\\
+               \xbf_i &= \xbf_i-\boldsymbol{\mu}\\
+               \sigma_j^2 & = \cfrac{1}{n}\sum_{i=1}^n (x_{ij} - \mu_j)^2\\
+               x_{ij} & = \cfrac{x_{ij}}{\sigma_j}
+            \end{multiequation}
+       \end{itemize}
+   \end{tblock}
+   Rescaling helps in finding duplicate features such as km/h, mph
+\end{frame}
+
+\begin{frame}{Feature Processing}
+
+    \large
+
+    More concretely, we transform dataset, so that we have iid dataset $X = \{ \xbf_1, \cdots, \xbf_N \}$
+ with $0$ mean and convariance matrix $\Sigma$:
+    \begin{multiequation}
+        \Sigma = \cfrac{1}{N} \sum_{n=1}^N \xbf_n \xbf_n^\top
+    \end{multiequation}
+
+    Here $\xbf_i$ is a D-dimensional vector.
+    
+\end{frame}
+
+\begin{frame}{Find the Direction of Maximum Variance}
+
+    \begin{columns}
+        \column{0.5\linewidth}
+        \includegraphics[width=0.99\textwidth]{figures/Projection.pdf}
+        \column{0.5\linewidth}
+        
+        \large 
+
+        To project $\xbf_i$ onto a new axis $\Bbf$:
+        $$
+        \zbf_i  = \textrm{proj}_{\Bbf}(\xbf_i) = \Bbf^\top \xbf_i
+        $$
+
+        We define the projection matrix as $\Bbf := [\bbf_1, \cdots, \bbf_M] \in \Rbb^{D\times M}$.
+
+      We assume that the columns of $\Bbf$ are orthonormal  such that $$||b_i || = 1$$ and $\bbf_i^\top \bbf_j = 0$.
+    \end{columns}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Find the Direction of Maximal Variance}
+We maximize the variance of the low-dimensional coe using a sequential approach. Start with a single vector $\bbf_1 \in \Rbb^D$ that maximizes the variance of the projected data.
+
+\Large 
+How do we choose unit vector $\bbf_1$ so that we maximize
+$$
+V = \cfrac{1}{N}\sum (\bbf_1^\top \xbf_i)^2
+$$
+
+Here, expressing with sum of squares accounts for negative projections in other quadrants.
+
+
+\end{frame}
+
+\begin{frame}{The Direction with Maximal Variance}
+
+    \Large 
+Expanding
+
+\begin{multiequation}
+V & =   \cfrac{1}{N}\sum  (\bbf_1^\top \xbf_i)^2 = \cfrac{1}{N}\sum_{i=1}^N \bbf_1^\top  \xbf_i \xbf_i \bbf_1  \\
+    & = \bbf_1 ^\top \bigg( \cfrac{1}{N} \sum_{i=1}^N \xbf_i {\xbf_i}^\top \bigg)  \bbf_1 =  \bbf_1 ^\top \Sigma  \bbf_1 
+\end{multiequation}
+
+The dot product is symmetric, i.e. $ \bbf_1^\top \xbf_i = \xbf_i^\top \bbf_1 $.
+\end{frame}
+
+\begin{frame}{Lagrange Multiplier to Solve the Optimization Problem}
+    
+    \Large 
+    Our goal is to maximize $ \bbf_1 ^\top \Sigma  \bbf_1 $
+    such that
+    $$
+    \bbf_1^\top \bbf_1 = 1 \Rightarrow  \bbf_1^\top  \bbf_1 - 1 = 0
+    $$
+    We use the method of Lagrange Multiplier 
+    $$
+    \Lcal( \bbf_1, \lambda) =  \bbf_1^\top \Sigma  \bbf_1 - \lambda ( \bbf_1^\top  \bbf_1 - 1)
+    $$
+\end{frame}
+
+\begin{frame}{Lagrange Multiplier to Solve the Optimization Problem}
+\Large
+\begin{columns}
+    \column{0.60\linewidth}
+    \begin{multiequation}
+        \Lcal( \bbf_1, \lambda) & =  \bbf_1^\top \Sigma  \bbf_1 - \lambda ( \bbf_1^\top  \bbf_1 - 1)
+    \end{multiequation}
+    Take the gradient with respect to $ \bbf_1$
+
+    \begin{multiequation}
+        \nabla_{ \bbf_1}  \Lcal( \bbf_1, \lambda) & = \Sigma  \bbf_1 -\lambda  \bbf_1 = 0\\
+\Rightarrow  \Sigma  \bbf_1 = \lambda \bbf_1
+    \end{multiequation}
+
+    \column{0.05\linewidth}
+    \column{0.30\linewidth}
+    We see that $ \bbf_1$ is  an eignevector of the covariance matrix $\Sigma$ and the lagrange multiplier $\lambda$ is the corresponding eigenvalue.
+
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Eigenvalue Problem}
+
+  
+    From the eigenvector property:
+
+    \begin{multiequation}
+        V =  \bbf_1^\top \Sigma  \bbf_1 = \lambda  \bbf_1^\top  \bbf_1 = \lambda
+    \end{multiequation}
+
+    \begin{tblock}{}
+        Hence, the variance of the data projected onto a 1-D subspace equal the eigenvalue associated the basis vector $ \bbf_1$ that spans the subspace.
+    \end{tblock}
+
+    To maximimze the variance of the low-dimensional code, we choose the basis vector associated with the largest eigenvalue of the convariance matrix. This eigenvector is called the \textbf{first principal component}.
+\end{frame}
+
+\begin{frame}{Prinicpal Components}
+If we consider all basis vectors, there will be $D$ solution, i.e. $D$ eigenvalues.
+
+If you want to project into, say, $\Rbb^2$ from $\Rbb^6$, you select the first basis $b_1$ and $b_2$, sorted by the magnitude of respective eigenvalues.
+
+\begin{tblock}{Note}
+    $b_1, b_2, \cdots $ are new basis vectors for the reduced data.
+\end{tblock}
+
+\end{frame}
+
+
+\begin{frame}{Reduced Dimensions}
+
+    \Large 
+
+    The reduced dimension, $z_i$ can be written as 
+    \begin{multiequation}
+        \zbf_i = \begin{bmatrix}
+            \bbf_1^\top \xbf_i \\
+            \bbf_2^\top \xbf_i\\
+            \bbf_3^\top \xbf_i\\
+            \vdots
+        \end{bmatrix} \quad \begin{array}{c}
+            \leftarrow \text{projection onto } \bbf_1 \\
+            \leftarrow \text{projection onto } \bbf_2\\
+            \leftarrow \text{projection onto } \bbf_3\\
+            \vdots
+            \end{array}
+    \end{multiequation}
+
+    Here, $\zbf_i \in \Rbb^M$.
+
+\end{frame}
+
+
+
+
+\begin{frame}{Reconstruction}
+
+    \large
+
+    We can reconstruct $\xbf_i$ as folllows, although with loss of information as :
+
+    \begin{multiequation}
+        \xbf_i^{\text{recon}} = \Bbf \zbf_i = \sum_{j=1}^M z_{ij} \bbf_j
+    \end{multiequation}
+
+    \begin{tblock}{Note}
+        The quality of the reconstruction depends on the number of principal components $M$ used. If $M = D$, the reconstruction will be perfect, but if $M < D$, some information will be lost.
+    \end{tblock}
+
+\end{frame}
+
+
+\begin{frame}{Reconstruction Error}
+
+    \large
+
+    \begin{multiequation}
+        \text{Error} = \frac{1}{N} \sum_{i=1}^N \|\xbf_i - \xbf_i^{\text{recon}}\|^2
+    \end{multiequation}
+    
+    This error measures how well the reduced-dimensional data approximates the original data. We should be looking at PCA minimizing this error while reducing the dimensionality of the data.
+
+    \begin{tblock}{Note}
+        The reconstruction error is directly related to the eigenvalues of the covariance matrix. The smaller the eigenvalues of the discarded components, the smaller the reconstruction error.
+    \end{tblock}
+    
+\end{frame}
+
+
+\begin{frame}{Choosing the Number of Principal Components}
+
+    To choose the number of principal components $M$, we can use the following criteria:
+
+\begin{itemize}
+    \item \textbf{Variance Explained:} Select enough components to explain a desired percentage of the total variance (e.g., 95\%).
+    \item \textbf{Scree Plot:} Plot the eigenvalues in descending order and look for an "elbow" point where the eigenvalues start to level off.
+    \item \textbf{Cumulative Variance:} Calculate the cumulative sum of the eigenvalues and stop when the cumulative sum reaches a certain threshold.
+\end{itemize}
+
+\begin{tblock}{}
+    The number of principal components $M$ is a trade-off between dimensionality reduction and the amount of information retained.
+\end{tblock}
+
+
+\end{frame}
+
+
+% https://www2.imm.dtu.dk/pubdb/edoc/imm4000.pdf
+\begin{frame}{Using Singular Value Decomposition for PCA}
+    
+    After standardizing the dataset, the covariance matrix is $\Sigma = \cfrac{1}{N}\Xbf\Xbf^\top$ in matrix representation.
+
+    Assuming that we denote the matrix of eigenvectors, sorted according to the magnitude of eigenvalue by $\Ubf$, the the PCA transformation of the data is $\Zbf = \Ubf^\top \Xbf$. By selecting only the first $M$ rows of $\Zbf$, we have projected the data from $D$ down to $M$ dimensions.
+
+    \begin{tblock}{}
+        When using the data matrix $\Xbf$ notation, we follow a convention where the rows denote the features from 1 to D and the columns are the samples from 1 to N. 
+    \end{tblock}
+
+\end{frame}
+
+\begin{frame}{Using Singular Value Decomposition for PCA}
+    
+    We decompose $\Xbf$ using SVD:
+
+    $$
+    \Xbf = \Qbf \boldsymbol{\Gamma}\Vbf^\top
+    $$
+    
+    and find that we can write the covariance matrix as
+
+    $$
+\Sigma = \cfrac{1}{N}\Xbf\Xbf^\top = \cfrac{1}{N} \Qbf  \boldsymbol{\Gamma}^2 \Qbf^\top
+    $$
+
+    % Here $\Qbf$ is $D \times N$. The first $D$ columns iin $\Qbf$ corresponds to the sorted eigenvalues of $\Sigma$ if $D < M$. If $D \geq M$, the first $D$ corresponds to the sorted non-zero eigenvalues of $\Sigma$.
+\end{frame}
+
+\begin{frame}{Using Singular Value Decomposition for PCA}
+
+    \Large 
+    The transformed data thus is
+
+    $$
+\Zbf = \Ubf^\top \Xbf = \Ubf^\top \Qbf \boldsymbol{\Gamma}\Vbf^\top
+    $$
+    
+    where $\Ubf^\top \Qbf$ is a simple $D \times N$ matrix which is one on the diagonal and zero everywhere
+    else. Thus, we can write the transformed data in terms of the SVD decomposition of $\Xbf$.
+\end{frame}
+
+
+\section{Support Vector Machine}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+    
+    
+\begin{frame}{Motivating SVM}
+
+    \begin{columns}
+        \column{0.5\linewidth}
+
+        \includegraphics[width=0.99\textwidth]{figures/SVM.pdf}
+
+        \column{0.5\linewidth}
+        
+A linear support vector machine (SVM) aims to find a decision plane $\wbf^\top \xbf + b = 0$ that maximizes the margin of separation.
+
+\vspace{10pt}
+
+Assume that all data points satisfy the constraints:
+
+\begin{itemize}
+    \item $\wbf^\top \xbf + b \geq +1$ where $y_i = +1 $
+    \item  $\wbf^\top \xbf + b \leq -1$ where $y_i = -1 $
+\end{itemize}
+    \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{The SVM and Linear Classification}
+    \begin{center}
+    \tikzset{
+        leftNode/.style={circle,minimum width=.5ex, fill=Red,draw},
+        rightNode/.style={circle,minimum width=.5ex, fill=RoyalBlue,thick,draw},
+        rightNodeInLine/.style={solid,circle,minimum width=.7ex, fill=RoyalBlue,thick,draw=white},
+        leftNodeInLine/.style={solid,circle,minimum width=.7ex, fill=Red,thick,draw},
+    }
+    \begin{tikzpicture}[
+            scale=1.8,
+            important line/.style={thick,color=black}, dashed line/.style={dashed,color=blue},
+            every node/.style={color=black},
+        ]
+        
+        \node at (.5,1.55) {\color{Red}\Large$\Rcal_{+}$};
+        \node at (3.5,1.55) {\color{RoyalBlue}\Large$\Rcal_{-}$};
+        \node at (2.0,2.2) {\color{black}$\x_p$};
+        \node at (.5,.5) {\Large$\Hcal$};
+        
+        \draw[dashed line, yshift=.7cm]
+        (.2,.2) coordinate (sls) -- (2.5,2.5) coordinate (sle)
+        node[solid,circle,minimum width=2.8ex,fill=none,thick,draw] (name) at (2,2){}
+        node[leftNodeInLine] (name) at (2,2){}
+        node[solid,circle,minimum width=2.8ex,fill=none,thick,draw] (name) at (1.5,1.5){}
+        node[leftNodeInLine] (name) at (1.5,1.5){}
+        node [above right,color=Red] {$\wbf^\T \x + b > 1$};
+
+        \draw[important line]
+        (.55,.55) coordinate (lines) -- (3,3) coordinate (linee)
+        node [above right] {$g(\x) = \wbf^\T \x + b = 0$};
+
+        \draw[dashed line, xshift=.7cm]
+        (.2,.2) coordinate (ils) -- (2.5,2.5) coordinate (ile)
+        node[solid,circle,minimum width=2.8ex,fill=none,thick,draw] (name) at (1.8,1.8){}
+        node[rightNodeInLine] (name) at (1.8,1.8){}
+        node [above right,color=RoyalBlue] {$\wbf^\T \x + b < -1$};
+
+        \draw[very thick,<->] ($(sls)+(.2,.2)$) -- ($(ils)+(.2,.2)$)
+        node[sloped,above, near end] {Margin};
+        
+        \draw[very thick,<->] ($(linee)+(-.85,-.85)$) -- ($(ils)+(1.6,1.6)$)
+        node[sloped, above, near end] {$r$};
+        
+        \draw[very thick,<-] ($(sls)+(2.15,2.15)$) -- ($(linee)+(-.3,-.3)$)
+        node[sloped, above, near end] {$\wbf$};
+
+        \foreach \Point in {(.9,2.4), (1.3,2.5), (1.3,2.1), (2,3), (1,2.9)}{
+        \draw \Point node[leftNode]{};
+        }
+
+        \foreach \Point in {(2.9,1.4), (2.3,.5), (3.3,.6), (2,0.9), (2.4,1)}{
+        \draw \Point node[rightNode]{};
+        }
+
+    \end{tikzpicture}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}{Equation for a Hyperplane}
+
+    \begin{columns}
+        \column{0.2\linewidth}
+        \column{0.3\linewidth}
+        $\wbf^\top \xbf = \beta$
+
+        \column{0.5\linewidth}
+
+        \includegraphics[width=0.80\textwidth]{figures/hyperplane.pdf}
+
+
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}{Euclidean Projection of a Point on a Plane}
+
+    \begin{columns}
+        \column{0.05\linewidth}
+        \column{0.45\linewidth}
+        We project a point $\xbf_0$ onto the hyperplane  $\wbf^\top \xbf = \beta$.
+
+        The projection point $\xbf^*$  on the plane is give by 
+
+        \begin{multiequation}
+            \xbf^* =  \xbf_0 + (\beta - \wbf^\top \xbf_0)\cfrac{\wbf}{||\wbf||^2}
+        \end{multiequation}
+
+        \column{0.5\linewidth}
+
+        \includegraphics[width=0.80\textwidth]{figures/hyperplane_projection.pdf}
+
+
+    \end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Euclidean Projection as an Optimization Problem}
+
+    \begin{columns}
+        \column{0.10\linewidth}
+        \column{0.65\linewidth}
+        One way to come up with the above equation is to solve 
+
+        $$
+            \min \cfrac{1}{2}||\xbf - \xbf_0||^2
+        $$
+    
+        subject to 
+    
+        $$
+            \wbf^\top \xbf = \beta
+        $$
+
+        \column{0.10\linewidth}
+
+    \end{columns}
+
+
+    
+\end{frame}
+
+\begin{frame}{Distance between two Hyperplanes}
+
+    \begin{columns}
+        \column{0.10\linewidth}
+        \column{0.65\linewidth}
+       
+        Consider two Hyperplanes : 
+        
+        $\Hcal_1: \wbf^\top \xbf = b_1$ 
+
+        $\Hcal_2: \wbf^\top \xbf = b_2$
+
+        The distance between two hyperplanes is computed by projecting any point $\xbf_1$ that is already on one plane $\Hcal_1$ onto $\Hcal_2$.
+
+        \begin{multiequation}
+            \xbf_2 & =  \xbf_1 + (b_2 - \wbf^\top \xbf_0)\cfrac{\wbf}{||\wbf||^2}\\
+            \xbf_2 & =  \xbf_1 + (b_2 - b_1)\cfrac{\wbf}{||\wbf||^2}
+        \end{multiequation}
+
+        \column{0.10\linewidth}
+
+    \end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Distance between two Hyperplanes}
+
+    \begin{columns}
+        \column{0.10\linewidth}
+        \column{0.65\linewidth}
+    
+        Hence, the distance between two hyperplanes is given by 
+
+        \begin{multiequation}
+        d = ||\xbf_2 -  \xbf_1|| & = \bigg| \bigg| (b_2 - b_1)\cfrac{\wbf}{||\wbf||^2}\bigg| \bigg|\\
+        d = ||\xbf_2 -  \xbf_1|| & = \cfrac{|b_2 - b_1|}{|| \wbf||}
+        \end{multiequation}
+
+
+        \column{0.10\linewidth}
+
+    \end{columns}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Formulating SVM Problem: Hyperplane Distance}
+
+    \begin{columns}
+        \column{0.40\linewidth}
+
+    In SVM problem, if we have 
+
+    \begin{itemize}
+        \item $\wbf^\top \xbf + b = +1$
+        \item  $\wbf^\top \xbf + b = -1$ 
+    \end{itemize}
+
+    Let $b_1 = 1- b$ and $b_2 = - 1- b$. 
+
+
+    \column{0.40\linewidth}
+
+    Then, 
+
+    \begin{multiequation}
+        d& = || \xbf_2 - \xbf_1 || = \cfrac{|b_2 - b_1|}{|| \wbf||} \\
+        & = \cfrac{|- 1- b - 1 + b|}{|| \wbf||} = \cfrac{2}{||\wbf||}
+    \end{multiequation}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Formulating SVM Problem: Hyperplane Distance}
+
+    \begin{columns}
+        \column{0.10\linewidth}
+        \column{0.65\linewidth}
+    
+        Hence, the distance between two hyperplanes is given by 
+We want to maximize $d$, which is equivalent to minimizing $\cfrac{||\wbf||}{2}$. 
+
+
+\vspace{20pt}
+
+However $||\wbf||$ is not convex, so instead we minimize $\cfrac{||\wbf||^2}{2}$ which is convex.
+
+        \column{0.10\linewidth}
+
+    \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Final Optimization Problem for SVM}
+
+    \begin{tblock}{}
+        The conversation on constrained optimization was all about minimization tasks and our SVM formulation is a maximization problem. We can convert our maximization task to a minimization one by
+        \begin{multiequation}
+        \wbf^* = \arg&\min  \frac{1}{2}\|\mathbf{w}\|_2^2 \nonumber \\
+        & \text{s.t. } y_i (\mathbf{w}^T\mathbf{x}_i+b) \geq 1 
+        \hspace{1em}
+        {\color{MediumRed}\text{\% } 1 - y_i (\mathbf{w}^T\mathbf{x}_i+b)\leq 0}
+        \end{multiequation}
+        
+        \end{tblock}
+
+\end{frame}
+
+
+\section{Unsupervised Learning: K-Means}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+
+\begin{frame}{What is Unsupervised Learning?}
+    \begin{itemize}
+    \item In contrary to supervised learning, in unsupervised learning, there is no labeled data.
+    \item That is to say, there is no human-supervision involved in labeling a feature vector.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When to use Unsupervised Learning?}
+\begin{enumerate}
+    \item When we are not sure what we are looking at, unsupervised learning is a useful technique.
+    \item When we want to just group together several things but we don't care about what these groups belong to.
+    \item To find a hidden pattern.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{When Unsupervised Learning is Useful?}
+    \begin{enumerate}
+        \item The task is to find a pattern or a relationship between variables in order to provide a company with useful information so that they can create marketing strategies, decide on which clients they should focus on to maximize the profits or which customer segment they should put more effort to expand in the market.
+        \item In grouping together various images. Example: Creating two groups of images from a dataset of images containing the images of cats and dogs.
+        \item Image Segmentation: Identifying different segments of an image with some semantics.
+        \item In biological taxonomy:
+    \end{enumerate}
+    \end{frame}
+
+    \begin{frame}{}
+        \begin{center}
+            \includegraphics[width=1.0\textwidth]{figures/Taxonomy.pdf} % Replace taxonomy.png with your image
+        \end{center}
+    \end{frame}
+
+
+  \begin{sectionframe}{\faBraille}{Clustering}
+    \end{sectionframe}
+    
+
+    \begin{frame}{Clustering}
+            \begin{itemize}
+            \item Clustering is a type of unsupervised learning aimed at dividing unlabeled data into various groups.
+            \item In clustering, similar data points based on their features are grouped together while dissimilar data points are separated out.
+            \item Clustering can be used in various applications such as market segmentation, outlier detection, network analysis, and other applications discussed above.
+            \end{itemize}
+    \end{frame}
+        
+
+    \begin{frame}{Types of Clustering}
+        \begin{enumerate}
+            \item Centroid-based or Partition-based clustering
+            \begin{itemize}
+                \item Example: K-means
+            \end{itemize}
+            \item Connectivity-based clustering
+            \begin{itemize}
+                \item Example: Hierarchical clustering
+            \end{itemize}
+            \item Density-based clustering
+            \begin{itemize}
+                \item Example: DBSCAN
+            \end{itemize}
+            \item Graph-based clustering
+            \begin{itemize}
+                \item Example: Affinity Propagation
+            \end{itemize}
+            \item Distribution-based Clustering
+            \begin{itemize}
+                \item Example: Gaussian Mixture-Models
+            \end{itemize}
+        \end{enumerate}
+    \end{frame}
+
+    \begin{frame}{K-Means}
+    \begin{itemize}
+        \item K-means is the most common type of clustering method that works in a heuristic fashion.
+        \item It starts with assuming how many clusters can be there.
+        \item If there are k clusters, we start by initializing k centroids.
+        \item Consider the following data points in two clusters:
+        \begin{itemize}
+            \item Cluster 1: (1,1), (2,1), (1,2), (2,2), (3,1)
+            \item Cluster 2: (5,5), (5,6), (6,5), (6,6), (7,5), (6,7)
+        \end{itemize}
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{K-Means Clustering Example}
+        \begin{itemize}
+            \item \textbf{Step 1:} Initialize with two random centroids (1,1) and (5,5).
+            \begin{center}
+            \includegraphics[width=0.44\textwidth]{figures/two_clusters.pdf} % Replace kmeans_step1.png with your image
+            \end{center}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{K-Means Clustering Example (Continued)}
+        \begin{itemize}
+        \item \textbf{Step 2:} Calculate Euclidean distance of each point to the centroid and assign each data point to the nearest centroid.
+        \item In this case, it is clear to see that data points closer to (1,1) are (1,1), (2,1), (3,1), (1,2), (2,2) and data points closer to (5,5) are (5,5), (5,6), (6,5), (6,6), (7,5), and (6,7).
+        \item Now, we recalculate two centroids $(x_1, y_1)$ and $(x_2, y_2)$.
+        \begin{multiequation}
+        x_1 &= \frac{1+2+3+1+2}{5} = \frac{9}{5} = 1.8 \\
+        y_1 &= \frac{1+1+1+2+2}{5} = \frac{7}{5} = 1.4 \\
+        x_2 &= \frac{5+5+6+6+7+6}{6} = \frac{35}{6} = 5.83\\
+        y_2 &= \frac{5+6+5+6+5+7}{6} = \frac{34}{6} = 5.66
+        \end{multiequation}
+    \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{K-Means Iteration}
+    \begin{itemize}
+        \item Hence, the new centroids are (1.8, 1.4) and (5.83, 5.66).
+        \item Now, we again want to assign points belonging to one of the two centroids calculated by calculating the distance of each point to the centroids.
+        \item So basically, if a point is $(x_i, y_i)$ and two centroids are $(x_{c1}, y_{c1})$ and $(x_{c2}, y_{c2})$, then:
+        \begin{itemize}
+        \item If $\sqrt{(x_i - x_{c1})^2 + (y_i - y_{c1})^2} < \sqrt{(x_i - x_{c2})^2 + (y_i - y_{c2})^2}$, then $(x_i, y_i)$ belongs to cluster 1.
+        \item Otherwise, it belongs to cluster 2.
+        \end{itemize}
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{K-Means Convergence}
+        \begin{itemize}
+            \item We will keep repeating until no improvement is possible.
+            \item For more than two clusters, we will have $\arg\min_j \left( \sqrt{(x_i - x_{cj})^2 + (y_i - y_{cj})^2} \right)$ be the cluster index belonging to point $(x_i, y_i)$.
+        \end{itemize}
+    \end{frame}
+        
+
+    
+\begin{frame}
+	\Huge{\centerline{\color{MediumBlue}\textbf{The End}}}
+\end{frame}
+
+\end{document}
