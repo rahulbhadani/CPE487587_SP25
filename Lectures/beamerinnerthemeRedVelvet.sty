@@ -1,0 +1,716 @@
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+  color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
+
+\setbeamersize{text margin left=1em,text margin right=1em} 
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
+
+
+\usepackage{fontawesome5}
+\usepackage{minted}
+
+
+\pgfdeclareimage[width=0.09\paperwidth]{logo}{figures/uah.png}
+\pgfdeclareimage[width=0.09\paperwidth]{whitelogo}{figures/uah.png}
+\newcommand{\@logo}{logo}
+
+\setbeamercolor{title}{bg=white}
+\setbeamercolor{alerted text}{fg=maincolor}
+\setbeamercolor{author}{fg=cashblue}
+\setbeamercolor{date}{fg=black}
+
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{subtitle}{series=\mdseries,size=\small}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{framesubtitle}{series=\mdseries}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{block title}{series=\centering\bfseries}
+
+% Code to get prettier boxes
+\setbeamertemplate{blocks}[rounded]
+
+% Bullets in several levels
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{\textemdash}
+\setbeamertemplate{itemize subsubitem}{\ensuremath{\circ}}
+
+\newenvironment{colorblock}[3][white]{%
+	\begingroup
+	\setbeamercolor{block title}{fg=#1,bg=#2}
+	\setbeamercolor{block body} {fg=#1,bg=#2}
+	\begin{block}{#3}
+	}{%
+	\end{block}
+	\endgroup
+}
+
+\def\@courseLabel{}
+\def\@IDnumber{}
+
+
+% Define the title page
+\setbeamertemplate{title page}{%
+  \vskip0pt plus 1filll%
+  % Reposition the box in an inelegant way - but it works!
+  \hspace{-12mm}
+  \vspace{20mm}
+  \begin{beamercolorbox}[wd=0.72\textwidth,sep=10pt,leftskip=8mm]{title}%
+    {\usebeamerfont{title}\inserttitle}
+  
+    {\usebeamerfont{subtitle}\insertsubtitle}
+
+    {\usebeamerfont{subtitle}\@courseLabel}
+    
+    {Spring 2026}
+    
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\textbf{\insertauthor} \ifdefempty{\@IDnumber}{}{(\@IDnumber)}}
+  
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}
+  \end{beamercolorbox}
+}
+
+% Define slide splitting dimensions (e.g. title and chapter slides)
+\newcommand{\TikzSplitSlide}[1]{%
+  \rule{0.56\paperwidth}{0pt}%
+  \begin{tikzpicture}
+    \clip (-0.1\paperwidth,-0.5\paperheight) -- 
+          ( 0.5\paperwidth,-0.5\paperheight) -- 
+          ( 0.5\paperwidth, 0.5\paperheight) -- 
+          ( 0.1\paperwidth, 0.5\paperheight) -- cycle; 
+    \node at (0.2\paperwidth,0) {%
+      \includegraphics[height=\paperheight]{#1}%
+    };
+  \end{tikzpicture}
+}
+
+\newbool{splittitle}
+\newcommand{\@TitleBackground}{}
+\newcommand{\titlebackground}{\@ifstar{\SplitBackground}{\FullBackground}}
+\newcommand{\FullBackground}[1]{\renewcommand{\@TitleBackground}{#1}}
+\newcommand{\SplitBackground}[1]{%
+	\booltrue{splittitle}%
+	\renewcommand{\@TitleBackground}{#1}%
+}
+
+% Overwrite the maketitle command for the title page
+\renewcommand{\maketitle}{
+\begingroup
+  \ifdefempty{\@TitleBackground}{}{% Skip if \@TitleBackground is empty
+    \setbeamertemplate{background}{%
+      \ifbool{splittitle}{%
+        \TikzSplitSlide{\@TitleBackground}
+      }{% Normal, full-screen background
+        \includegraphics[height=\paperheight]{\@TitleBackground}
+      }
+    }
+  }
+  \begin{frame}%
+  \titlepage%
+  \end{frame}%
+\endgroup
+}
+
+\makeatletter
+    \newenvironment{withoutheadline}{
+        \setbeamertemplate{headline}[default]
+        \def\beamer@entrycode{\vspace*{-\headheight}}
+    }{}
+\makeatother
+
+% Define chapter environment
+\newenvironment{chapter}[3][]{% Args: image (optional), color, frame title
+  \begingroup
+  \themecolor{main}
+  \setbeamertemplate{footline}{}
+  \ifstrempty{#2}{
+    \setbeamercolor{frametitle}{fg=white}
+    \setbeamercolor{normal text}{fg=white,bg=maincolor}
+  }{
+    \setbeamercolor{frametitle}{fg=white}
+    \setbeamercolor{normal text}{fg=white,bg=#2}
+  }
+  \ifstrempty{#1}{}{\setbeamertemplate{background}{\TikzSplitSlide{#1}}}
+  \setbeamertemplate{frametitle}{%
+    \vspace*{8ex}
+    \begin{beamercolorbox}[wd=0.45\textwidth]{frametitle}
+      \usebeamerfont{frametitle}\insertframetitle\\
+      \usebeamerfont{framesubtitle}\insertframesubtitle
+    \end{beamercolorbox}
+  }
+  \begin{frame}{#3}
+  \hspace*{0.05\textwidth}%
+  \minipage{0.35\textwidth}%
+  \usebeamercolor[fg]{normal text}%
+}{%
+  \endminipage
+  \end{frame}
+  \endgroup
+}
+
+% Define sidepic environment
+\newenvironment{sidepic}[2]{% Args: image, frame title
+  \begingroup
+  \setbeamertemplate{background}{%
+  \hspace*{0.6\paperwidth}%
+  \includegraphics[height=\paperheight]{#1}%
+  }
+  \setbeamertemplate{frametitle}{% Same as normal, but with right skip
+    \vspace*{-3.5ex}
+    \begin{beamercolorbox}[leftskip=2cm,rightskip=0.4\textwidth]{frametitle}%
+      \usebeamerfont{frametitle}\insertframetitle\\
+      \usebeamerfont{framesubtitle}\insertframesubtitle
+    \end{beamercolorbox}
+  }
+  \begin{frame}{#2}
+  \minipage{0.6\textwidth}%
+}{%
+  \endminipage
+  \end{frame}
+  \endgroup
+}
+
+% Define backmatter
+\newcommand{\backmatter}[1][]{
+\begingroup
+  \themecolor{main}
+  \begin{frame}[c]
+    \centering
+    \begin{minipage}{\textwidth}
+      \usebeamercolor[fg]{normal text}
+      \centering
+      \ifstrequal{#1}{notitle}{}{
+        \Huge \inserttitle
+        \vspace{5mm}
+      }
+      \Large \textsl{\\Thank you for listening! \\ Any questions?}
+    \end{minipage}
+  \end{frame}
+\endgroup
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{sectionframe}[2]{
+\section{#2}
+    \begin{frame} % Begin the frame
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=south east, xshift=-30pt, yshift=55pt] at (current page.south east) {          
+            	 \tcbset{
+            sharp corners,
+            colback=white,
+            colframe=white,
+            halign=center, % Align content within the box
+            boxrule=0pt, % Thickness of the border
+            left=0.01em, % Padding on the left
+            right=0.01em, % Padding on the right
+            top=0.01em, % Padding on the top
+            bottom=0.01em, % Padding on the bottom
+            ,center title}
+               \begin{tcolorbox}[width=0.80\linewidth]{\color{white}{\Huge \bfseries \color{DarkRed}   #1 \hspace{3pt}   #2  }}  % DarkBlue -> DarkRed
+    \end{tcolorbox}
+            
+        };
+           \node[anchor=south east, xshift=-27pt, yshift=42pt, rectangle, fill=softMint, 
+              minimum width=300pt, minimum height=1em] 
+             at (current page.south east) {};  % softLilac -> softMint
+        \node[anchor=south east, xshift=-30pt, yshift=45pt, rectangle, fill=forestGreen, 
+              minimum width=300pt, minimum height=1em] 
+             at (current page.south east) {};  % roseRed -> forestGreen
+        \node[anchor=south east, xshift=-29pt, yshift=47pt, rectangle, fill=white, 
+              minimum width=302pt, minimum height=1em] 
+             at (current page.south east) {};
+           
+    \end{tikzpicture}
+}{\end{frame}}
+
+
+\newenvironment{subsectionframe}[1]{
+\subsection{#1}
+    \begin{frame} % Begin the frame
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=south east, xshift=-0.35\linewidth, yshift=0.7\paperheight] at (current page.south east) {
+                \tcbset{enhanced,
+            sharp corners,
+            colback=white,
+            colframe=white,
+            halign=center, % Align content within the box
+            boxrule=2pt, % Thickness of the border
+            left=0.1em, % Padding on the left
+            right=0.1em, % Padding on the right
+            top=0.1em, % Padding on the top
+            bottom=0.1em, % Padding on the bottom
+            drop lifted shadow=pineGreen,center title}  % pineGreen unchanged
+               \begin{tcolorbox}[width=0.60\linewidth]{\color{white}{ \Large\bfseries \color{mossGreen}  #1  }}  % rosewood -> mossGreen
+    \end{tcolorbox}
+        };
+    \end{tikzpicture}
+}{\end{frame}}
+
+
+
+\newtcolorbox{tblock}[2][]{
+  enhanced,
+  breakable,
+  sharp corners=northwest,
+  sharp corners=southeast,
+  colback=white,
+  colframe=green!75!black,  % red -> green
+  halign=left, 
+  boxrule=1pt, 
+  left=1em, 
+  right=1em, 
+  top=0.5em, 
+  bottom=0.5em, 
+  drop shadow=coolGray,  % coolGray unchanged
+  title=#2,
+  #1
+}
+
+\newtcolorbox{talert}[2][]{%
+	enhanced,
+    colbacktitle=emeraldGreen!20!white,  % cherryRed -> emeraldGreen
+    coltitle=black, 
+    colback=white,
+    title=#2,
+    boxrule=0pt,
+    drop shadow, % Add a drop shadow
+    sharp corners,
+    #1
+}
+
+\newtcolorbox{facts}[2][]{beamer,title=#2,left=1mm,right=1mm,top=1mm,bottom=1mm,arc=0mm,
+  colback=InvisibleGreen,colupper=black,colframe=InvisibleGreen,fonttitle=\sffamily,  % InvisibleRed -> InvisibleGreen
+  coltitle=black,title style={left color=GreenYellow!70,right color=BlueGreen},  % Colors unchanged (already appropriate)
+  #1}
+
+  \newtcolorbox{gradblock}[2][]{beamer,title=#2,left=1mm,right=1mm,top=1mm,bottom=1mm,arc=0mm,
+  colback=Seashell,colupper=black,colframe=Seashell,fonttitle=\sffamily,  % Neutral colors unchanged
+  coltitle=black,title style={left color=Goldenrod!70,right color=Tomato},  % Colors unchanged (appropriate)
+  #1}
+
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{shapes.callouts}
+
+\newcommand{\titlebox}[1]{%
+    \begin{tikzpicture}[baseline=(text.base)]
+        \node[
+            draw=emeraldGreen,
+            fill=lightGreen!30,
+            rounded corners=2pt,
+            inner sep=2pt,
+            font=\small\bfseries,
+            text=darkForest
+        ] (text) {#1};
+    \end{tikzpicture}%
+}
+
+
+\newtcolorbox{texample}[1][]{
+    enhanced,
+    sharp corners, % Ensure sharp corners
+    drop shadow, % Add a drop shadow
+    left=2pt,
+    right=2pt,
+    colframe=powderGreen,
+    boxrule=1pt,
+    colback=sageFuzz,
+    overlay={
+        \def\myblock@tempa{#1}
+        \ifx\myblock@tempa\@empty
+        \else
+        % Custom overlay for the title marker
+        \draw[cashblue,fill=cashblue] ($(frame.north west)+(.2pt,-.2pt)$) -- +(.1,0)
+        to[bend right] +(-0,-.1) -- cycle;
+        \node[
+            anchor=south west,
+            inner sep=0pt,
+            outer sep=0pt
+        ] at (frame.north west) {\titlebox{#1}};
+        \fi
+    },
+}
+
+
+\newcommand{\msgbox}[2]{%
+  \begin{tcolorbox}[
+  enhanced,
+    colback=#1,
+    colframe=#1,
+    boxrule=1pt,
+    arc=0pt,
+    outer arc=0pt,
+    left=6pt,
+    right=6pt,
+    top=3pt,
+    bottom=3pt,
+    boxsep=0pt,
+    drop shadow
+  ]
+    \textbf{#2}
+  \end{tcolorbox}
+}
+
+
+\newtcolorbox{redblock}[2][]{%
+enhanced,
+drop fuzzy shadow,
+    colbacktitle=pinkLace,
+    coltitle=black,
+    colback=white,
+    title=#2,
+    boxrule=0pt,
+    sharp corners,
+     overlay={
+    \begin{tcbclipinterior}
+      \shade[left color=LightPink!30,right color=MistyRose!30]
+        (interior.south west) rectangle (interior.north east);
+    \end{tcbclipinterior}
+  },
+    #1
+}
+
+
+% Add these to your preamble
+
+% \usepackage{patterns}
+\usetikzlibrary{patterns,shapes}
+
+% 1. Bubblegum Blush -> Minty Blush
+\newtcolorbox{mintyblush}[2][]{  % bubblegum -> mintyblush
+  enhanced, breakable, rounded corners,
+  colback=green!5, colframe=green!70!darkgreen,  % pink -> green
+  coltitle=MediumRed!95!darkgreen, fonttitle=\bfseries\scshape,  % MediumBlue -> MediumRed
+  title={~#2}, drop shadow={green!50},  % pink -> green
+  #1}
+
+% 2. Minty Meadow -> Ocean Meadow
+\newtcolorbox{ocean}[2][]{  % minty -> ocean
+  enhanced, breakable, sharp corners,
+  colback=lavenderblue!2, colframe=blue!60!black,  % cpelime -> lavenderblue, green -> blue
+  coltitle=blue!50!black, title style={left color=lavenderblue,right color=white},  % green -> blue, cpegreen -> lavenderblue
+  title={\faAnchor~~#2}, boxrule=2pt, arc=3mm,  % faLeaf -> faAnchor
+  underlay={\pattern[pattern=checkerboard,pattern color=lavenderblue!5] (frame.south west) rectangle (frame.north east);},  % cpegreen -> lavenderblue
+  #1}
+
+% 3. Sunny Sparkle - commented out in original, keeping commented
+
+% 4. Ocean Whisper -> Forest Whisper
+\newtcolorbox{forest}[2][]{  % ocean -> forest
+  enhanced, breakable, colback=green!5,  % cyan -> green
+  frame style={left color=green!60,right color=forestGreen!60},  % blue -> green, teal -> forestGreen
+  coltitle=white, title={#2},
+  borderline west={1pt}{0pt}{green!50},  % blue -> green
+  borderline east={1pt}{0pt}{forestGreen!50},  % teal -> forestGreen
+  fuzzy shadow={0pt}{-2pt}{0pt}{0.4pt}{green!20!forestGreen},  % blue!20!teal -> green!20!forestGreen
+  #1}
+
+% 5. Twilight Glow -> Dawn Glow
+\newtcolorbox{dawn}[2][]{  % twilight -> dawn
+  enhanced, breakable, 
+  colback=red!5, colframe=red!60!crimson,  % purple -> red
+  title={#2}, coltitle=red!80!crimson,  % purple -> red
+  frame hidden, borderline={0.5pt}{0pt}{red!30},  % purple -> red
+  fuzzy shadow={0pt}{-2pt}{0pt}{0.4pt}{red!20},  % purple -> red
+  overlay={\node[rotate=30,red!30] at (frame.center) {\faSun};},  % purple -> red, faMagic -> faSun
+  #1}
+
+% 6. Cotton Cloud (neutral - unchanged)
+\newtcolorbox{cotton}[2][]{
+  enhanced, breakable, rounded corners,
+  colback=white, colframe=gray!30,
+  title={\faCloud~~#2}, coltitle=gray!60,
+  boxrule=0.8pt, drop shadow={gray!40},
+  overlay first={\draw[gray!20,line width=2pt] (frame.north west) -- (frame.south east);},
+  #1}
+
+% 7. Berry Burst -> Leafy Burst
+\newtcolorbox{leafy}[2][]{  % berry -> leafy
+  enhanced, breakable, 
+  colback=green!5, colframe=green!10!forestGreen,  % red -> green
+  title={#2}, coltitle=green!10!black,  % red -> green
+  arc=3mm, watermark color=green!10,  % red -> green
+  watermark text={\Large\faLeaf},  % faPaperclip -> faLeaf
+  underlay={\draw[green!30,double] (frame.south west) to[out=15,in=150] (frame.south east);},  % red -> green
+  #1}
+
+% 8. Golden Hour -> Emerald Hour
+\newtcolorbox{emerald}[2][]{  % golden -> emerald
+  enhanced, breakable, 
+  colback=green!5, colframe=green!70!forestGreen,  % orange -> green
+  title={\faGem~~#2}, coltitle=green!90!darkgreen,  % faStar -> faGem, orange -> green
+  frame style={top color=green!60,bottom color=green!40},  % orange -> green
+  borderline={1pt}{0pt}{green!30},  % orange -> green
+  drop shadow={green!50},  % orange -> green
+  overlay={\node[green!30] at (frame.center) {\faLeaf};},  % orange -> green, faSunO -> faLeaf
+  #1}
+
+% 9. Fairy Frost -> Crimson Frost
+\newtcolorbox{crimson}[2][]{  % fairy -> crimson
+  enhanced, breakable, 
+  colback=white, colframe=red!50!crimson,  % cyan -> red
+  title={#2}, coltitle=red!70,  % cyan -> red
+  boxrule=1.5pt, arc=3mm,
+  borderline={0.5pt}{0pt}{red!20},  % cyan -> red
+  fuzzy shadow={0pt}{-2pt}{0pt}{0.4pt}{red!30},  % cyan -> red
+  overlay={\foreach \i in {1,...,3} \node[red!30] at (frame.south east) {\faHeart};},  % cyan -> red, faAsterisk -> faHeart
+  #1}
+
+% 10. Peach Fizz -> Mint Fizz
+\newtcolorbox{mintx}[2][]{  % peach -> mint
+  enhanced, breakable,
+  rounded corners,
+  sharp corners=northwest,
+  sharp corners=southeast,
+  colback=sageFuzz!10, colframe=sageFuzz!70!green,  % peachFuzz -> sageFuzz
+  title={#2}, coltitle=green!90!darkgreen,  % red -> green
+  boxrule=1.2pt,
+  drop shadow={darkForest!90}  % burgundy -> darkForest
+  #1}
+
+  \newtcolorbox{CloudNineBox}[2][]{
+    enhanced,
+    breakable,
+    rounded corners=all,
+    colback=gray!10,  % Neutral - unchanged
+    colframe=gray!50!white,  % Neutral - unchanged
+    halign=left, 
+    boxrule=1pt, 
+    left=1em, 
+    right=1em, 
+    top=0.5em, 
+    bottom=0.5em, 
+    drop shadow={gray!20},  % Neutral - unchanged
+    title=#2,
+    #1
+  }
+
+  \newtcolorbox{origami}[2][]{
+  enhanced, sharp corners, 
+  colback=blue!10, colframe=blue!60,  % yellow -> blue, orange -> blue
+  title style={fill=blue!20, rounded corners=3pt},  % orange -> blue
+  title={\faPlane~~#2},  % faPaperPlane -> faPlane (same icon, different name)
+  underlay={
+    \fill[blue!40, rotate around={45:(frame.north east)}]  % orange -> blue
+      (frame.north east) rectangle ++(-0.5cm,-0.5cm);
+    \draw[blue!70, line width=0.8pt]  % orange -> blue
+      (frame.north east) -- ++(-0.35cm,-0.35cm);},
+  borderline={1pt}{0pt}{blue!30},  % orange -> blue
+  #1}
+
+  \newtcolorbox{tblockFrost}[2][]{
+    enhanced,
+    breakable,
+    arc=2mm,
+    colback=red!5,  % cyan -> red
+    colframe=red!80!crimson,  % cyan!80!blue -> red!80!crimson
+    boxrule=1pt,
+    left=1em,
+    right=1em,
+    top=0.5em,
+    bottom=0.5em,
+    drop shadow={xshift=1mm, yshift=-1mm, opacity=0.3},
+    title=#2,
+    #1
+  }
+
+  \newtcolorbox{tblockWing}[2][]{%
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=red!80!black,  % teal -> red
+  boxrule=1pt,
+  left=1em,
+  right=1em,
+  top=2em,
+  bottom=1em,
+  title=#2,
+  #1
+}
+
+\newtcolorbox{twilight}[2][]{
+  enhanced, breakable, 
+  colback=purple!5, colframe=purple!60!blue,
+  title={#2}, coltitle=purple!80!pink,
+  frame hidden, borderline={0.5pt}{0pt}{purple!30},
+  fuzzy shadow={0pt}{-2pt}{0pt}{0.4pt}{purple!20},
+  overlay={\node[rotate=30,purple!30] at (frame.center) {\faMagic};},
+  #1}
+  
+  \newtcolorbox{golden}[2][]{
+  enhanced, breakable, 
+  colback=orange!5, colframe=orange!70!yellow,
+  title={\faStar~~#2}, coltitle=orange!90!red,
+  frame style={top color=orange!60,bottom color=orange!40},
+  borderline={1pt}{0pt}{orange!30},
+  drop shadow={orange!50},
+  overlay={\node[orange!30] at (frame.center) {\faSunO};},
+  #1}
+
+
+  \newtcolorbox{gradbox}[2][]{beamer,title=#2,left=1mm,right=1mm,top=1mm,bottom=1mm,arc=1mm,
+  colback=MistyRose,colupper=black,colframe=Tomato,fonttitle=\sffamily,  % Neutral/appropriate colors unchanged
+  coltitle=black,title style={left color=Goldenrod!70,right color=Tomato},  % Appropriate colors unchanged
+  #1}
+
+
+\newcommand{\faFlash}{\faIcon{bolt}}
+
+\newcommand{\tikzLightning}{%
+  \begin{tikzpicture}[scale=0.15, baseline=-0.5ex]
+    \draw[fill=black, line width=0.5pt] 
+      (0,0) -- (1,2) -- (0.5,1) -- (1.5,0) -- (0.5,-1) -- (1,-2) -- (0,-1) -- cycle;
+  \end{tikzpicture}%
+}
+
+\setbeamertemplate{itemize item}{\faFlash}
+
+\newcommand{\intinf}{\int_{-\infty}^\infty}
+
+\newcommand{\suminf}[1]{\sum_{#1=-\infty}^\infty}
+
+\newenvironment{multiequation}{%
+  \setlength{\abovedisplayskip}{3pt}      % Reduce space above the equation
+  \setlength{\belowdisplayskip}{3pt}      % Reduce space below the equation
+  \setlength{\abovedisplayshortskip}{0pt} % Reduce space above short equations
+  \setlength{\belowdisplayshortskip}{0pt} % Reduce space below short equations
+  \begin{equation}%                      % Start an unnumbered equation
+    \begin{aligned}%                       % Align multiple lines
+}{%
+    \end{aligned}%                        % End alignment
+  \end{equation}%                        % End equation
+}
+
+\newenvironment{multiequation*}{%
+  \setlength{\abovedisplayskip}{3pt}      % Reduce space above the equation
+  \setlength{\belowdisplayskip}{3pt}      % Reduce space below the equation
+  \setlength{\abovedisplayshortskip}{0pt} % Reduce space above short equations
+  \setlength{\belowdisplayshortskip}{0pt} % Reduce space below short equations
+  \begin{equation*}%                      % Start an unnumbered equation
+    \begin{aligned}%                       % Align multiple lines
+}{%
+    \end{aligned}%                        % End alignment
+  \end{equation*}%                        % End equation
+}
+
+
+\setlength{\parskip}{0pt}
+\setlength{\abovedisplayskip}{0pt} % Reduce space above the equation
+\setlength{\belowdisplayskip}{0pt} % Reduce space below the equation
+\setlength{\abovedisplayshortskip}{0pt} % Space above short equations
+\setlength{\belowdisplayshortskip}{0pt} % Space below short equations
+
+% Create custom section page template
+\setbeamertemplate{section page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    % Background elements
+    \fill[androidYellow] (current page.north west) rectangle ([yshift=-3cm]current page.north east);  % cpeyellow -> androidYellow
+    \fill[brightGreen,opacity=0.3] (current page.south west) rectangle ([yshift=3cm]current page.south east);  % raspberryRed -> brightGreen
+    
+    % Decorative elements
+    \draw[line width=2pt,androidYellow] ([xshift=1cm,yshift=-3.5cm]current page.north west) -- ([xshift=9cm,yshift=-3.5cm]current page.north west);  % cpeyellow -> androidYellow
+    
+    % Binary code design element (representing assembly)
+    \foreach \i in {1,...,20} {
+      \foreach \j in {1,...,3} {
+        \node[text=androidYellow!40,font=\tiny] at ([xshift=\i*0.5cm,yshift=-6cm-\j*0.5cm]current page.north west) {\pgfmathparse{int(random(0,1))}\pgfmathresult};  % cpeyellow -> androidYellow
+      }
+    }
+    
+    % Main title - using \insertsection to automatically get the current section title
+    \node[text=white,font=\bfseries\LARGE,align=center] at (current page.north) [yshift=-1.5cm] {\insertsection};
+    
+    
+    % Visual elements suggesting ARM architecture
+    \draw[line width=1.5pt,androidYellow] ([xshift=10cm,yshift=-4cm]current page.north east) -- ([xshift=10cm,yshift=-7cm]current page.north east);  % cpeyellow -> androidYellow
+    \draw[line width=1.5pt,androidYellow] ([xshift=10cm,yshift=-5cm]current page.north east) -- ([xshift=12cm,yshift=-5cm]current page.north east);  % cpeyellow -> androidYellow
+    \draw[line width=1.5pt,androidYellow] ([xshift=10cm,yshift=-6cm]current page.north east) -- ([xshift=11cm,yshift=-6cm]current page.north east);  % cpeyellow -> androidYellow
+    
+    % Stylized register representation
+    \node[rectangle,fill=androidYellow!20,minimum width=3cm,minimum height=1cm,draw=androidYellow,thick] at ([xshift=-2cm,yshift=-5cm]current page.center) {0x00FF00FF};  % cpeyellow -> androidYellow
+    \node[rectangle,fill=androidYellow!10,minimum width=3cm,minimum height=1cm,draw=androidYellow,thick] at ([xshift=-2cm,yshift=-6.5cm]current page.center) {0xABCD1234};  % cpeyellow -> androidYellow
+  \end{tikzpicture}
+}
+
+% Create custom subsection page template
+\setbeamertemplate{subsection page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    % Background elements - more subtle than section
+    \fill[androidYellow!60] (current page.north west) rectangle ([yshift=-2cm]current page.north east);  % cpeyellow -> androidYellow
+    \fill[brightGreen,opacity=0.15] (current page.south west) rectangle ([yshift=2cm]current page.south east);  % raspberryRed -> brightGreen
+    
+    % Decorative elements - smaller scale
+    \draw[line width=1.5pt,androidYellow] ([xshift=2cm,yshift=-2.5cm]current page.north west) -- ([xshift=7cm,yshift=-2.5cm]current page.north west);  % cpeyellow -> androidYellow
+    
+    % Subsection indicator dots
+    \foreach \i in {0,1,2} {
+      \fill[androidYellow] ([xshift=1cm+\i*0.5cm,yshift=-3cm]current page.north west) circle (3pt);  % cpeyellow -> androidYellow
+    }
+    
+    % Simplified binary pattern - fewer elements
+    \foreach \i in {1,...,15} {
+      \foreach \j in {1,...,2} {
+        \node[text=androidYellow!30,font=\scriptsize] at ([xshift=\i*0.6cm,yshift=-7cm-\j*0.4cm]current page.north west) {\pgfmathparse{int(random(0,1))}\pgfmathresult};  % cpeyellow -> androidYellow
+      }
+    }
+    
+    % Section title (smaller, above subsection)
+    \node[text=androidYellow!80,font=\bfseries\normalsize,align=center] at (current page.north) [yshift=-0.8cm] {\insertsection};  % cpeyellow -> androidYellow
+    
+    % Subsection title (main focus)
+    \node[text=white,font=\bfseries\Large,align=center] at (current page.north) [yshift=-1.8cm] {\insertsubsection};
+    
+    % Connector line between section and subsection
+    \draw[line width=1pt,white,opacity=0.7] ([yshift=-1.2cm]current page.north) -- ([yshift=-1.4cm]current page.north);
+    
+    % Simplified ARM-style elements - right side
+    \draw[line width=1pt,androidYellow!80] ([xshift=9cm,yshift=-3.5cm]current page.north east) -- ([xshift=9cm,yshift=-5.5cm]current page.north east);  % cpeyellow -> androidYellow
+    \draw[line width=1pt,androidYellow!80] ([xshift=9cm,yshift=-4cm]current page.north east) -- ([xshift=11cm,yshift=-4cm]current page.north east);  % cpeyellow -> androidYellow
+    
+    % Single register representation - smaller
+    \node[rectangle,fill=androidYellow!15,minimum width=2.5cm,minimum height=0.8cm,draw=androidYellow!60,thick] at ([xshift=-1.5cm,yshift=-4.5cm]current page.center) {\small 0x1A2B3C4D};  % cpeyellow -> androidYellow
+    
+    % Progress indicator (optional - shows subsection within section)
+    \node[text=androidYellow!60,font=\small] at ([xshift=-8cm,yshift=8cm]current page.south east) {\thesection.\thesubsection};  % cpeyellow -> androidYellow
+    
+  \end{tikzpicture}
+}
+
+\hypersetup{ 
+    colorlinks=true,
+    urlcolor=fernGreen,
+    linkcolor=cpeyellow,
+}
+
+% Customize table of contents text color (sage green for all entries)
+\setbeamercolor{section in toc}{fg=sageGreen}
+\setbeamercolor{subsection in toc}{fg=sageGreen}
+\setbeamercolor{subsubsection in toc}{fg=sageGreen}
+
+% Optional: Use numbered sections and subsections
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+% Custom command to wrap table of contents with background using colorbox
+\newcommand{\backgroundtableofcontents}{%
+  \colorbox{softMint}{%
+    \begin{minipage}{\dimexpr\textwidth-2\fboxsep}%
+      \vspace{0.5em}%
+      \tableofcontents%
+      \vspace{0.5em}%
+    \end{minipage}%
+  }%
+}
+
+\usepackage{tikzsymbols}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+\newenvironment<>{examplesolution}[1]{%
+  \setbeamercolor{block title}{fg=white,bg=red!75!black}%
+  \begin{block}#2{#1}}{\end{block}}

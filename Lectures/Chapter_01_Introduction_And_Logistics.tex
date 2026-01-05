@@ -654,6 +654,343 @@ Bernard Widrow and Marcian Hoff: ADALINE, and MADALINE: (Multiple) Adaptive Line
 
 \end{frame}
 
+
+\begin{frame}{}
+
+  \begin{center}
+    \includegraphics[width=.88\linewidth]{figures/nobel_physics_2024.pdf}  
+    
+    {\tiny Source: \url{https://www.nobelprize.org/uploads/2024/12/Slideshow_All_NobelPrizes_2024_NobelPrizeLessons.pdf}} 
+
+  \end{center}
+  
+\end{frame}
+
+\section{Tasks with Deep Learning}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+\begin{frame}{Deep Learning, Data Science, Artificial Intelligence}
+\begin{center}
+\includegraphics[height=.7\textheight]{figures/DI_ML_DL_DS.drawio.pdf}
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Classification, Clustering, Segmentation}
+
+\small
+
+Usually done in unsupervised fashion, but can be semi-supervised or supervised as well.
+
+ \begin{columns}[onlytextwidth,T]
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=0.35\textheight,keepaspectratio]{figures/clusters_illustration.pdf}
+        \end{column}
+        \hfill
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=0.35\textheight,keepaspectratio]{figures/bear_segmentation.png} {\tiny Learning a Classification Model for Segmentation, Xiaofeng Ren and Jitendra Malik}
+        \end{column}
+        \hfill
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=0.35\textheight,keepaspectratio]{figures/chemo_clustering.png} \\ {\tiny Pertpy: an end-to-end framework for perturbation analysis, Lukas Heumos et al.}
+        \end{column}
+    \end{columns}
+    
+    \vspace{1em} % Space between rows
+    
+    % Second row of images
+    \begin{columns}[onlytextwidth,T]
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=0.35\textheight,keepaspectratio]{figures/av_segmentation.pdf} \\ {\tiny A segmentation network for enhancing autonomous driving scene understanding using skip connection and adaptive weighting, Jiayao Li et al.}
+        \end{column}
+        \hfill
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=0.25\textheight,keepaspectratio]{figures/quasar_clusters.png} \\ {\tiny Simulations of the formation, evolution and clustering of galaxies and quasars, Volker Springel et al.}
+        \end{column}
+        \hfill
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\linewidth,height=0.25\textheight,keepaspectratio]{figures/virus_taxonomy.png} \\ {\tiny Machine learning enables scalable and systematic hierarchical virus taxonomy, Benjamin Bolduc et al.}
+        \end{column}
+    \end{columns}
+   
+\end{frame}
+
+
+\begin{frame}{Regression Problems: predicting continuous values or next token}
+
+\begin{enumerate}
+
+\item Machine learning-based framework for wall-perching prediction of flying robot \url{https://doi.org/10.1038/s41467-025-67386-0}
+
+\item Machine learning models based wear performance prediction of AZ31/TiC composites \url{https://www.nature.com/articles/s41598-025-33417-5}
+
+\item Deep learning based real-time prediction of depth of penetration during activated tungsten inert gas welding of 10 mm thick 316LN stainless steel \url{https://www.nature.com/articles/s41598-025-31414-2}
+
+\item Comparative analysis of deep learning architectures in solar power prediction \url{https://www.nature.com/articles/s41598-025-14908-x}
+
+\item Explainable judgment prediction and article-violation analysis using deep LexFaith hierarchical BERT model \url{https://www.nature.com/articles/s41598-025-32833-x}
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{Types of Learning}
+\begin{tblock}{Learning Modalities}
+    
+\begin{itemize}
+    \item{\bf\color{DarkBlue} Supervised learning}: Given training data with previously labeled classes, learn the mapping between the data and their correct classes. 
+    \item {\bf\color{DarkBlue} Unsupervised learning}: Given unlabeled data obtained from an unknown number of categories, learn how to group such data into meaningful clusters based on some measure of similarity
+    \item {\bf\color{DarkBlue} Reinforcement learning}: Given a sequence of outputs, learn a policy to obtain the desired output game-playing problems.
+\end{itemize}
+\end{tblock}
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{What do you need to be successful in this course?}
+\begin{itemize}
+    \item {\bf\color{MediumBlue}Linear Algebra}: Data are represented as vectors, vectors lie in a vector space, \ldots, you get the point!
+      \item {\bf\color{MediumBlue}Calculus}: A little bit of calculus is needed to understand  how optimization problem works!
+    \item {\bf\color{MediumBlue}Probability and Statistics}: We need a way to capture uncertainty in our data and models. Probability theory provides us a way to capture and harness uncertainty. 
+    \item {\bf\color{MediumBlue}Coding/Software}: Not only are you going to be talk the talk in machine learning, but with software you're going to be able to walk the walk.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Prerequisite Slides}
+
+\begin{enumerate}
+
+\item \url{https://github.com/rahulbhadani/CPE486586_FA25/blob/main/Lectures/Chapter_01_Introduction.pdf}
+
+\item \url{https://github.com/rahulbhadani/CPE486586_FA25/blob/main/Lectures/Chapter_02_Tools_For_Machine_Learning.pdf}
+
+
+\end{enumerate}
+
+\end{frame}
+
+
+\section{Setting up Development Environment}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+
+\begin{frame}{Command Line Tools}
+
+Required for mastering automation, file operations and system interaction.
+
+\begin{figure}
+\includegraphics[scale=0.25]{figures/linux_cmdline.png}
+\vspace{-10pt}
+\caption{Linux Command Line Tool}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Using Command Line Tools}
+
+\begin{enumerate}
+
+\item Installed by default on Linux and Mac
+\item Windows: recommended option: use Windows Subsystem for Linux. Installation guide: 1. \url{https://youtu.be/GMhV5Uqd8R8}, 2.
+\url{https://youtu.be/NPuIUT_6NeM}
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[containsverbatim]{Connecting Remotely to a Linux Machine for Development}
+
+
+
+  \begin{minted}[bgcolor=powderGreen]{bash}
+	ssh rkb0022@blackhawk.ece.uah.edu    
+  \end{minted}
+  
+  Blackhawk machine is a placeholder. From there you can enter into Euler or Gauss machine:
+  
+  
+    \begin{minted}[bgcolor=powderGreen]{bash}
+	ssh rkb0022@euler.ece.uah.edu    
+  \end{minted}
+  
+  or 
+      \begin{minted}[bgcolor=powderGreen]{bash}
+	ssh rkb0022@gauss.ece.uah.edu    
+  \end{minted}
+  
+  Default password (if not already changed by you) is the user's lowercase first and last initial followed by the last 6 digits of their A\#.
+
+Using these remote machines are recommended if you don't have GPU-based machine available to you.
+
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Installing UV}
+
+
+      \begin{minted}[bgcolor=powderGreen]{bash}
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+  \end{minted}
+
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Creating Python Virtual Environment}
+
+
+      \begin{minted}[bgcolor=powderGreen]{bash}
+	mkdir python_project
+	cd python_project
+	uv init .
+	# install python
+	uv python install 3.12
+	# create a virtual environment
+	uv venv --python 3.12
+	# activate virtual environment
+	source .venv/bin/activate
+  \end{minted}
+  
+  Now, you can install some packages
+  
+
+     \begin{minted}[bgcolor=powderGreen]{bash}
+	uv add numpy matplotlib  scikit-learn  polars torch
+  \end{minted}  
+
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Running your Python code}
+
+
+     \begin{minted}[bgcolor=powderGreen]{bash}
+	python example.py
+  \end{minted}  
+
+
+
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{VS Code}
+    
+    Many IDEs are available such PyCharm, Atom, VS Code.
+
+    \vspace{10pt}
+
+    For this course, I recommend VS Code.
+
+    \begin{center}
+        \includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio]{figures/vscode.png}
+    \end{center}
+
+    VS Code supports several extensions for Python, and other necessary tools.
+
+\end{frame}
+
+\begin{frame}[containsverbatim]{Installing VS Code}
+
+    Download: \url{https://code.visualstudio.com/download}
+
+    On Linux, downloaded deb file can be install at command line:
+
+    \begin{minted}[bgcolor=powderGreen]{bash}
+    sudo dpkg -i code_1.103.1-1755017277_amd64.deb
+    \end{minted}
+    
+\end{frame}
+
+\begin{frame}{VS Code Extension}
+
+    Recommended VS Code Extension:
+    \footnotesize
+    \begin{enumerate}
+        \item Jupyter (Microsoft)
+        \item Jupyter Notebook Renderers (Microsoft)
+        \item Python (Microsoft)
+        \item Pylance (Microsoft)
+        \item Python Debugger (Microsoft)
+        \item Python Environments (Microsoft)
+        \item Remote -- SSH (Microsoft)
+        \item Remote -- SSH: Editing Configuration Files (Microsoft)
+        \item Remote Explorer (Microsoft)
+    \end{enumerate}
+    
+\end{frame}
+
+\begin{frame}{Connecting to Remote Machine in VS Code}
+
+    When connecting to remote machine on VS Code, environment variables of the remote machine takes into effect.
+
+    \vspace{10pt}
+
+    To connect with \texttt{blackhawk.ece.uah.edu} from outside the Engineering building,  if need VPN, download from:
+
+    \vspace{10pt}
+
+    Download VPN: \url{https://chargerware.uah.edu/all-software/secure-access-vpn}
+
+    
+\end{frame}
+
+\begin{frame}{Connecting to Remote Machine in VS Code}
+
+    \footnotesize
+\begin{columns}
+    \column{0.5\linewidth}
+\begin{center}
+    \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{figures/VSCode_HomePage.png}
+\end{center}
+
+    \column{0.5\linewidth}
+
+    After connecting to campus VPN,
+    
+    click \textbf{Connect to ...}
+    
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Connecting to Remote Machine in VS Code}
+\footnotesize
+\begin{columns}
+    \column{0.5\linewidth}
+\begin{center}
+    \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{figures/VSCode_ConnectTo.png}
+\end{center}
+
+    \column{0.5\linewidth}
+
+    Click \textbf{Connect to Host ...}, 
+    
+    enter the address \texttt{username@blackhawk.ece.uah.edu}. Use your own user name.
+
+
+    
+\end{columns}
+\end{frame}
+
+
+
+
+
+
 \begin{frame}
 	\Huge{\centerline{\color{MediumBlue}\textbf{The End}}}
 \end{frame}

@@ -1,0 +1,127 @@
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{multimedia}
+
+\definecolor{crimson}{HTML}{DC143C}
+\definecolor{pinkLace}{HTML}{FFDDF4} % Pink Lace
+\definecolor{blizzardblue}{rgb}{0.67, 0.9, 0.93}
+\definecolor{bubblegumPink}{HTML}{FFC1CC} % Bubblegum Pink
+
+% Basic invisible colors: Cooler, softer tones
+\definecolor{InvisibleGreen}{rgb}{0.88, 0.94, 0.92}  % Softer, less saturated green
+\definecolor{InvisibleBlue}{rgb}{0.91, 0.93, 0.95}   % Cooler blue-gray
+\definecolor{InvisibleRed}{rgb}{0.94, 0.92, 0.88}    % Warmer but muted beige-red
+
+
+% Medium colors: Reduced saturation and brightness
+\definecolor{MediumGreen}{rgb}{0.25, 0.75, 0.35}     % Much less saturated green
+\definecolor{MediumBlue}{rgb}{0.35, 0.45, 0.70}      % Softer blue
+\definecolor{MediumRed}{rgb}{0.65, 0.45, 0.42}       % Muted red-brown
+
+% Dark colors: Deeper, less harsh tones
+\definecolor{DarkRed}{rgb}{0.45, 0.25, 0.28}         % Deeper burgundy
+\definecolor{DarkGreen}{rgb}{0.25, 0.50, 0.30}       % Forest green
+
+% Theme colors: Cooler, eye-friendly versions
+\definecolor{forestGreen}{HTML}{2E8B57}               % Sea green instead of bright green
+\definecolor{coolGray}{HTML}{6B7280}                  % Slightly cooler gray
+\definecolor{limeGreen}{HTML}{66CDAA}                 % Medium aquamarine
+\definecolor{softMint}{HTML}{B8D4C6}                  % Softer mint
+\definecolor{deepBlue}{HTML}{1E3A5F}                  % Deeper, less harsh blue
+\definecolor{pineGreen}{HTML}{2F4F4F}                 % Dark slate gray
+
+% Red family -> Cooler green family
+\definecolor{emeraldGreen}{HTML}{50C878}              % Emerald (less bright)
+\definecolor{darkForest}{HTML}{355E3B}                % Hunter green
+\definecolor{mintGreen}{HTML}{98FB98}                 % Pale green
+\definecolor{limeLight}{HTML}{7CB342}                 % Olive green
+\definecolor{darkEmerald}{HTML}{4F7942}               % Dark olive green
+\definecolor{hunterGreen}{HTML}{3B5F37}               % Deep forest
+\definecolor{sageGreen}{HTML}{87A96B}                 % Sage
+\definecolor{brightGreen}{HTML}{66BB6A}               % Medium green
+\definecolor{neonGreen}{HTML}{7CB342}                 % Olive instead of neon
+\definecolor{mossGreen}{HTML}{4A5D23}                 % Moss green
+\definecolor{springGreen}{HTML}{7CB342}               % Muted spring green
+
+% Yellow/Blue colors - cooler versions
+\definecolor{cashyellow}{HTML}{DAA520}                % Goldenrod (less harsh)
+\definecolor{cashblue}{HTML}{4682B4}                  % Steel blue
+\definecolor{cpeyellow}{HTML}{F5F5DC}                 % Beige (much softer)
+\definecolor{mintCream}{HTML}{E0F2E7}                 % Very soft mint
+\definecolor{cpegreen}{HTML}{E8F5E8}                  % Very pale green
+\definecolor{cpelime}{HTML}{E6E6FA}                   % Lavender (cooler)
+\definecolor{lavenderblue}{HTML}{B6C7FF}              % Softer periwinkle
+
+% Light green family - very soft versions
+\definecolor{lightGreen}{HTML}{C8E6C9}                % Very pale green
+\definecolor{pastelGreen}{HTML}{B8E6B8}               % Pastel green
+\definecolor{softMint2}{HTML}{AFEEEE}                 % Pale turquoise
+\definecolor{mintFresh}{HTML}{D4F1D4}                 % Mint cream
+\definecolor{lightMint}{HTML}{E0FFE0}                 % Honeydew
+\definecolor{dustyGreen}{HTML}{A8C68A}                % Dusty olive
+\definecolor{powderGreen}{HTML}{F0F8E8}               % Very pale mint
+\definecolor{fernGreen}{HTML}{7CB342}                 % Fern green
+
+% Pink family -> Very soft green family
+\definecolor{springBlossom}{HTML}{D4ECD6}             % Spring mint
+\definecolor{eucalyptusGreen}{HTML}{E8F5E8}           % Eucalyptus
+\definecolor{jadeMint}{HTML}{D1E7DD}                  % Jade mint
+\definecolor{lightEmerald}{HTML}{B8D4B8}              % Light jade
+\definecolor{mintLace}{HTML}{F0FFF0}                  % Mint cream
+\definecolor{pastelMint}{HTML}{E8F8E8}                % Pastel mint
+\definecolor{mistyGreen}{HTML}{F0FFF0}                % Misty mint
+\definecolor{jadeGold}{HTML}{A8B88A}                  % Jade gold
+\definecolor{peachMint}{HTML}{F0F8E0}                 % Cream mint
+\definecolor{pearlMint}{HTML}{F8FFF8}                 % Pearl mint
+\definecolor{cucumberCream}{HTML}{E8F8E8}             % Cucumber
+\definecolor{melonGreen}{HTML}{B8E6B8}                % Melon green
+\definecolor{leafGreen}{HTML}{C8D4C8}                 % Leaf green
+\definecolor{softMint3}{HTML}{E0F0E0}                 % Soft mint
+\definecolor{forestBlush}{HTML}{D8E8D8}               % Forest blush
+\definecolor{babyGreen}{HTML}{F0FFF0}                 % Baby green
+\definecolor{petalGreen}{HTML}{E8F8E8}                % Petal green
+\definecolor{mintCandy}{HTML}{F0FFF0}                 % Mint candy
+\definecolor{sageFuzz}{HTML}{E0E8E0}                  % Sage fuzz
+
+% Special colors - cooler versions
+\definecolor{LightJade}{HTML}{E0F0F0}                 % Light jade
+\definecolor{Illuminate}{HTML}{DAA520}                % Goldenrod (softer)
+\definecolor{LivingMint}{HTML}{98D982}                % Living mint
+
+% Android colors - cooler, less saturated versions
+\definecolor{androidRed}{HTML}{E57373}                % Softer red
+\definecolor{androidRedLight}{HTML}{FFEBEE}           % Very pale pink
+\definecolor{androidBlue}{HTML}{7986CB}               % Indigo (softer)
+\definecolor{androidBlueLight}{HTML}{E8EAF6}          % Indigo tint
+
+% Android other colors - muted versions
+\definecolor{androidGreen}{HTML}{81C784}              % Softer green
+\definecolor{androidGreenLight}{HTML}{E8F5E8}         % Very pale green
+\definecolor{androidOrange}{HTML}{81D4FA}             % Light blue (cooler)
+\definecolor{androidOrangeLight}{HTML}{E1F5FE}        % Very pale blue
+\definecolor{androidTeal}{HTML}{A5D6A7}               % Light green
+\definecolor{androidTealLight}{HTML}{E8F5E8}          % Very pale green
+\definecolor{androidYellow}{HTML}{64B5F6}             % Blue (cooler alternative)
+\definecolor{androidYellowLight}{HTML}{E3F2FD}        % Very pale blue
+\definecolor{androidPurple}{HTML}{BA68C8}             % Softer purple
+\definecolor{androidPurpleLight}{HTML}{F3E5F5}        % Very pale purple
+
+% Gray unchanged but slightly cooler
+\definecolor{androidGray}{HTML}{CFD8DC}               % Blue gray
+\definecolor{androidGrayLight}{HTML}{ECEFF1}          % Cool white
+
+% Set color theme - using cooler forest green
+\usecolortheme[named=cashblue]{structure}
+
+\setbeamercolor{titlelike}{parent=structure}
+\setbeamercolor{block title}{bg=MediumRed}
+\setbeamercolor{block body}{bg=InvisibleRed}
+\setbeamercolor{block title example}{bg=MediumBlue}
+\setbeamercolor{block body example}{bg=InvisibleBlue}
+\setbeamercolor{block title alerted}{bg=cpelime}      % Using softer lavender instead of lime
+\setbeamercolor{block body alerted}{bg=cpeyellow}     % Using beige instead of yellow
+
+
+\usepackage{hyperref}
+
