@@ -1,0 +1,199 @@
+\documentclass[12pt, xcolor=dvipsnames,svgnames,x11names]{article}
+
+\input{common}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+
+% Redefine \maketitle to include tcolorbox
+\makeatletter
+\renewcommand{\maketitle}{%
+      \begin{center}
+         \begin{tcolorbox}[
+               enhanced,
+               colback=white,
+               colframe=goldenrod,
+               boxrule=1pt,
+               arc=3pt,
+               left=0pt,
+               right=0pt,
+               top=0pt,
+               bottom=0pt,
+               drop shadow={goldenrod!25!white},
+         ]
+               % Header section
+               \begin{tcolorbox}[
+                  enhanced,
+                  colback=stormblue!85!white,
+                  colframe=stormblue!25!white,
+                  boxrule=0pt,
+                  arc=3pt,
+                  sharp corners=south,
+                  left=2em,
+                  right=2em,
+                  top=1em,
+                  bottom=1em
+               ]
+                  \centering
+                  {\LARGE\bfseries\textcolor{white}{\@title}}
+               \end{tcolorbox}
+               
+               % Content section
+               \vspace{1em}
+               \centering
+               {\large\textcolor{darkgray}{\@author}} \\[0.8em]
+               {\normalsize\textcolor{darkgray}{\@date}}
+               \vspace{1em}
+         \end{tcolorbox}
+      \end{center}
+      \vspace{2em}
+}
+\makeatother
+
+
+
+\newcommand{\hw}{Homework 1: Gradient Descent and Optimization}
+\newcommand{\duedate}{Jan 25, 2025, 11:59 PM}
+\newcommand{\hwturnin}{hw00}
+
+\newenvironment{multiequation}[1][]{%
+\begin{equation}%
+   \begin{aligned}%
+   \ifx#1\@empty\else\label{#1}\fi%
+}{%
+   \end{aligned}%
+\end{equation}%
+}
+\pagestyle{fancy}
+
+\lhead{\footnotesize{\coursenumber, \courseterm}, \footnotesize{The University of Alabama in Huntsville}}
+\chead{}
+\rhead{\footnotesize{\emph{\hw}}}
+\lfoot{\footnotesize{\instructorname}}
+\cfoot{\footnotesize{\thepage}}
+\rfoot{\footnotesize{\textit{Last Revised:~\today}}}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\newcommand{\minipagewidth}{0.8\columnwidth}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+\begin{document}
+
+
+\title{\textsc{\hw\\
+\coursenumber}}
+\author{Instructor: \instructorname}
+\date{Due: \duedate\\ 50 Points}
+
+\maketitle
+
+\setlength{\unitlength}{1in}
+You are allowed to use a generative model-based AI tool for your assignment. However, you must submit an accompanying reflection report detailing how you used the AI tool, the specific query you made, and how it improved your understanding of the subject. You are also required to submit screenshots of your conversation with any large language model (LLM) or equivalent conversational AI, clearly showing the prompts and your login avatar. Some conversational AIs provide a way to share a conversation link, and such a link is desirable for authenticity. Failure to do so may result in actions taken in compliance with the plagiarism policy.
+
+Additionally, you must include your thoughts on how you would approach the assignment if such a tool were not available. Failure to provide a reflection report for every assignment where an AI tool is used may result in a penalty, and subsequent actions will be taken in line with the plagiarism policy.
+
+\subsection*{Submission instruction:}
+Upload a .pdf on Canvas with the format  \texttt{CPE487587-LastFirst-HW-XX}. For example, if your name is Sam Wells, your file name should be \texttt{CPE487587-LastFirst-HW-XX.pdf}.  If there is a programming assignment, then you should include your source code along with your PDF files in a zip file \texttt{CPE487587-LastFirst-HW-XX.zip}. 
+Your submission must contain your name and UAH Charger ID or your UAH email address.  Please number your pages as well.
+
+All CPE 587 students are required to submit their response in a Latex-generated PDF.
+\vskip 1em
+\hrule
+\vskip 1em
+
+\newpage
+
+
+Before you attempt, please read the entire problem end-to-end.
+
+\section{Finding Optimal Weights using Gradient Descents}
+
+Consider a sequence of linear and nonlinear operation on a feature matrix from $n$ samples and $d$ features as shown in Figure~\ref{fig:Two_Layer_NN}.
+
+\begin{figure}[h]
+\includegraphics[width=1.0\linewidth]{figures/Two_Layer_NN.pdf}
+\label{fig:Two_Layer_NN}
+\end{figure}
+
+The goal of this homework is to implement gradient-descent based optimization using the power of automatic differentiation provided by PyTorch library. We will find optimal weights to create a model that performs binary classification. For this problem consider a data set as $\{ \Dcal = (X, Y)\}$, where $X \in \mathbb{R}^{n \times d}$ is the feature matrix and $Y \in \mathbb{R}^{n\times 1}$ is the true label vector for all $n$ samples.
+
+Consider the following requirements for the sequence of linear and non-linear actions above:
+
+
+\begin{enumerate}
+
+
+\item $W_1 \in \mathbb{R}^{d \times 48}$.
+
+\item $W_2 \in \mathbb{R}^{48 \times 16}$.
+
+\item $W_3 \in \mathbb{R}^{16 \times 32}$.
+
+\item $W_4 \in \mathbb{R}^{32 \times 1}$.
+
+\end{enumerate}
+
+
+Your code should meet the following requirements:
+
+\begin{enumerate}
+
+\item You should generate a random matrix $X$ of size $n\times d$  that will serve as a feature matrix. Use \texttt{torch.randn}. It should be torch Tensor of data type Float32. \hfill \textbf{(2 Points)}
+
+
+\item You should generate label vector of size $n \times 1$ following the rule that if the sum of features for one data sample is greater than $2$ it should have label $1$, otherwise 0.\hfill \textbf{(2 Points)}
+
+\item Weight matrice $W_1$ should be initialized from Gaussian distribution of $0$ mean and standard deviation $\sigma = \sqrt{\frac{2}{d}}$. Similarly, it would be $\sigma = \sqrt{\frac{2}{48}}$ for $W_2$ and so on.\hfill \textbf{(2 Points)}
+
+\item Select learning rate of $\eta = 0.001$ and perform training for upto $10000$ epochs using gradient descent. Following the Chapter 2 course notebook for an example.\hfill \textbf{(2 Points)}
+
+\item Your code should check for the presence of GPU and create GPU tensors if the machine has GPU, otherwise CPU. The training portion should take advantage of GPU. \hfill \textbf{(2 Points)}
+
+
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{enumerate}
+
+\item Write a python function \mintinline{python}{binary_classification} in a file  \mintinline{python}{two_layer_binary_classification.py}. The function should be able to taken as argument the following:
+
+\begin{enumerate}
+\item Number of features $d$, number of samples $n$, number of epochs $epochs$ with default value of $10000$, learning rate $\eta$ with a default value of $0.001$.
+
+\item It should return updated weight matrices after the completion of the training, and a loss vector keep the historical loss value for every epoch.
+ 
+\end{enumerate} \hfill \textbf{(20 Points)}
+
+\item You should create a new subpackage \texttt{deepl} in your UV package and add \\ \mintinline{python}{two_layer_binary_classification.py} as a module to the subpackage.  \hfill \textbf{(2 Points)}
+
+\item Appropriately initialize \mintinline{python}{__init__.py} so that you may be able to import your package. \hfill \textbf{(2 Points)}
+
+\item Create a new subfolder called \texttt{scripts} in the root directory of your package where you will add \mintinline{python}{binaryclassification_impl.py} demonstrating the use of the function \\ \mintinline{python}{binary_classification}. \hfill \textbf{(2 Points)}
+
+\item Your script should retrieve the loss vector and create a plot of the loss value against epochs. Your script should save plot as a pdf file with the file number \newline \mintinline{python}{crossentropyloss_20260115133203.pdf} where your script should automatically replace 20260115133203 by actual timestamp YYYYMMDDhhmmss, Y = Year, M = Month, D = Day, h = hour, m = minutes, s = seconds. \hfill \textbf{(10 Points)}
+
+
+
+\item Add a README.md to the UV project root directory explaining how to install your package, run your code and get the result. \hfill \textbf{(2 Points)}
+
+
+\item Commit all the files to GitHub and report the commit hash as a part of the submission. I will only evaluate your code to the point of the commit hash. \hfill \textbf{(2 Points)}
+
+
+\end{enumerate}
+
+No Jupyter Notebook or Google Colab link is required for the submission.
+
+
+
+\end{document}
