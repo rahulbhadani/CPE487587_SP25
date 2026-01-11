@@ -115,16 +115,18 @@ All CPE 587 students are required to submit their response in a Latex-generated 
 
 Before you attempt, please read the entire problem end-to-end.
 
-\section{Finding Optimal Weights using Gradient Descents}
+For this assignment, you will only report GitHub commit hash as a submission and nothing else, and this supercedes the previous submission instruction.
 
-Consider a sequence of linear and nonlinear operation on a feature matrix from $n$ samples and $d$ features as shown in Figure~\ref{fig:Two_Layer_NN}.
+\section{Finding Optimal Weights using Gradient Descent}
+
+Consider a sequence of linear and nonlinear operations on a feature matrix from $n$ samples and $d$ features as shown in Figure~\ref{fig:Two_Layer_NN}.
 
 \begin{figure}[h]
 \includegraphics[width=1.0\linewidth]{figures/Two_Layer_NN.pdf}
 \label{fig:Two_Layer_NN}
 \end{figure}
 
-The goal of this homework is to implement gradient-descent based optimization using the power of automatic differentiation provided by PyTorch library. We will find optimal weights to create a model that performs binary classification. For this problem consider a data set as $\{ \Dcal = (X, Y)\}$, where $X \in \mathbb{R}^{n \times d}$ is the feature matrix and $Y \in \mathbb{R}^{n\times 1}$ is the true label vector for all $n$ samples.
+The goal of this homework is to implement gradient-descent-based optimization using the power of automatic differentiation provided by the PyTorch library. We will find optimal weights to create a model that performs binary classification. For this problem consider a data set as $\{ \Dcal = (X, Y)\}$, where $X \in \mathbb{R}^{n \times d}$ is the feature matrix and $Y \in \mathbb{R}^{n\times 1}$ is the true label vector for all $n$ samples.
 
 Consider the following requirements for the sequence of linear and non-linear actions above:
 
@@ -147,16 +149,16 @@ Your code should meet the following requirements:
 
 \begin{enumerate}
 
-\item You should generate a random matrix $X$ of size $n\times d$  that will serve as a feature matrix. Use \texttt{torch.randn}. It should be torch Tensor of data type Float32. \hfill \textbf{(2 Points)}
+\item You should generate a random matrix $X$ of size $n\times d$  that will serve as a feature matrix. Use \texttt{torch.randn}. It should be a torch Tensor of data type Float32. \hfill \textbf{(2 Points)}
 
 
-\item You should generate label vector of size $n \times 1$ following the rule that if the sum of features for one data sample is greater than $2$ it should have label $1$, otherwise 0.\hfill \textbf{(2 Points)}
+\item You should generate a label vector of size $n \times 1$ following the rule that if the sum of features for one data sample is greater than $2$, it should have a label of $1$, otherwise 0.\hfill \textbf{(2 Points)}
 
 \item Weight matrice $W_1$ should be initialized from Gaussian distribution of $0$ mean and standard deviation $\sigma = \sqrt{\frac{2}{d}}$. Similarly, it would be $\sigma = \sqrt{\frac{2}{48}}$ for $W_2$ and so on.\hfill \textbf{(2 Points)}
 
 \item Select learning rate of $\eta = 0.001$ and perform training for upto $10000$ epochs using gradient descent. Following the Chapter 2 course notebook for an example.\hfill \textbf{(2 Points)}
 
-\item Your code should check for the presence of GPU and create GPU tensors if the machine has GPU, otherwise CPU. The training portion should take advantage of GPU. \hfill \textbf{(2 Points)}
+\item Your code should check for the presence of a GPU and create GPU tensors if the machine has a GPU; otherwise, CPU. The training portion should take advantage of a GPU. \hfill \textbf{(2 Points)}
 
 
 \end{enumerate}
@@ -165,12 +167,12 @@ Your code should meet the following requirements:
 
 \begin{enumerate}
 
-\item Write a python function \mintinline{python}{binary_classification} in a file  \mintinline{python}{two_layer_binary_classification.py}. The function should be able to taken as argument the following:
+\item Write a python function \mintinline{python}{binary_classification} in a file  \mintinline{python}{two_layer_binary_classification.py}. The function should be able to take as an argument the following:
 
 \begin{enumerate}
 \item Number of features $d$, number of samples $n$, number of epochs $epochs$ with default value of $10000$, learning rate $\eta$ with a default value of $0.001$.
 
-\item It should return updated weight matrices after the completion of the training, and a loss vector keep the historical loss value for every epoch.
+\item It should return updated weight matrices after the completion of the training, and a loss vector that keeps the historical loss value for every epoch.
  
 \end{enumerate} \hfill \textbf{(20 Points)}
 
@@ -178,13 +180,13 @@ Your code should meet the following requirements:
 
 \item Appropriately initialize \mintinline{python}{__init__.py} so that you may be able to import your package. \hfill \textbf{(2 Points)}
 
-\item Create a new subfolder called \texttt{scripts} in the root directory of your package where you will add \mintinline{python}{binaryclassification_impl.py} demonstrating the use of the function \\ \mintinline{python}{binary_classification}. \hfill \textbf{(2 Points)}
+\item Create a new subfolder called \texttt{scripts} in the root directory of your package, where you will add \mintinline{python}{binaryclassification_impl.py} demonstrating the use of the function \\ \mintinline{python}{binary_classification}. \hfill \textbf{(2 Points)}
 
-\item Your script should retrieve the loss vector and create a plot of the loss value against epochs. Your script should save plot as a pdf file with the file number \newline \mintinline{python}{crossentropyloss_20260115133203.pdf} where your script should automatically replace 20260115133203 by actual timestamp YYYYMMDDhhmmss, Y = Year, M = Month, D = Day, h = hour, m = minutes, s = seconds. \hfill \textbf{(10 Points)}
+\item Your script should retrieve the loss vector and create a plot of the loss value against epochs. Your script should save the plot as a pdf file with the file number \newline \mintinline{python}{crossentropyloss_20260115133203.pdf} where your script should automatically replace 20260115133203 by the actual timestamp YYYYMMDDhhmmss, Y = Year, M = Month, D = Day, h = hour, m = minutes, s = seconds. \hfill \textbf{(10 Points)}
 
 
 
-\item Add a README.md to the UV project root directory explaining how to install your package, run your code and get the result. \hfill \textbf{(2 Points)}
+\item Add a README.md to the UV project root directory explaining how to install your package, run your code, and get the result. \hfill \textbf{(2 Points)}
 
 
 \item Commit all the files to GitHub and report the commit hash as a part of the submission. I will only evaluate your code to the point of the commit hash. \hfill \textbf{(2 Points)}
