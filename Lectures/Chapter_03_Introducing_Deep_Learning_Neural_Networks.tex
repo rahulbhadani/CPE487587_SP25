@@ -135,7 +135,7 @@ frame=none
 
 
 \title[CPE 487/587: Deep Learning]{CPE 486/586: Deep Learning for Engineering Applications} % The short title appears at the bottom of every slide, the full title is only on the title page
-\subtitle{03 Intorducing Deep Learning: Neural Networks}
+\subtitle{03 Introducing Deep Learning: Neural Networks}
 
 \author[Rahul Bhadani] {{\Large \textbf{Rahul Bhadani}}}
 
@@ -924,5 +924,108 @@ For neuron, scalar version can work, for multiple neurons, and multiple inputs, 
 \end{frame}
 
 
+\begin{frame}{Gradient}
+
+\begin{tblock}{Definition}
+Vector of partial derivatives:
+
+\begin{align*}
+\nabla f (x, y) = \bigg[ \frac{\partial f(x,y)}{\partial x}, \frac{\partial f(x,y)}{\partial y} \bigg]
+\end{align*}
+
+This is about vector calculus, but in a Neural Network, we not only have one function of many variables but many functions of many variables, $\to$ Matrix calculus.
+
+\end{tblock}
+
+\end{frame}
+
+
+\begin{frame}{Jacobian}
+
+If we have two functions $f$ and $g$, 
+
+then 
+
+\begin{align*}
+J = \begin{bmatrix}
+\nabla f (x, y) \\ \nabla g (x, y) 
+\end{bmatrix} = \begin{bmatrix}
+\frac{\partial f(x,y)}{\partial x} & \frac{\partial f(x,y)}{\partial y}\\\frac{\partial g(x,y)}{\partial x} &\frac{\partial g(x,y)}{\partial y}
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Generalization}
+
+Assume $f(x, y, z) \Rightarrow  f(\xbf) $ Or in general, $\xbf = \begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4  \\ \vdots
+\end{bmatrix}
+$
+
+$\bullet$ Scalar-valued functions can be written as vectors $\ybf = \fbf(\xbf)$.
+
+So,
+
+\begin{align*}
+\frac{\partial \mathbf{y}}{\partial \mathbf{x}} = 
+\begin{bmatrix}
+\nabla f_1(\mathbf{x}) \\ \nabla f_2(\mathbf{x}) \\ \dots \\ \nabla f_m(\mathbf{x})
+\end{bmatrix} = 
+\begin{bmatrix}
+\frac{\partial}{\partial \mathbf{x}} f_1(\mathbf{x}) \\ \frac{\partial}{\partial \mathbf{x}} f_2(\mathbf{x}) \\ \dots \\ \frac{\partial}{\partial \mathbf{x}} f_m(\mathbf{x})
+\end{bmatrix} = 
+\begin{bmatrix}
+\frac{\partial}{\partial x_1} f_1(\mathbf{x}) & \frac{\partial}{\partial x_2} f_1(\mathbf{x}) & \dots & \frac{\partial}{\partial x_n} f_1(\mathbf{x}) \\ 
+\frac{\partial}{\partial x_1} f_2(\mathbf{x}) & \frac{\partial}{\partial x_2} f_2(\mathbf{x}) & \dots & \frac{\partial}{\partial x_n} f_2(\mathbf{x}) \\ 
+\dots & \dots & \dots & \dots \\ 
+\frac{\partial}{\partial x_1} f_m(\mathbf{x}) & \frac{\partial}{\partial x_2} f_m(\mathbf{x}) & \dots & \frac{\partial}{\partial x_n} f_m(\mathbf{x})
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Some Notes on Generalization}
+
+\begin{itemize}
+\item $\frac{\partial}{\partial \mathbf{x}} f_i(\mathbf{x}) $ is a horizontal (row) $n$-vector.
+\item Width of Jacobian is $n$ and have $m$ rows.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Classwork}
+
+Derive the Jacobian of identify function $\fbf(\xbf) = \xbf $, i.e. $f_i(\xbf) = x_i$ that has $n$ functions and each function has $n$ parameters held in a single vector $\xbf$.
+
+\end{frame}
+
+
+\begin{frame}{Element-wise Binary Operators}
+\begin{facts}{}
+By "element-wise binary operations" we mean applying
+an operator to the first item of each vector to get the first item of the output, then to the second items of the inputs for the second item of the output, and so forth.
+\end{facts}
+
+Element-wise binary operation: $\ybf = \fbf(\wbf) \bigcirc \gbf(\xbf)$
+
+Consider $m = n$ for this case.
+
+Essentially, in scalar format:
+
+\begin{align*}
+\begin{bmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_n
+\end{bmatrix} = 
+\begin{bmatrix}
+f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x}) \\ 
+f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x}) \\ 
+\vdots \\ 
+f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x})
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
 
 \end{document}
