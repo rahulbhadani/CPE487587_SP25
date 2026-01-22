@@ -1026,6 +1026,813 @@ f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x})
 \end{bmatrix}
 \end{align*}
 
+Elementwise implies that $f_i$ is purely a function of $w_i$ and $g_i$ is purely a function of $x_i$.
 \end{frame}
+
+
+
+\begin{frame}{General Case of Element-wise Binary Operators}
+
+Jacobian with respect to $\wbf$ can be expanded as 
+
+\begin{align*}
+J_{\mathbf{w}} = \frac{\partial \mathbf{y}}{\partial \mathbf{w}} = 
+\begin{bmatrix}
+\frac{\partial}{\partial w_1} (f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x})) & \frac{\partial}{\partial w_2} (f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x})) & \dots & \frac{\partial}{\partial w_n} (f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x})) \\ 
+\frac{\partial}{\partial w_1} (f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x})) & \frac{\partial}{\partial w_2} (f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x})) & \dots & \frac{\partial}{\partial w_n} (f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x})) \\ 
+\dots & \dots & \dots & \dots \\ 
+\frac{\partial}{\partial w_1} (f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x})) & \frac{\partial}{\partial w_2} (f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x})) & \dots & \frac{\partial}{\partial w_n} (f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x}))
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{General Case of Element-wise Binary Operators}
+
+Jacobian with respect to $\xbf$ can be expanded as 
+
+\begin{align*}
+J_{\mathbf{x}} = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} = 
+\begin{bmatrix}
+\frac{\partial}{\partial x_1} (f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x})) & \frac{\partial}{\partial x_2} (f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x})) & \dots & \frac{\partial}{\partial x_n} (f_1(\mathbf{w}) \bigcirc g_1(\mathbf{x})) \\ 
+\frac{\partial}{\partial x_1} (f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x})) & \frac{\partial}{\partial x_2} (f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x})) & \dots & \frac{\partial}{\partial x_n} (f_2(\mathbf{w}) \bigcirc g_2(\mathbf{x})) \\ 
+\dots & \dots & \dots & \dots \\ 
+\frac{\partial}{\partial x_1} (f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x})) & \frac{\partial}{\partial x_2} (f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x})) & \dots & \frac{\partial}{\partial x_n} (f_n(\mathbf{w}) \bigcirc g_n(\mathbf{x}))
+\end{bmatrix}
+\end{align*}
+
+The good news that most of the time, Jacobian will be a diagonal matrix that greatly simplifies the calculation!!
+
+
+
+\end{frame}
+
+\begin{frame}{Classwork}
+
+\begin{redblock}{}
+Under what conditions, are the off-diagonal elements of a Jacobian zero?
+\end{redblock}
+
+\end{frame}
+
+\begin{frame}{Example}
+
+Consider $\fbf(\wbf) = \wbf$ and $\gbf(\xbf) = \xbf$. $\fbf(\wbf) + \gbf(\xbf)$ has scalar equations $y_i = f_i(\wbf) + g_i(\xbf)$ which reduces to $y_i = f_i(w_i) + g_i(x_i) = w_i + x_i$. We can get partial derivatives as
+
+\begin{align*}
+\frac{\partial}{\partial w_i}(f_i(w_i) + g_i(x_i)) &= \frac{\partial}{\partial w_i}(w_i + x_i) = 1 + 0 = 1 \\
+\frac{\partial}{\partial x_i}(f_i(w_i) + g_i(x_i)) &= \frac{\partial}{\partial x_i}(w_i + x_i) = 0 + 1 = 1
+\end{align*}
+
+This gives us $\frac{\partial (\wbf + \xbf)}{\partial \wbf} = \frac{\partial (\wbf + \xbf)}{\partial \xbf} = \Ibf$, the identity matrix.
+
+\end{frame}
+
+\begin{frame}{Results of Common Elementwise Binary Operations}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Operation} & \textbf{Partial with respect to w} & \textbf{Result} \\ \hline
+$+$ & $\frac{\partial(\mathbf{w}+\mathbf{x})}{\partial \mathbf{w}} = \text{diag}\left(\dots \frac{\partial(w_i+x_i)}{\partial w_i} \dots\right) = \text{diag}(\vec{1})$ & $I$ \\ \hline
+$-$ & $\frac{\partial(\mathbf{w}-\mathbf{x})}{\partial \mathbf{w}} = \text{diag}\left(\dots \frac{\partial(w_i-x_i)}{\partial w_i} \dots\right) = \text{diag}(\vec{1})$ & $I$ \\ \hline
+$\otimes$ & $\frac{\partial(\mathbf{w} \otimes \mathbf{x})}{\partial \mathbf{w}} = \text{diag}\left(\dots \frac{\partial(w_i \times x_i)}{\partial w_i} \dots\right)$ & $\text{diag}(\mathbf{x})$ \\ \hline
+$\oslash$ & $\frac{\partial(\mathbf{w} \oslash \mathbf{x})}{\partial \mathbf{w}} = \text{diag}\left(\dots \frac{\partial(w_i / x_i)}{\partial w_i} \dots\right)$ & $\text{diag}\left(\dots \frac{1}{x_i} \dots\right)$ \\ \hline
+\end{tabular}
+
+\vspace{5pt}
+
+$\otimes$ is also called the Hadamard product.
+\end{frame}
+
+
+\begin{frame}{Vector-Scalar Operation}
+
+What about adding scalar $z$ to vector $\xbf$? 
+
+\pause
+
+\vspace{10pt}
+
+$z$ gets expanded to vector with appropriate length to add to elements of $\xbf$.
+
+
+\vspace{10pt}
+
+In essence, 
+
+\begin{align*}
+z = \gbf(z) = \vec{1}z\\
+\ybf  = \fbf(\xbf) + \gbf(z)
+\end{align*}
+
+\pause 
+
+\vspace{10pt}
+
+And then you can apply our previous discussion. $\vec{1}$ means a vertical vector (column vector of all 1s).
+
+
+\vspace{10pt}
+
+\textbf{Note:} Computing the partial derivative with respect to the scalar parameter however results in a vertical vector and not a diagonal matrix.
+
+
+
+
+\end{frame}
+
+\begin{frame}{Vector Sum Reduction and Calculus}
+
+Consider
+\begin{facts}{}
+$y = \sum_{i=1}^n f_i(\xbf)$
+\end{facts}
+The sume is over the results of the function, and not the parameter itself. Then, 
+
+\begin{align*}
+\frac{\partial y}{\partial \mathbf{x}} &= \left[ \frac{\partial y}{\partial x_1}, \frac{\partial y}{\partial x_2}, \dots, \frac{\partial y}{\partial x_n} \right] \\
+&= \left[ \frac{\partial}{\partial x_1} \sum_i f_i(\mathbf{x}), \frac{\partial}{\partial x_2} \sum_i f_i(\mathbf{x}), \dots, \frac{\partial}{\partial x_n} \sum_i f_i(\mathbf{x}) \right] \\
+&= \left[ \sum_i \frac{\partial f_i(\mathbf{x})}{\partial x_1}, \sum_i \frac{\partial f_i(\mathbf{x})}{\partial x_2}, \dots, \sum_i \frac{\partial f_i(\mathbf{x})}{\partial x_n} \right] \quad \text{(move derivative inside } \Sigma)
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Single Variable Chain Rule}
+
+\begin{tcolorbox}
+\begin{align*}
+ y  & = f(g(x))\\
+ y' &  = f'(g(x))g'(x)
+\end{align*}
+\end{tcolorbox}
+
+
+We also rewrite by introducing an intermediate variable  $ u = g(x)$, so 
+
+\begin{tcolorbox}[colframe=nuaalightblue, colback = red!10]
+\begin{align*}
+\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}
+\end{align*}
+\end{tcolorbox}
+
+Example: Use chain rule for $ \sin(x^2)$ to find its derivative wrt $x$.
+
+\end{frame}
+
+
+\begin{frame}{Law of Total Derivatives}
+
+\begin{tcolorbox}[colback=nuaalightblue!10, colframe=red!30]
+To compute $\frac{dy}{dx}$, we need to sum up all possible contributions from changes in $x$ to the change in $y$.
+\end{tcolorbox}
+
+Assume $ u_1 = g(x)$, and $ y = f(x) = u_2(x, u_1)$, then 
+
+
+\begin{tcolorbox}[colframe=nuaalightblue, colback = red!10]
+\begin{align*}
+\frac{dy}{dx} = \frac{\partial f(x)}{\partial x} &= \frac{\partial u_2(x, u_1)}{\partial x} \\
+&= \frac{\partial u_2}{\partial x} \frac{\partial x}{\partial x} + \frac{\partial u_2}{\partial u_1} \frac{\partial u_1}{\partial x} \\
+&= \frac{\partial u_2}{\partial x} + \frac{\partial u_2}{\partial u_1} \frac{\partial u_1}{\partial x}
+\end{align*}
+\end{tcolorbox}
+
+
+\end{frame}
+
+
+\begin{frame}{Law of Total Derivatives}
+
+In general
+
+\begin{tcolorbox}[colframe=forestBlush, colback = red!10!yellow!10]
+
+\begin{align*}
+\frac{\partial f(x, u_1, \dots, u_n)}{\partial x} &= \frac{\partial f}{\partial x} + \frac{\partial f}{\partial u_1} \frac{\partial u_1}{\partial x} + \frac{\partial f}{\partial u_2} \frac{\partial u_2}{\partial x} + \dots + \frac{\partial f}{\partial u_n} \frac{\partial u_n}{\partial x} \\
+&= \frac{\partial f}{\partial x} + \sum_{i=1}^n \frac{\partial f}{\partial u_i} \frac{\partial u_i}{\partial x}
+\end{align*}
+\end{tcolorbox}
+
+This is called \textbf{\color{DarkGreen}Single-variable Total-derivative Chain Rule}.
+
+\vspace{10pt}
+
+The total derivative assumes all variables are potentially codependent whereas the partial derivative
+assumes all variables but x are constants.
+
+\vspace{5pt}
+
+\textit{\color{crimson}Could we simplify the above expression further?}
+
+\end{frame}
+
+\begin{frame}{Vector Chain Rule}
+
+\begin{align*}
+\begin{bmatrix}
+y_1(x) \\ 
+y_2(x)
+\end{bmatrix} = \begin{bmatrix}
+f_1(x) \\ 
+f_2(x)
+\end{bmatrix} = \begin{bmatrix}
+ln(x^2) \\ 
+sin(3x)
+\end{bmatrix}
+\end{align*}
+
+
+Consider $\ybf = \fbf(\gbf(x))$ with $g_1$ and $g_2$ as two intermediate variables: 
+
+\begin{align*}
+\begin{bmatrix}
+g_1(x) \\ 
+g_2(x)
+\end{bmatrix} &= \begin{bmatrix}
+x^2 \\ 
+3x
+\end{bmatrix} \\
+\begin{bmatrix}
+f_1(\mathbf{g}) \\ 
+f_2(\mathbf{g})
+\end{bmatrix} &= \begin{bmatrix}
+ln(g_1) \\ 
+sin(g_2)
+\end{bmatrix}
+\end{align*}
+
+\begin{align*}
+\frac{\partial \mathbf{y}}{\partial x} = \begin{bmatrix}
+\frac{\partial f_1(\mathbf{g})}{\partial x} \\ 
+\frac{\partial f_2(\mathbf{g})}{\partial x}
+\end{bmatrix} &= \begin{bmatrix}
+\frac{\partial f_1}{\partial g_1} \frac{\partial g_1}{\partial x} + \frac{\partial f_1}{\partial g_2} \frac{\partial g_2}{\partial x} \\ 
+\frac{\partial f_2}{\partial g_1} \frac{\partial g_1}{\partial x} + \frac{\partial f_2}{\partial g_2} \frac{\partial g_2}{\partial x}
+\end{bmatrix} = \begin{bmatrix}
+\frac{1}{g_1} 2x + 0 \\ 
+0 + \cos(g_2)3
+\end{bmatrix} = \begin{bmatrix}
+\frac{2x}{x^2} \\ 
+3\cos(3x)
+\end{bmatrix} = \begin{bmatrix}
+\frac{2}{x} \\ 
+3\cos(3x)
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Vector Chain Rule}
+
+Still, the goal is convert group of scalar operations into a vector operations.
+
+\begin{align*}
+\begin{bmatrix}
+\frac{\partial f_1}{\partial g_1} \frac{\partial g_1}{\partial x} + \frac{\partial f_1}{\partial g_2} \frac{\partial g_2}{\partial x} \\ 
+\frac{\partial f_2}{\partial g_1} \frac{\partial g_1}{\partial x} + \frac{\partial f_2}{\partial g_2} \frac{\partial g_2}{\partial x}
+\end{bmatrix}
+\end{align*}
+
+could be written as 
+
+\begin{align*}
+\begin{bmatrix}
+\frac{\partial f_1}{\partial g_1} & \frac{\partial f_1}{\partial g_2} \\ 
+\frac{\partial f_2}{\partial g_1} & \frac{\partial f_2}{\partial g_2}
+\end{bmatrix} \begin{bmatrix}
+\frac{\partial g_1}{\partial x} \\ 
+\frac{\partial g_2}{\partial x}
+\end{bmatrix} \stackrel{\text{set}}{=} \frac{\partial \mathbf{f}}{\partial \mathbf{g}} \frac{\partial \mathbf{g}}{\partial x}
+\end{align*}
+
+by matrix multiplication. So the Jacobian is the multiplication of two other Jacobians.
+
+\end{frame}
+
+\begin{frame}{Vector Chain Rule}
+
+Instead of a scalar $x$, if we consider $\mathbf{x}$, 
+
+\begin{tcolorbox}{colback=powderGreen, colframe=cpelime}
+\begin{align*}
+\frac{\partial}{\partial \mathbf{x}} \mathbf{f}(\mathbf{g}(\mathbf{x})) = \frac{\partial \mathbf{f}}{\partial \mathbf{g}} \frac{\partial \mathbf{g}}{\partial \mathbf{x}} 
+\end{align*}
+\textbf{Note:} matrix multiply doesn't commute; order of  $\frac{\partial \mathbf{f}}{\partial \mathbf{g}} \frac{\partial \mathbf{g}}{\partial \mathbf{x}}$ matters.
+\end{tcolorbox}
+
+\end{frame}
+
+\begin{frame}{Vector Chain Rule}
+
+Expanding $\frac{\partial}{\partial \mathbf{x}} \mathbf{f}(\mathbf{g}(\mathbf{x})) $, 
+
+\begin{align*}
+\frac{\partial}{\partial \mathbf{x}}\mathbf{f}(\mathbf{g}(\mathbf{x})) = \begin{bmatrix}
+\frac{\partial f_1}{\partial g_1} & \frac{\partial f_1}{\partial g_2} & \dots & \frac{\partial f_1}{\partial g_k} \\ 
+\frac{\partial f_2}{\partial g_1} & \frac{\partial f_2}{\partial g_2} & \dots & \frac{\partial f_2}{\partial g_k} \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+\frac{\partial f_m}{\partial g_1} & \frac{\partial f_m}{\partial g_2} & \dots & \frac{\partial f_m}{\partial g_k}
+\end{bmatrix} \begin{bmatrix}
+\frac{\partial g_1}{\partial x_1} & \frac{\partial g_1}{\partial x_2} & \dots & \frac{\partial g_1}{\partial x_n} \\ 
+\frac{\partial g_2}{\partial x_1} & \frac{\partial g_2}{\partial x_2} & \dots & \frac{\partial g_2}{\partial x_n} \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+\frac{\partial g_k}{\partial x_1} & \frac{\partial g_k}{\partial x_2} & \dots & \frac{\partial g_k}{\partial x_n}
+\end{bmatrix}
+\end{align*}
+
+where $m = |f|$, $n = |x|$, and $k = |g|$, the resulting Jacobian matrix has dimensions $m \times n$ (derived from the multiplication of an $m \times k$ matrix by a $k \times n$ matrix). $|\cdot |$ denotes cardinality.
+
+
+\vspace{15pt}
+
+\textit{\color{red!80}When will the off-diagonal entries be zero for both matrices? How does that simplify our calculations?}
+
+\end{frame}
+
+
+\section{Matrix Calculus in Action}
+
+\begin{frame}
+    \sectionpage
+\end{frame}
+
+\begin{frame}{Gradient of Neuron Activation}
+
+
+ We consider ReLU activation for simplicity.
+ 
+ \begin{align*}
+ activation(x) = max(0, \wbf \cdot \xbf + b)
+ \end{align*}
+ 
+ Focusing on $\pdv{(\wbf \cdot \xbf + b)}{\wbf}$, the dot product $\wbf \cdot \xbf$ is elementwise multiplication that can be written as $sum (\wbf \otimes \xbf)$.
+ 
+ \end{frame}
+ 
+ \begin{frame}{Gradient of Neuron Activation}
+
+ 
+ \begin{align*}
+\bm{u} &= \bm{w} \otimes \bm{x} \\
+y &= \text{sum}(\bm{u})
+\end{align*}
+ 
+ Once we've rephrased $y$, we recognize two subexpressions with known partial derivatives:
+
+\begin{align*}
+\frac{\partial \bm{u}}{\partial \bm{w}} &= \frac{\partial}{\partial \bm{w}} (\bm{w} \otimes \bm{x}) = \text{diag}(\bm{x}) \\
+\frac{\partial y}{\partial \bm{u}} &= \frac{\partial}{\partial \bm{u}} \text{sum}(\bm{u}) = \bm{1}^T
+\end{align*}
+
+
+The vector chain rule says to multiply the partials:
+
+$$\frac{\partial y}{\partial \bm{w}} = \frac{\partial y}{\partial \bm{u}} \frac{\partial \bm{u}}{\partial \bm{w}} = \bm{1}^T \text{diag}(\bm{x}) = \bm{x}^T$$
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Verification via Scalar Expansion}
+
+To check our results, we can grind the dot product down into a pure scalar function:
+
+\begin{align*}
+y &= \bm{w} \cdot \bm{x} = \sum_{i}^{n} (w_i x_i) \\
+\frac{\partial y}{\partial w_j} &= \frac{\partial}{\partial w_j} \sum_i (w_i x_i) = \sum_i \frac{\partial}{\partial w_j} (w_i x_i) = \frac{\partial}{\partial w_j} (w_j x_j) = x_j
+\end{align*}
+
+\vspace{0.3cm}
+
+Then:
+
+$$\frac{\partial y}{\partial \bm{w}} = [x_1, \ldots, x_n] = \bm{x}^T$$
+
+\vspace{0.5cm}
+
+\textbf{Hooray!} Our scalar results match the vector chain rule results.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Full Linear Layer with Bias}
+
+Now, let $y = \bm{w} \cdot \bm{x} + b$, the full expression within the $\max$ activation function call. We have two different partials to compute, but we don't need the chain rule:
+
+\begin{align*}
+\frac{\partial y}{\partial \bm{w}} &= \frac{\partial}{\partial \bm{w}} \bm{w} \cdot \bm{x} + \frac{\partial}{\partial \bm{w}} b = \bm{x}^T + \bm{0}^T = \bm{x}^T \\
+\frac{\partial y}{\partial b} &= \frac{\partial}{\partial b} \bm{w} \cdot \bm{x} + \frac{\partial}{\partial b} b = 0 + 1 = 1
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Including Nonlinearity of the Activation Function}
+Let's tackle the partials of the neuron activation, $\max(0, \bm{w} \cdot \bm{x} + b)$. The use of the $\max(0, z)$ function call on scalar $z$ just says to treat all negative $z$ values as 0. 
+
+\vspace{0.3cm}
+
+The derivative of the max function is a piecewise function:
+\begin{itemize}
+\item When $z \leq 0$, the derivative is 0 because $z$ is a constant
+\item When $z > 0$, the derivative of the max function is just the derivative of $z$, which is 1
+\end{itemize}
+
+\vspace{0.3cm}
+
+\begin{align*}\frac{\partial}{\partial z} \max(0, z) = \begin{cases}
+0 & z \leq 0 \\
+\frac{dz}{dz} = 1 & z > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Broadcasting Functions Across Vectors}
+
+An aside on broadcasting functions across scalars. When one or both of the $\max$ arguments are vectors, such as $\max(0, \bm{x})$, we broadcast the single-variable function $\max$ across the elements. This is an example of an element-wise unary operator. 
+
+\vspace{0.3cm}
+
+
+
+\begin{align*}
+\max(0, \bm{x}) = \begin{bmatrix}
+\max(0, x_1) \\
+\max(0, x_2) \\
+\vdots \\
+\max(0, x_n)
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Derivative of Broadcast ReLU}
+
+For the derivative of the broadcast version then, we get a vector of zeros and ones where:
+
+\begin{align*}
+\frac{\partial}{\partial x_i} \max(0, x_i) = \begin{cases}
+0 & x_i \leq 0 \\
+\frac{dx_i}{dx_i} = 1 & x_i > 0
+\end{cases}
+\end{align*}
+
+\vspace{0.3cm}
+
+\begin{align*}
+\frac{\partial}{\partial \bm{x}} \max(0, \bm{x}) = \begin{bmatrix}
+\frac{\partial}{\partial x_1} \max(0, x_1) \\
+\frac{\partial}{\partial x_2} \max(0, x_2) \\
+\vdots \\
+\frac{\partial}{\partial x_n} \max(0, x_n)
+\end{bmatrix}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Applying the Chain Rule to Activation}
+
+To get the derivative of the $\text{activation}(\bm{x})$ function, we need the chain rule because of the nested subexpression, $\bm{w} \cdot \bm{x} + b$. 
+
+\vspace{0.3cm}
+
+Following our process, let's introduce intermediate scalar variable $z$ to represent the affine function giving:
+
+\begin{align*}
+z(\bm{w}, b, \bm{x}) &= \bm{w} \cdot \bm{x} + b \\
+\text{activation}(z) &= \max(0, z)
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Applying the Chain Rule to Activation}
+
+\small
+
+
+\begin{align*}
+\frac{\partial \text{activation}}{\partial \bm{w}} = \frac{\partial \text{activation}}{\partial z} \frac{\partial z}{\partial \bm{w}}
+\end{align*}
+
+\vspace{0.3cm}
+
+which we can rewrite as follows:
+
+\begin{align*}
+\frac{\partial \text{activation}}{\partial \bm{w}} = \begin{cases}
+0 \cdot \frac{\partial z}{\partial \bm{w}} = \bm{0}^T & z \leq 0 \\
+1 \cdot \frac{\partial z}{\partial \bm{w}} = \frac{\partial z}{\partial \bm{w}} = \bm{x}^T & z > 0 \quad \text{(we computed $\frac{\partial z}{\partial \bm{w}} = \bm{x}^T$ previously)}
+\end{cases}
+\end{align*}
+
+\vspace{0.3cm}
+
+and then substitute $z = \bm{w} \cdot \bm{x} + b$ back in:
+
+\begin{align*}
+\frac{\partial \text{activation}}{\partial \bm{w}} = \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x} + b \leq 0 \\
+\bm{x}^T & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+
+When the activation function clips affine function output $z$ to 0, the derivative is zero with respect to any weight $w_i$. When $z > 0$, it's as if the $\max$ function disappears and we get just the derivative of $z$ with respect to the weights.
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Derivative with Respect to Bias}
+
+Turning now to the derivative of the neuron activation with respect to $b$, we get:
+
+\begin{align*}
+\frac{\partial \text{activation}}{\partial b} = \begin{cases}
+0 \cdot \frac{\partial z}{\partial b} = 0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+1 \cdot \frac{\partial z}{\partial b} = 1 & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Gradient of Neural Network Loss}
+
+Feature matrix: $X = [\xbf_1, \xbf_2, \xbf_3, \cdots, \xbf_N]^\top$
+
+
+$\ybf = [y_1, y_2, \cdots, y_N]$.
+
+where $y_i$ is a scalar.
+
+\vspace{10pt}
+
+Cost function:
+
+\begin{align*}
+C(\bm{w}, b, X, \bm{y}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \text{activation}(\bm{x}_i))^2 = \frac{1}{N} \sum_{i=1}^{N} (y_i - \max(0, \bm{w} \cdot \bm{x}_i + b))^2
+\end{align*}
+
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+
+Following our chain rule process we introduce these intermediate variables:
+
+\begin{align*}
+u(\bm{w}, b, \bm{x}) &= \max(0, \bm{w} \cdot \bm{x} + b) \\
+v(y, u) &= y - u \\
+C(v) &= \frac{1}{N} \sum_{i=1}^{N} v^2
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Gradient Computation}
+
+Recall
+
+\begin{align*}
+\frac{\partial}{\partial \bm{w}} u(\bm{w}, b, \bm{x}) = \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x} + b \leq 0 \\
+\bm{x}^T & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+and
+
+\begin{align*}
+\frac{\partial v(y, u)}{\partial \bm{w}} = \frac{\partial}{\partial \bm{w}} (y - u) = \bm{0}^T \frac{\partial u}{\partial \bm{w}} = -\frac{\partial u}{\partial \bm{w}} = \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x} + b \leq 0 \\
+-\bm{x}^T & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Gradient Computation}
+
+\begin{align*}
+\frac{\partial C(v)}{\partial \bm{w}} = \frac{\partial}{\partial \bm{w}} \frac{1}{N} \sum_{i=1}^{N} v_i^2 = \frac{1}{N} \sum_{i=1}^{N} \frac{\partial}{\partial \bm{w}} v_i^2 = \frac{1}{N} \sum_{i=1}^{N} \frac{\partial v_i^2}{\partial v} \frac{\partial v}{\partial \bm{w}} = \frac{1}{N} \sum_{i=1}^{N} 2v_i \frac{\partial v}{\partial \bm{w}}
+\end{align*}
+
+\vspace{0.2cm}
+
+\begin{align*}
+= \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+2v_i \bm{0}^T = \bm{0}^T & \bm{w} \cdot \bm{x}_i + b \leq 0 \\
+-2v_i \bm{x}^T & \bm{w} \cdot \bm{x}_i + b > 0
+\end{cases}
+\end{align*}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Gradient Computation}
+
+\footnotesize
+
+\begin{align*}
+\frac{\partial C(v)}{\partial \bm{w}} = \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x}_i + b \leq 0 \\
+-2(y_i - u)\bm{x}_i^T & \bm{w} \cdot \bm{x}_i + b > 0
+\end{cases} = \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x}_i + b \leq 0 \\
+-2(y_i - \max(0, \bm{w} \cdot \bm{x}_i + b))\bm{x}_i^T & \bm{w} \cdot \bm{x}_i + b > 0
+\end{cases}
+\end{align*}
+
+\vspace{0.2cm}
+
+\begin{align*}
+= \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x}_i + b \leq 0 \\
+-2(y_i - (\bm{w} \cdot \bm{x}_i + b))\bm{x}_i^T & \bm{w} \cdot \bm{x}_i + b > 0
+\end{cases} = \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x}_i + b \leq 0 \\
+-\frac{2}{N} \sum_{i=1}^{N} (y_i - (\bm{w} \cdot \bm{x}_i + b))\bm{x}_i^T & \bm{w} \cdot \bm{x}_i + b > 0
+\end{cases}
+\end{align*}
+
+\vspace{0.2cm}
+
+\begin{align*}
+= \begin{cases}
+\bm{0}^T & \bm{w} \cdot \bm{x}_i + b \leq 0 \\
+\frac{2}{N} \sum_{i=1}^{N} (\bm{w} \cdot \bm{x}_i + b - y_i)\bm{x}_i^T & \bm{w} \cdot \bm{x}_i + b > 0
+\end{cases}
+\end{align*}
+
+
+We can substitute an error term $e_i = \bm{w} \cdot \bm{x}_i + b - y_i$ yielding:
+
+\begin{align*}
+\frac{\partial C}{\partial \bm{w}} = \frac{2}{N} \sum_{i=1}^{N} e_i \bm{x}_i^T \quad \text{(for the nonzero activation case)}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Gradient Computation}
+
+
+
+What about the bias?
+
+Intermediate variables:
+
+\begin{align*}
+u(\bm{w}, b, \bm{x}) &= \max(0, \bm{w} \cdot \bm{x} + b) \\
+v(y, u) &= y - u \\
+C(v) &= \frac{1}{N} \sum_{i=1}^{N} v^2
+\end{align*}
+
+
+From previous result:
+
+
+\begin{align*}
+\frac{\partial u}{\partial b} = \begin{cases}
+0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+1 & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Gradient Computation for Bias}
+
+For $v$, the partial is:
+
+\begin{align*}
+\frac{\partial v(y, u)}{\partial b} = \frac{\partial}{\partial b} (y - u) = 0 - \frac{\partial u}{\partial b} = -\frac{\partial u}{\partial b} = \begin{cases}
+0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+-1 & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Gradient Computation for Bias}
+
+\footnotesize
+
+\begin{align*}
+\frac{\partial C(v)}{\partial b} = \frac{\partial}{\partial b} \frac{1}{N} \sum_{i=1}^{N} v_i^2 = \frac{1}{N} \sum_{i=1}^{N} \frac{\partial}{\partial b} v_i^2 = \frac{1}{N} \sum_{i=1}^{N} \frac{\partial v_i^2}{\partial v} \frac{\partial v}{\partial b}
+\end{align*}
+
+\vspace{0.2cm}
+
+\begin{align*}
+= \frac{1}{N} \sum_{i=1}^{N} 2v_i \frac{\partial v}{\partial b}
+\end{align*}
+
+\vspace{0.2cm}
+
+\begin{align*}
+= \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+-2v_i & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Gradient Computation for Bias}
+
+
+\begin{align*}
+\frac{\partial C(v)}{\partial b} = \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+-2(y_i - \max(0, \bm{w} \cdot \bm{x}_i + b)) & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\vspace{0.2cm}
+
+\begin{align*}
+= \frac{1}{N} \sum_{i=1}^{N} \begin{cases}
+0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+2(\bm{w} \cdot \bm{x}_i + b - y_i) & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\vspace{0.3cm}
+
+\begin{align*}
+= \begin{cases}
+0 & \bm{w} \cdot \bm{x} + b \leq 0 \\
+\frac{2}{N} \sum_{i=1}^{N} (\bm{w} \cdot \bm{x}_i + b - y_i) & \bm{w} \cdot \bm{x} + b > 0
+\end{cases}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Error Term Substitution for Bias Gradient}
+
+As before, we can substitute an error term:
+
+\begin{align*}
+\frac{\partial C}{\partial b} = \frac{2}{N} \sum_{i=1}^{N} e_i \quad \text{(for the nonzero activation case)}
+\end{align*}
+
+where $e_i = \bm{w} \cdot \bm{x}_i + b - y_i$ is the prediction error.
+
+\vspace{0.5cm}
+
+\begin{alert}
+
+The bias gradient is proportional to the mean prediction error across all samples when the neuron is active.
+
+
+\end{alert}
+
+\end{frame}
+
+
+\begin{frame}{References/Readings}
+
+\footnotesize
+
+\textbf{Mandatory Reading}
+
+\begin{enumerate}
+\item The Matrix Calculus You Need For Deep Learning \url{https://arxiv.org/pdf/1802.01528}
+\end{enumerate}
+
+\textbf{Recommended Reading}
+
+\begin{enumerate}
+\item \url{https://lrjconan.github.io/UBC-CPEN455-DL/assets/slides_2025/mlp.pdf}
+\item \url{https://www.csie.ntu.edu.tw/~cjlin/papers/autodiff/autodiff.pdf}
+\item \url{https://comp6248.ecs.soton.ac.uk/handouts/autograd-handouts.pdf}
+\item \url{https://www.cs.toronto.edu/~rgrosse/courses/csc2541_2022/tutorials/tut01.pdf}
+\item \url{https://xiucheng.org/assets/pdfs/matrix-calculus4ml.pdf}
+\item \url{https://robotchinwag.com/posts/gradient-of-matrix-multiplicationin-deep-learning/}
+\end{enumerate}
+
+\end{frame}
+
 
 \end{document}
