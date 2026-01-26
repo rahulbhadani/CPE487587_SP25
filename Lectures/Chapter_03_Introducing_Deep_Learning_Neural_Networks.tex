@@ -1810,6 +1810,35 @@ The bias gradient is proportional to the mean prediction error across all sample
 
 \end{frame}
 
+% ============================================================
+\begin{frame}[fragile]
+\frametitle{Scalar vs. Vectorized Operations}
+
+\small
+
+\begin{tabular}{l|l|l}
+\textbf{Operation} & \textbf{Scalar (Loop)} & \textbf{Vectorized} \\
+\hline
+Affine transformation & $z_i = \bm{x}_i^T \bm{w} + b$ & $\bm{z} = X\bm{w} + b$ \\
+& One sample at a time & All $n$ samples at once \\
+\hline
+Activation & $u_i = \max(0, z_i)$ & $\bm{u} = \max(0, \bm{z})$ \\
+& Scalar function & Element-wise operation \\
+\hline
+Loss & $C = \frac{1}{N}\sum_i v_i^2$ & $C = \frac{1}{N}\|\bm{v}\|_2^2$ \\
+& Accumulate in loop & Vectorized norm \\
+\hline
+Gradient $\bm{w}$ & $\frac{\partial C}{\partial w_j} = \frac{2}{N}\sum_i x_{ij} e_i$ & $\frac{\partial C}{\partial \bm{w}} = \frac{2}{N}X^T\bm{e}$ \\
+& Nested loops & Single matrix product \\
+\hline
+Gradient $b$ & $\frac{\partial C}{\partial b} = \frac{2}{N}\sum_i e_i$ & $\frac{\partial C}{\partial b} = \frac{2}{N}\mathbf{1}^T\bm{e}$ \\
+& Single loop & Dot product \\
+\end{tabular}
+
+$N$: Number of samples.
+
+\end{frame}
+
 
 \begin{frame}{References/Readings}
 
@@ -1820,6 +1849,8 @@ The bias gradient is proportional to the mean prediction error across all sample
 \begin{enumerate}
 \item The Matrix Calculus You Need For Deep Learning \url{https://arxiv.org/pdf/1802.01528}
 \end{enumerate}
+
+
 
 \textbf{Recommended Reading}
 
