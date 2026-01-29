@@ -770,7 +770,7 @@ Otherwise, aligning entire probability distribution of adjusted values is \textb
 \end{frame}
 
 
-\subsection{Data Preprocessing}
+\subsection{Impact of Batch Size in the Training Process}
 
 \begin{frame}
     \subsectionpage
@@ -779,9 +779,344 @@ Otherwise, aligning entire probability distribution of adjusted values is \textb
 
 \begin{frame}{Batch Size}
 
+    \begin{tcolorbox}[title=Definition, colframe=Orange!30, colback=Green!10]
+    The number of samples passed through the neural network simultaneously is called \textbf{batch size}.
+    \end{tcolorbox}
     
+    Determining a suitable batch size is an important consideration to the training process, as it may influence the learning rate of the model. 
+    
+    \begin{center}
+    \begin{align*}
+    \wbf = \wbf - \eta \frac{1}{m}\sum_{i=1}^m \nabla_\wbf \Lcal_i(\wbf)
+    \end{align*}
+    \end{center}
+    
+
+    $m$ is the batch size.
+
+\end{frame}
+
+\begin{frame}{}
+    
+    \begin{center}
+        \begin{forest}{}
+            \LARGE \centering
+        How does the batch size affect training?
+        \end{forest}
+
+    \end{center}
     
 \end{frame}
+
+\begin{frame}{Stochastic Gradient Descent and Batch Size}
+    
+    \Large 
+    {\faQuestionCircle~~ What's problem if we use entire training set for gradient descent? }
+
+    \pause 
+
+    \vspace{10pt}
+
+    \begin{tblock}{}
+        Stochastic gradient descent provides approximation of true gradients using one sample at a time after shuffling the training sample and pick one training sample to update the weights. It optionally adds a small noise to the gradient calculation.
+    \end{tblock}
+    
+
+\end{frame}
+
+\begin{frame}{Mini Batch}
+    
+    Single sample gradient calculation can be very slow, so we can choose more than one sample at a time (but not all of them). This is called \textbf{mini batch}.
+
+\end{frame}
+
+\begin{frame}{Suggested Reading}
+
+    \large 
+    \begin{enumerate}
+        \item Masters, Dominic, and Carlo Luschi. \textbf{"Revisiting small batch training for deep neural networks."} arXiv preprint arXiv:1804.07612 (2018).
+        \item You, Yang, Yuhui Wang, Huan Zhang, Zhao Zhang, James Demmel, and Cho-Jui Hsieh. \textbf{"The limit of the batch size."} arXiv preprint arXiv:2006.08517 (2020).
+        \item Smith, Samuel L., Pieter-Jan Kindermans, Chris Ying, and Quoc V. Le. \textbf{"Don't decay the learning rate, increase the batch size."} arXiv preprint arXiv:1711.00489 (2017).
+    \end{enumerate}
+    
+\end{frame}
+
+\begin{frame}{Batch Normalization}
+
+    Normalization applied per batch:
+
+    \begin{align*}
+        \hat{\xbf}_i = \frac{\xbf_i - \mu_{\Bcal}}{\sqrt{\sigma^2_\Bcal + \epsilon}}
+    \end{align*}
+    
+    $ \mu_{\Bcal}$ batchwise mean, $\sigma^2_\Bcal$ is batchwise variance, and $\epsilon$ is to avoid numerical instability.
+\end{frame}
+
+\begin{frame}{Batch Normalization}
+    But why Batch Normalization?
+
+    \pause 
+
+    \begin{enumerate}
+        \item Batch Normalization smoothened out the loss landscape.
+        \item Gradients become more reliable and predictive.
+    \end{enumerate}
+
+    \bigskip
+
+    \small
+
+\textbf{Reading:}
+
+    \footnotesize
+
+
+\begin{enumerate}
+    \item Santurkar, Shibani, Dimitris Tsipras, Andrew Ilyas, and Aleksander Madry. \textbf{"How does batch normalization help optimization?."} Advances in neural information processing systems 31 (2018).
+    \item Section 3.3 of Huang, Lei. Normalization Techniques in Deep Learning. Cham: Springer, 2022.
+\end{enumerate}
+
+\end{frame}
+
+
+\subsection{Preventing Overfitting and Regularization}
+
+\begin{frame}
+    \subsectionpage
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{Dropout}
+
+\begin{tblock}{Dropout: A new way to regularize a network}
+\begin{itemize}
+    \item The central idea behind {\em\color{MediumBlue}dropout} is to randomly dropout nodes in the neural network with a probability $p$. After the nodes are ``dropped out'' the remain network is a subnetwork of the original. 
+    \item Dropout has been shown to work quite well at preventing overfitting and allowing the network to find a good local minimum. 
+    \item {\bf\color{MediumRed}Recommendation}: Use dropout! 
+\end{itemize}
+\end{tblock}
+{\footnotesize
+Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, Ruslan Salakhutdinov, ``Dropout: A Simple Way to Prevent Neural Networks from Overfitting,'' {\em Journal of Machine Learning Research}, 15(56):1929--1958, 2014.}
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}{Dropout in a Neural Network}
+
+\begin{center}
+    
+\begin{tikzpicture}
+
+	\node[circle, draw, thick] (i1) {};
+	\node[circle, draw, thick, above=2em of i1] (i2) {};
+	\node[circle, draw, thick, above=2em of i2] (i3) {};
+	\node[circle, draw, thick, below=2em of i1] (i4) {};
+	\node[circle, draw, thick, below=2em of i4] (i5) {};
+	
+	\node[circle, draw, thick, right=4em of i1] (h1) {};
+	\node[circle, draw, thick, right=4em of i2] (h2) {};
+	\node[circle, draw, thick, right=4em of i3] (h3) {};
+	\node[circle, draw, thick, right=4em of i4] (h4) {};
+	\node[circle, draw, thick, right=4em of i5] (h5) {};
+	
+	\node[circle, draw, thick, right=4em of h1] (hh1) {};
+	\node[circle, draw, thick, right=4em of h2] (hh2) {};
+	\node[circle, draw, thick, right=4em of h3] (hh3) {};
+	\node[circle, draw, thick, right=4em of h4] (hh4) {};
+	\node[circle, draw, thick, right=4em of h5] (hh5) {};
+	
+	\node[circle, draw, thick, right=4em of hh2] (o1) {};
+	\node[circle, draw, thick, right=4em of hh4] (o2) {};
+	
+	\draw[-stealth, thick] (i1) -- (h1);
+	\draw[-stealth, thick] (i1) -- (h2);
+	\draw[-stealth, thick] (i1) -- (h3);
+	\draw[-stealth, thick] (i1) -- (h4);
+	\draw[-stealth, thick] (i1) -- (h5);
+	\draw[-stealth, thick] (i2) -- (h1);
+	\draw[-stealth, thick] (i2) -- (h2);
+	\draw[-stealth, thick] (i2) -- (h3);
+	\draw[-stealth, thick] (i2) -- (h4);
+	\draw[-stealth, thick] (i2) -- (h5);
+	\draw[-stealth, thick] (i3) -- (h1);
+	\draw[-stealth, thick] (i3) -- (h2);
+	\draw[-stealth, thick] (i3) -- (h3);
+	\draw[-stealth, thick] (i3) -- (h4);
+	\draw[-stealth, thick] (i3) -- (h5);
+	\draw[-stealth, thick] (i4) -- (h1);
+	\draw[-stealth, thick] (i4) -- (h2);
+	\draw[-stealth, thick] (i4) -- (h3);
+	\draw[-stealth, thick] (i4) -- (h4);
+	\draw[-stealth, thick] (i4) -- (h5);
+	\draw[-stealth, thick] (i5) -- (h1);
+	\draw[-stealth, thick] (i5) -- (h2);
+	\draw[-stealth, thick] (i5) -- (h3);
+	\draw[-stealth, thick] (i5) -- (h4);
+	\draw[-stealth, thick] (i5) -- (h5);
+	
+	\draw[-stealth, thick] (h1) -- (hh1);
+	\draw[-stealth, thick] (h1) -- (hh2);
+	\draw[-stealth, thick] (h1) -- (hh3);
+	\draw[-stealth, thick] (h1) -- (hh4);
+	\draw[-stealth, thick] (h1) -- (hh5);
+	\draw[-stealth, thick] (h2) -- (hh1);
+	\draw[-stealth, thick] (h2) -- (hh2);
+	\draw[-stealth, thick] (h2) -- (hh3);
+	\draw[-stealth, thick] (h2) -- (hh4);
+	\draw[-stealth, thick] (h2) -- (hh5);
+	\draw[-stealth, thick] (h3) -- (hh1);
+	\draw[-stealth, thick] (h3) -- (hh2);
+	\draw[-stealth, thick] (h3) -- (hh3);
+	\draw[-stealth, thick] (h3) -- (hh4);
+	\draw[-stealth, thick] (h3) -- (hh5);
+	\draw[-stealth, thick] (h4) -- (hh1);
+	\draw[-stealth, thick] (h4) -- (hh2);
+	\draw[-stealth, thick] (h4) -- (hh3);
+	\draw[-stealth, thick] (h4) -- (hh4);
+	\draw[-stealth, thick] (h4) -- (hh5);
+	\draw[-stealth, thick] (h5) -- (hh1);
+	\draw[-stealth, thick] (h5) -- (hh2);
+	\draw[-stealth, thick] (h5) -- (hh3);
+	\draw[-stealth, thick] (h5) -- (hh4);
+	\draw[-stealth, thick] (h5) -- (hh5);
+	
+	
+	\draw[-stealth, thick] (hh1) -- (o1);
+	\draw[-stealth, thick] (hh1) -- (o2);
+	\draw[-stealth, thick] (hh2) -- (o1);
+	\draw[-stealth, thick] (hh2) -- (o2);
+	\draw[-stealth, thick] (hh3) -- (o1);
+	\draw[-stealth, thick] (hh3) -- (o2);
+	\draw[-stealth, thick] (hh4) -- (o1);
+	\draw[-stealth, thick] (hh4) -- (o2);
+	\draw[-stealth, thick] (hh5) -- (o1);
+	\draw[-stealth, thick] (hh5) -- (o2);
+	
+	\draw[-stealth, double, dashed, thick] (5.5,0) -- node[above] {dropout} (7.6, 0);
+	
+	
+	%%% BOUNDARY %%%
+	
+	\node[circle, draw, thick, red, fill=red!10, right=10em of hh1] (i1) {};
+	\node[circle, draw, thick, red, fill=red!10, above=2em of i1] (i2) {};
+	\node[circle, draw, thick, above=2em of i2] (i3) {};
+	\node[circle, draw, thick, below=2em of i1] (i4) {};
+	\node[circle, draw, thick, below=2em of i4] (i5) {};
+	
+	\node[red] (icr) at (i1) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	\node[red] (icr) at (i2) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	
+	\node[circle, draw, thick, red, fill=red!10, right=4em of i1] (h1) {};
+	\node[circle, draw, thick, right=4em of i2] (h2) {};
+	\node[circle, draw, thick, red, fill=red!10, right=4em of i3] (h3) {};
+	\node[circle, draw, thick, red, fill=red!10, right=4em of i4] (h4) {};
+	\node[circle, draw, thick, right=4em of i5] (h5) {};
+	
+	\node[red] (icr) at (h1) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	\node[red] (icr) at (h3) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	\node[red] (icr) at (h4) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	
+	\node[circle, draw, thick, right=4em of h1] (hh1) {};
+	\node[circle, draw, thick, red, fill=red!10, right=4em of h2] (hh2) {};
+	\node[circle, draw, thick, right=4em of h3] (hh3) {};
+	\node[circle, draw, thick, red, fill=red!10, right=4em of h4] (hh4) {};
+	\node[circle, draw, thick, right=4em of h5] (hh5) {};
+	
+	\node[red] (icr) at (hh2) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	\node[red] (icr) at (hh4) {$\mathlarger{\mathlarger{\mathlarger{\mathlarger{\mathlarger{\bm{\times}}}}}}$};
+	
+	\node[circle, draw, thick, right=4em of hh2] (o1) {};
+	\node[circle, draw, thick, right=4em of hh4] (o2) {};
+	
+	\draw[-stealth, thick] (i3) -- (h2);
+	\draw[-stealth, thick] (i3) -- (h5);
+	\draw[-stealth, thick] (i4) -- (h2);
+	\draw[-stealth, thick] (i4) -- (h5);
+	\draw[-stealth, thick] (i5) -- (h2);
+	\draw[-stealth, thick] (i5) -- (h5);
+	
+	\draw[-stealth, thick] (h2) -- (hh1);
+	\draw[-stealth, thick] (h2) -- (hh3);
+	\draw[-stealth, thick] (h2) -- (hh5);
+	\draw[-stealth, thick] (h5) -- (hh1);
+	\draw[-stealth, thick] (h5) -- (hh3);
+	\draw[-stealth, thick] (h5) -- (hh5);
+	
+	\draw[-stealth, thick] (hh1) -- (o1);
+	\draw[-stealth, thick] (hh1) -- (o2);
+	\draw[-stealth, thick] (hh3) -- (o1);
+	\draw[-stealth, thick] (hh3) -- (o2);
+	\draw[-stealth, thick] (hh5) -- (o1);
+	\draw[-stealth, thick] (hh5) -- (o2);
+
+\end{tikzpicture}
+
+
+
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{Dropout Model}
+
+    \footnotesize
+
+During training, Dropout stochastically "thins" the network by sampling a mask from a Bernoulli distribution.
+
+    \begin{mybox}{}
+        \begin{align*}
+        r_i^{(l)} &\sim \text{Bernoulli}(p) \tag{Mask} \\
+        \mathbf{\tilde{y}}^{(l)} &= \mathbf{r}^{(l)} \otimes \mathbf{y}^{(l)} \tag{Thinned Output} \\
+        \mathbf{z}^{(l+1)} &= W^{(l+1)}\mathbf{\tilde{y}}^{(l)} + \mathbf{b}^{(l+1)} \\
+        \mathbf{y}^{(l+1)} &= \sigma(\mathbf{z}^{(l+1)})
+        \end{align*}
+    \end{mybox}
+\footnotesize
+    \begin{itemize}
+        \item $\mathbf{r}^{(l)}$ is a vector of independent Bernoulli random variables, each of which has probability $p$ of being $1$.
+        \item The operator $\otimes$ denotes an element-wise product.
+        \item $\sigma$ is an activation function.
+        \item The thinned outputs as input to the next layer. 
+        \item For learning, the derivatives of the loss function are backpropagated through the thinned network.
+        \item At test time, the weights are scaled as $W^{(l)}_{test} = pW^{(l)}$. The resulting neural network is run without
+dropout.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Regularization in Neural Network}
+
+    \begin{columns}
+        \column{0.45\linewidth}
+
+        \begin{tcolorbox}[colframe=Indigo!20, colback=purple!10, title=L2 Regularization]
+            \begin{align*}
+                \hat{\Lcal}(W) = \Lcal(W)+ \frac{\alpha}{2} ||W||^2_2
+            \end{align*}
+        \end{tcolorbox}
+
+        \column{0.45\linewidth}
+
+        \begin{tcolorbox}[colframe=Blue!20, colback=Green!10, title=L1 Regularization]
+            \begin{align*}
+                \hat{\Lcal}(W) = \Lcal(W)+ \frac{\beta}{2} ||W||_1
+            \end{align*}
+        \end{tcolorbox}
+        
+        
+
+    \end{columns}
+
+    \begin{enumerate}
+            \item L1 regularization promotes sparsity by forcing weights to zero.
+            \item L2 regularization shrinks weights, but some of the components of weights large than others that are contributing more to the model.
+        \end{enumerate}
+    
+\end{frame}
+
+
 
 \begin{frame}{References and Additional Reading}
 
@@ -793,4 +1128,12 @@ Otherwise, aligning entire probability distribution of adjusted values is \textb
 \end{enumerate}
 
 \end{frame}
+
+
+    \begin{frame}
+        \Huge{\centerline{\color{MediumBlue}\textbf{The End}}}
+    \end{frame}
+
+
+
 \end{document}
